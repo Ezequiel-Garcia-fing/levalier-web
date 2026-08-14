@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Levalier | Diseñador 3D</title>
+    <!-- Actualizamos la ruta al CSS -->
+    <link rel="icon" type="image/jpeg" href="imagenes/logo_levalier.jpeg">
+    <link rel="stylesheet" href="css/configurador.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- NUEVO: DECORACIÓN DEPORTIVA (Líneas de fondo) -->
+    <!-- ========================================== -->
+    <div class="lineas-decorativas">
+        <div class="linea-azul-1"></div>
+        <div class="linea-roja-1"></div>
+        <div class="linea-azul-2"></div>
+        <div class="linea-roja-2"></div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- NUEVO: BARRA SUPERIOR FIJA CON EL LOGO -->
+    <!-- ========================================== -->
+<!-- ========================================== -->
+    <!-- BARRA SUPERIOR FIJA (Logo a la Izquierda)  -->
+    <!-- ========================================== -->
+    <header class="topbar-config">
+<!-- Logo a la izquierda (Convertido en enlace para volver al inicio) -->
+        <a href="index.html" id="logo-inicio" class="logo-config">
+            <img src="imagenes/logo_levalier.jpeg" alt="Logo Levalier">
+        </a>
+        
+        <!-- Botón a la derecha -->
+        <button id="btn-menu" class="btn-hamburguesa">☰ Menú</button>
+    </header>
+
+    <!-- 2. EL MENÚ LATERAL OCULTO (Limpio, sin logo) -->
+    <div id="sidebar" class="sidebar">
+        
+        
+        <!-- ACÁ BORRAMOS EL BLOQUE DEL LOGO QUE ESTABA ANTES -->
+
+        <h3>Prendas</h3>
+        <ul class="menu-prendas">
+            <li><a href="#" data-target="modulo-remera" class="menu-item activo">Remeras</a></li>
+            <li><a href="#" data-target="modulo-musculosa" class="menu-item">Pecheras</a></li>
+            <li><a href="#" data-target="modulo-pantalon" class="menu-item">Pantalones</a></li>
+            <li><a href="#" data-target="modulo-medias" class="menu-item">Medias</a></li>
+            <li><a href="#" data-target="modulo-gorras" class="menu-item">Gorras Trucker</a></li>
+            <li><a href="#" data-target="modulo-gorras-gabardina" class="menu-item">Gorras Gabardina</a></li>
+        </ul>
+        <hr style="border-color: #555; margin: 20px;">
+        <a href="index.html" class="menu-volver">&larr; Volver a la web</a>
+    </div>
+
+    <!-- 3. EL CONTENEDOR DE LAS APLICACIONES -->
+    <div class="area-trabajo">
+        
+        <!-- MÓDULO REMERA (Acá adentro quedó tu código) -->
+        <div id="modulo-remera" class="modulo-prenda activo">
+            
+            <div class="contenedor-principal">
+                <!-- VISUALIZADOR -->
+                <div class="lienzo-remera">
+                    <div class="capa-absoluta capa-color" id="color-cuerpo">
+                        <div id="patron-mitad-frente" class="patron-mitad" style="left: 0; width: 25%;"></div>
+                        <div id="patron-mitad-espalda" class="patron-mitad" style="right: 0; width: 25%;"></div>
+                        <div id="patron-rayas-frente" class="patron-rayas" style="left: 0; width: 50%;"></div>
+                        <div id="patron-rayas-espalda" class="patron-rayas" style="right: 0; width: 50%;"></div>
+                    </div>
+                    
+                    <div class="capa-absoluta capa-color" id="color-mangas"></div>
+                    <canvas id="canvas-logos" width="800" height="500"></canvas>
+                    <div class="capa-absoluta capa-textura" id="textura-cuerpo"></div>
+                    <div class="capa-absoluta capa-textura" id="textura-mangas"></div>
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="panel-herramientas">
+                    
+                    <h2>Diseño Base</h2>
+                    <div class="grupo-control">
+                        <label>Estilo de la Prenda:</label>
+                        <div class="grilla-modelos">
+                            <div class="tarjeta-modelo activa" data-modelo="liso">
+                                <img src="imagenes/thumb_clasico.jpg" alt="Clásico">
+                                <span>Clásico Base</span>
+                            </div>
+                            <div class="tarjeta-modelo" data-modelo="mitad">
+                                <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
+                                <span>Corte Bicolor</span>
+                            </div>
+                            <div class="tarjeta-modelo" data-modelo="rayas">
+                                <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
+                                <span>Bastones Tradicionales</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grupo-control">
+                        <label id="label-color-1">Color Principal:</label>
+                        <input type="color" id="selector-cuerpo" value="#ffffff">
+                    </div>
+                    <div class="grupo-control oculto" id="contenedor-color-2">
+                        <label id="label-color-2">Color Secundario:</label>
+                        <input type="color" id="selector-patron" value="#5a2e8c">
+                    </div>
+                    <div class="grupo-control oculto" id="contenedor-slider">
+                        <label id="label-slider">Ajuste:</label>
+                        <input type="range" id="slider-corte" min="1" max="50" value="25" step="1">
+                    </div>
+                    <div class="grupo-control">
+                        <label>Color de Mangas:</label>
+                        <input type="color" id="selector-mangas" value="#ffffff">
+                    </div>
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+            </div>
+
+        </div> <!-- Fin módulo remera -->
+
+       <!-- ========================================== -->
+        <!-- MÓDULO MUSCULOSA (Simplificado)            -->
+        <!-- ========================================== -->
+        <div id="modulo-musculosa" class="modulo-prenda">
+            <div class="contenedor-principal">
+                
+                <!-- VISUALIZADOR -->
+                <div class="lienzo-remera">
+                    <!-- Capas limpias sin patrones geométricos adentro -->
+                    <div class="capa-absoluta capa-color" id="color-cuerpo-musc"></div>
+                    <div class="capa-absoluta capa-color" id="color-ribetes-musc"></div>
+                    
+                    <canvas id="canvas-logos-musc" width="800" height="500"></canvas>
+                    
+                    <div class="capa-absoluta capa-textura" id="textura-cuerpo-musc"></div>
+                    <div class="capa-absoluta capa-textura" id="textura-ribetes-musc"></div>
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="panel-herramientas">
+                    <h2>Diseño Pecheras</h2>
+                    
+                    <!-- SELECTOR DE CORTE (HOMBRE / MUJER) -->
+                    <div class="grupo-control">
+                        <label>Corte de la Prenda:</label>
+                        <div class="selector-genero">
+                            <button class="btn-genero activa" data-genero="hombre">Hombre</button>
+                            <button class="btn-genero" data-genero="mujer">Mujer</button>
+                        </div>
+                    </div>
+
+                    <!-- COLORES SIMPLES -->
+                    <div class="grupo-control">
+                        <label>Color Principal:</label>
+                        <input type="color" id="selector-cuerpo-musc" value="#ffffff">
+                    </div>
+                    <div class="grupo-control">
+                        <label>Color Ribetes/Cuello:</label>
+                        <input type="color" id="selector-ribetes-musc" value="#ffffff">
+                    </div>
+                    
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                    
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo-musc" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+
+        <!-- MÓDULO PANTALÓN (Por ahora vacío) -->
+<!-- MÓDULO PANTALÓN -->
+        <div id="modulo-pantalon" class="modulo-prenda">
+            <div class="contenedor-principal">
+                
+                <!-- VISUALIZADOR DEL PANTALÓN -->
+                <div class="lienzo-remera"> <!-- Reutilizamos la clase para mantener el tamaño 800x500 -->
+                    <!-- Capa de color base -->
+                    <div class="capa-absoluta capa-color" id="color-pantalon"></div>
+                    
+                    <!-- Lienzo independiente para los logos del short -->
+                    <canvas id="canvas-logos-pantalon" width="800" height="500"></canvas>
+                    
+                    <!-- Capa de sombras y arrugas -->
+                    <div class="capa-absoluta capa-textura" id="textura-pantalon"></div>
+                </div>
+
+                <!-- CONTROLES DEL PANTALÓN -->
+                <div class="panel-herramientas">
+                    <h2>Diseño de Pantalón</h2>
+                    
+                    <div class="grupo-control">
+                        <label>Color del Short:</label>
+                        <input type="color" id="selector-pantalon" value="#ffffff">
+                    </div>
+
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+                    
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo-pantalon" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg">
+                    </div>
+                    
+                    <p style="font-size: 12px; color: #666;">
+                        Hacé clic en el escudo o número para moverlo. Usá "Suprimir" para borrarlo.
+                    </p>
+                </div>
+                
+            </div>
+        </div>
+
+    </div>
+    <!-- ========================================== -->
+        <!-- MÓDULO MEDIAS                              -->
+        <!-- ========================================== -->
+        <div id="modulo-medias" class="modulo-prenda">
+            <div class="contenedor-principal">
+                
+                <!-- VISUALIZADOR -->
+                <div class="lienzo-remera">
+                    <div class="capa-absoluta capa-color" id="color-medias"></div>
+                    <canvas id="canvas-logos-medias" width="800" height="500"></canvas>
+                    <div class="capa-absoluta capa-textura" id="textura-medias"></div>
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="panel-herramientas">
+                    <h2>Diseño Medias</h2>
+                    
+                    <!-- PALETA DE COLORES FIJOS -->
+                    <div class="grupo-control">
+                        <label>Color de las Medias:</label>
+                        <div class="paleta-colores">
+                            <button class="btn-color activa" style="background-color: #ffffff;" data-color="#ffffff" title="Blanco"></button>
+                            <button class="btn-color" style="background-color: #000000e0;" data-color="#000000e0" title="Negro"></button>
+                            <button class="btn-color" style="background-color: #0055ff;" data-color="#0055ff" title="Azul Francia"></button>
+                            <button class="btn-color" style="background-color: #cc0000;" data-color="#cc0000" title="Rojo"></button>
+                            <button class="btn-color" style="background-color: #ffcc00;" data-color="#ffcc00" title="Amarillo"></button>
+                            <button class="btn-color" style="background-color: #000066;" data-color="#000066" title="Azul Marino"></button>
+                            <button class="btn-color" style="background-color: #008000;" data-color="#008000" title="Verde"></button>
+                            <button class="btn-color" style="background-color: #00aaff;" data-color="#00aaff" title="Celeste"></button>
+                        </div>
+                    </div>
+                    
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+                    
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo-medias" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo-medias" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- MÓDULO GORRAS TRUCKER                      -->
+        <!-- ========================================== -->
+        <div id="modulo-gorras" class="modulo-prenda">
+            <div class="contenedor-principal">
+                
+                <!-- VISUALIZADOR -->
+                <div class="lienzo-remera">
+                    <!-- Capa de color (Afecta solo a la red y solapa) -->
+                    <div class="capa-absoluta capa-color" id="color-red-gorra"></div>
+                    
+                    <canvas id="canvas-logos-gorras" width="800" height="500"></canvas>
+                    
+                    <!-- Capa de textura (Gorra completa con sombras) -->
+                    <div class="capa-absoluta capa-textura" id="textura-gorra"></div>
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="panel-herramientas">
+                    <h2>Diseño Gorra Trucker</h2>
+                    
+                    <div class="grupo-control">
+                        <label>Color de Red y Visera:</label>
+                        <input type="color" id="selector-color-gorra" value="#000000">
+                    </div>
+                    
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+                    
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo-gorra" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo-gorra" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ========================================== -->
+        <!-- MÓDULO GORRAS DE GABARDINA                 -->
+        <!-- ========================================== -->
+        <div id="modulo-gorras-gabardina" class="modulo-prenda">
+            <div class="contenedor-principal">
+                
+                <!-- VISUALIZADOR -->
+                <div class="lienzo-remera">
+                    <!-- Capa de color (Afecta a la gorra completa) -->
+                    <div class="capa-absoluta capa-color" id="color-gorra-gabardina"></div>
+                    
+                    <canvas id="canvas-logos-gorras-gabardina" width="800" height="500"></canvas>
+                    
+                    <!-- Capa de textura (Sombras y detalles de la tela) -->
+                    <div class="capa-absoluta capa-textura" id="textura-gorra-gabardina"></div>
+                </div>
+
+                <!-- CONTROLES -->
+                <div class="panel-herramientas">
+                    <h2>Diseño Gorra Gabardina</h2>
+                    
+                    <div class="grupo-control">
+                        <label>Color de la Gorra:</label>
+                        <!-- Por defecto arranca en blanco -->
+                        <input type="color" id="selector-color-gorra-gabardina" value="#ffffff">
+                    </div>
+                    
+                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
+                    
+                    <h2>Logos</h2>
+                    <div class="grupo-control">
+                        <label for="subir-logo-gorra-gabardina" class="btn-subir">Subir Logo (.PNG)</label>
+                        <input type="file" id="subir-logo-gorra-gabardina" accept="image/png, image/jpeg">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- Actualizamos la ruta al JS -->
+    <script src="js/script.js"></script>
+</body>
+</html>

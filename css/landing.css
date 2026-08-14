@@ -1,0 +1,281 @@
+
+html {
+    scroll-behavior: smooth;
+}
+/* =========================================
+   VARIABLES DE COLOR Y FUENTES
+========================================= */
+:root {
+    --azul-levalier: #2b3245;
+    --azul-oscuro: #1a1e29;
+    --rojo-levalier: #e32627;
+    --blanco-fondo: #f8f9fc;
+    --texto-gris: #555555;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overflow-x: hidden; }
+
+/* =========================================
+   BARRA DE NAVEGACIÓN
+========================================= */
+.navbar {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 10px 50px; /* ACÁ ACHICAMOS EL ESPACIO VERTICAL */
+    background-color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    position: sticky; top: 0; z-index: 1000;
+}
+.logo img { height: 50px; width: auto; }
+.nav-links { list-style: none; display: flex; align-items: center; gap: 35px; }
+.nav-links li a { text-decoration: none; color: var(--azul-levalier); font-weight: 600; font-size: 15px; transition: color 0.3s; }
+.nav-links li a:hover { color: var(--rojo-levalier); }
+/* Estilo para la página actual */
+.nav-links li a.activo {
+    color: var(--rojo-levalier);
+    border-bottom: 2px solid var(--rojo-levalier);
+    padding-bottom: 4px;
+    transition: all 0.3s ease; /* Para que la línea roja aparezca suavemente */
+}
+
+.btn-nav-borde {
+    border: 2px solid var(--azul-levalier);
+    padding: 8px 20px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+.btn-nav-borde:hover { background-color: var(--azul-levalier); color: white !important; }
+
+/* =========================================
+   HERO CON DEGRADADO
+========================================= */
+.hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    /* Agregamos padding-bottom extra para que la tarjeta superpuesta no tape el contenido */
+    padding: 0 20px 120px 20px;
+    background: linear-gradient(135deg, rgba(43, 50, 69, 0.9) 0%, rgba(227, 38, 39, 0.7) 100%), url('../imagenes/fondo_deporte.jpg') center/cover no-repeat;
+}
+
+.hero-content { max-width: 850px; z-index: 2; position: relative; }
+.hero-content h1 { font-size: 4.5rem; color: white; margin-bottom: 20px; line-height: 1.1; font-weight: 800; }
+.hero-content h1 span { color: transparent; -webkit-text-stroke: 2px white; } 
+.hero-content p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; }
+
+.btn-principal-whatsapp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background-color: #25D366; color: white;
+    padding: 18px 45px; font-size: 1.3rem; font-weight: bold;
+    text-decoration: none; border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease; animation: latido 2s infinite;
+}
+.btn-principal-whatsapp:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6); }
+
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.subtexto-hero { display: block; margin-top: 15px; font-size: 0.9rem; color: #ccc; letter-spacing: 1px; text-transform: uppercase; }
+
+/* =========================================
+   CONFIGURADOR (ESTILO TARJETA SUPERPUESTA)
+========================================= */
+.seccion-configurador {
+    max-width: 1100px;
+    /* El margen negativo arriba la sube por encima del hero */
+    margin: -80px auto 80px auto; 
+    background: linear-gradient(135deg, var(--azul-levalier) 0%, #3a435c 100%);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.contenido-config { max-width: 700px; margin: 0 auto; }
+.contenido-config h2 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; }
+.contenido-config p { font-size: 1.1rem; margin-bottom: 30px; color: #cbd0d8; line-height: 1.6; }
+
+.btn-configurador {
+    display: inline-block; background-color: var(--rojo-levalier); color: white;
+    padding: 15px 35px; border-radius: 12px; font-weight: bold; text-decoration: none; font-size: 1.1rem;
+    transition: transform 0.3s, background 0.3s;
+}
+.btn-configurador:hover { background-color: white; color: var(--rojo-levalier); transform: translateY(-3px); }
+
+/* =========================================
+   SECCIÓN MÉTODO (TARJETAS ORGÁNICAS)
+========================================= */
+.proceso-levalier { padding: 40px 20px 100px 20px; background-color: var(--blanco-fondo); }
+.titulo-seccion { text-align: center; color: var(--azul-levalier); font-size: 2.2rem; margin-bottom: 50px; font-weight: 800; }
+
+.contenedor-proceso { max-width: 1100px; margin: 0 auto; display: flex; gap: 40px; }
+
+.tarjeta-flotante {
+    flex: 1; background: white; padding: 40px 30px; border-radius: 20px;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    transition: all 0.4s ease; border-bottom: 4px solid transparent;
+}
+.tarjeta-flotante:hover { transform: translateY(-10px); border-bottom-color: var(--rojo-levalier); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+
+.icono-paso {
+    width: 80px; height: 80px; margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--azul-levalier), var(--azul-oscuro));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 30px; color: white; transition: border-radius 0.3s ease;
+}
+.tarjeta-flotante:hover .icono-paso { border-radius: 50%; background: var(--rojo-levalier); }
+
+.tarjeta-flotante h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--azul-levalier); }
+.tarjeta-flotante p { color: var(--texto-gris); line-height: 1.6; }
+
+/* =========================================
+   REDES FLOTANTES
+========================================= */
+.redes-flotantes { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
+.btn-social {
+    width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    color: white; font-size: 28px; text-decoration: none; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.3s;
+}
+.btn-social:hover { transform: scale(1.1); }
+.whatsapp { background-color: #25D366; }
+.instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
+
+/* =========================================
+   SECCIÓN NOSOTROS Y CONTACTO
+========================================= */
+.seccion-nosotros {
+    padding: 80px 20px 120px 20px;
+    background-color: white; /* Contraste limpio con el fondo gris de la sección anterior */
+    position: relative;
+}
+
+.contenedor-nosotros {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+/* --- Columna Izquierda (Texto) --- */
+.nosotros-texto {
+    flex: 1;
+}
+
+.nosotros-texto h2 {
+    font-size: 2.8rem;
+    color: var(--azul-levalier);
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -1px;
+}
+
+.destaque-rojo {
+    color: var(--rojo-levalier);
+}
+
+.linea-separadora-roja {
+    width: 60px;
+    height: 5px;
+    background-color: var(--rojo-levalier);
+    margin-bottom: 30px;
+    border-radius: 3px;
+}
+
+.nosotros-texto p {
+    font-size: 1.1rem;
+    color: var(--texto-gris);
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.nosotros-texto strong {
+    color: var(--azul-levalier);
+}
+
+/* --- Columna Derecha (Tarjeta de Contacto) --- */
+.nosotros-contacto {
+    flex: 1;
+}
+
+.tarjeta-oscura-contacto {
+    background: linear-gradient(135deg, var(--azul-levalier) 0%, var(--azul-oscuro) 100%);
+    padding: 40px;
+    border-radius: 20px;
+    color: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    border-left: 5px solid var(--rojo-levalier); /* Conexión estética con el menú lateral 3D */
+}
+
+.tarjeta-oscura-contacto h3 {
+    font-size: 1.6rem;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.lista-contacto {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.lista-contacto li {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.lista-contacto li i {
+    font-size: 24px;
+    color: var(--rojo-levalier);
+    background: rgba(227, 38, 39, 0.1);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.lista-contacto li div {
+    display: flex;
+    flex-direction: column;
+}
+
+.lista-contacto li strong {
+    font-size: 0.9rem;
+    color: #cbd0d8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+}
+
+.lista-contacto li span {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.mapa-ubicacion {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* --- Adaptación para celulares --- */
+@media (max-width: 900px) {
+    .contenedor-nosotros {
+        flex-direction: column;
+        gap: 40px;
+    }
+}
+

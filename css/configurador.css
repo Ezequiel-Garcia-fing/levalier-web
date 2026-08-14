@@ -1,0 +1,597 @@
+/* styles.css */
+
+/* =========================================
+   VARIABLES DE COLOR LEVALIER
+========================================= */
+:root {
+    --azul-levalier: #2b3245;
+    --azul-oscuro: #1a1e29;
+    --rojo-levalier: #e32627;
+    --blanco-fondo: #f8f9fc;
+}
+
+/* =========================================
+   BARRA SUPERIOR (TOPBAR CONSTANTE)
+========================================= */
+/* =========================================
+   BARRA SUPERIOR (TOPBAR CONSTANTE)
+========================================= */
+.topbar-config {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    background-color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    z-index: 999;
+    box-sizing: border-box; /* ESTO ARREGLA QUE SE SALGA DE LA PANTALLA */
+}
+
+.logo-config img {
+    height: 50px;
+    width: auto;
+}
+
+/* =========================================
+   BOTÓN MENÚ (Con Animación de Desplazamiento)
+========================================= */
+.btn-hamburguesa {
+    background-color: var(--azul-levalier);
+    color: white; border: none; padding: 10px 15px;
+    font-size: 16px; font-weight: bold; border-radius: 6px;
+    cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    /* Agregamos transición para que se mueva suavemente */
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    z-index: 1005; /* Lo forzamos a estar por encima del menú lateral */
+}
+
+.btn-hamburguesa:hover { background-color: var(--rojo-levalier) !important; }
+
+/* Clase que JS agregará para mover el botón 250px a la izquierda */
+.btn-desplazado {
+    transform: translateX(-250px);
+}
+
+/* Ajuste del área de trabajo para que no choque con la barra */
+.area-trabajo {
+    margin-top: 100px; 
+}
+
+/* =========================================
+   DECORACIÓN DEPORTIVA (LÍNEAS CRUZADAS)
+========================================= */
+.lineas-decorativas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    z-index: -1; /* Atrás de todo, contra el fondo */
+    pointer-events: none; /* Para que el cliente pueda hacer clic en los botones sin que las líneas molesten */
+    overflow: hidden;
+}
+
+/* Base geométrica de las líneas */
+.linea-azul-1, .linea-roja-1, .linea-azul-2, .linea-roja-2 {
+    position: absolute;
+    transform: rotate(-45deg); /* Inclinación deportiva típica (corte de velocidad) */
+}
+
+/* Esquina Superior Derecha */
+.linea-azul-1 {
+    width: 600px; height: 40px;
+    background-color: var(--azul-levalier);
+    top: 30px; right: -150px;
+    opacity: 0.08; /* Muy sutil para no distraer */
+}
+
+.linea-roja-1 {
+    width: 600px; height: 12px;
+    background-color: var(--rojo-levalier);
+    top: 80px; right: -170px;
+    opacity: 0.5; /* El rojo resalta un poco más */
+}
+
+/* Esquina Inferior Izquierda */
+.linea-azul-2 {
+    width: 800px; height: 80px;
+    background-color: var(--azul-levalier);
+    bottom: -50px; left: -200px;
+    opacity: 0.05;
+}
+
+.linea-roja-2 {
+    width: 800px; height: 16px;
+    background-color: var(--rojo-levalier);
+    bottom: 40px; left: -220px;
+    opacity: 0.4;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--blanco-fondo); /* Antes era gris */
+    display: flex;
+    justify-content: center;
+    padding: 40px;
+    color: var(--azul-levalier); /* Texto en azul Levalier */
+}
+
+.contenedor-principal {
+    display: flex;
+    gap: 40px;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.lienzo-remera {
+    position: relative;
+    width: 800px; 
+    height: 500px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+}
+
+.capa-absoluta {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+/* NIVEL 1: LOS COLORES BASE Y PATRONES */
+.capa-color {
+    transition: background-color 0.3s ease;
+    -webkit-mask-size: contain; -webkit-mask-repeat: no-repeat; -webkit-mask-position: center;
+    mask-size: contain; mask-repeat: no-repeat; mask-position: center;
+    z-index: 1;
+}
+
+#color-cuerpo { background-color: #ffffff; mask-image: url('../imagenes/cuerpo.png'); -webkit-mask-image: url('../imagenes/cuerpo.png'); }
+#color-mangas { background-color: #ffffff; mask-image: url('../imagenes/mangas.png'); -webkit-mask-image: url('../imagenes/mangas.png'); }
+
+/* PATRÓN: Mitades Espejadas */
+.patron-mitad {
+    position: absolute;
+    top: 0; 
+    height: 100%;
+    background-color: #5a2e8c;
+    display: none;
+}
+
+/* PATRÓN: Rayas Verticales */
+.patron-rayas {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    display: none; /* Oculto por defecto */
+}
+
+/* NIVEL 2: EL LIENZO DE LOGOS */
+.canvas-container {
+    position: absolute !important;
+    top: 0; left: 0;
+    z-index: 2;
+}
+
+/* NIVEL 3: LAS TEXTURAS */
+.capa-textura {
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    z-index: 3;
+}
+
+#textura-cuerpo { background-image: url('../imagenes/cuerpo.png'); }
+#textura-mangas { background-image: url('../imagenes/mangas.png'); }
+
+/* PANEL LATERAL */
+.panel-herramientas {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 250px;
+}
+
+.grupo-control {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label { font-weight: 600; font-size: 14px; }
+
+select, input[type="color"] {
+    width: 100%; height: 45px; border: 1px solid #ccc; border-radius: 8px; cursor: pointer;
+    font-family: inherit; font-size: 14px; padding: 0 10px;
+}
+input[type="color"] { padding: 0; border: none; }
+input[type="range"] { width: 100%; cursor: pointer; }
+
+.btn-subir {
+    background-color: var(--rojo-levalier); /* Rojo Levalier */
+    color: white; padding: 12px; border: none;
+    border-radius: 8px; cursor: pointer; font-weight: bold; text-align: center;
+    transition: background 0.3s;
+}
+.btn-subir:hover { background-color: #c21e1f; }
+input[type="file"] { display: none; }
+.oculto { display: none !important; }
+
+/* ESTILOS PARA LA GRILLA DE MODELOS VISUALES */
+.grilla-modelos {
+    display: flex;
+    gap: 10px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.tarjeta-modelo {
+    flex: 1;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px;
+    cursor: pointer;
+    text-align: center;
+    background-color: #fafafa;
+    transition: all 0.2s ease;
+}
+
+.tarjeta-modelo:hover {
+    border-color: #b3c6ff;
+    transform: translateY(-2px);
+}
+
+.tarjeta-modelo.activa {
+    border-color: var(--rojo-levalier); /* Borde rojo */
+    background-color: #fdf2f2; /* Fondo muy suavemente rojo */
+    box-shadow: 0 4px 8px rgba(227, 38, 39, 0.15);
+}
+
+.tarjeta-modelo img {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 5px;
+    /* Un pequeño borde gris a la imagen para que resalte si la ropa es blanca */
+    border: 1px solid #eee; 
+}
+
+.tarjeta-modelo span {
+    font-size: 11px;
+    font-weight: 700;
+    color: #444;
+    display: block;
+    line-height: 1.1;
+}
+
+/* =========================================
+   MENÚ LATERAL (Estilo Levalier)
+========================================= */
+/* =========================================
+   MENÚ LATERAL (Estilo Levalier - Líneas Cruzadas)
+========================================= */
+.sidebar {
+    height: 100%; width: 250px; position: fixed; top: 0; left: auto; right: -250px;
+    background-color: var(--azul-oscuro); /* Volvemos al color sólido para máxima legibilidad */
+    padding-top: 20px; transition: right 0.3s ease; z-index: 1001; color: white;
+    box-shadow: -4px 0 15px rgba(0,0,0,0.3);
+    border-left: 3px solid var(--rojo-levalier); /* Mantenemos el detalle de marca */
+    overflow: hidden; /* Evita que las líneas se escapen del menú */
+}
+
+/* La clase que abre el menú */
+.sidebar.abierta { right: 0 !important; }
+
+/* Decoración interna 1: Línea Ancha (Gris translúcido) */
+.sidebar::before {
+    content: ''; 
+    position: absolute;
+    width: 200%; 
+    height: 55px;
+    background-color: rgba(255, 255, 255, 0.04); /* Simula la franja gris de forma sutil */
+    bottom: 25%; 
+    left: -50%;
+    transform: rotate(-45deg);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Decoración interna 2: Línea Fina (Roja, paralela por debajo) */
+.sidebar::after {
+    content: ''; 
+    position: absolute;
+    width: 200%; 
+    height: 6px;
+    background-color: var(--rojo-levalier);
+    bottom: 15%; /* Al tener un bottom menor, se posiciona exactamente por debajo dejando el gap */
+    left: -50%;
+    transform: rotate(-45deg);
+    opacity: 0.6; /* Un poco de transparencia para no saturar */
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Elevamos el texto para que las líneas pasen por detrás y no afecten los clics */
+.sidebar h3, .sidebar ul, .sidebar .menu-volver {
+    position: relative;
+    z-index: 10;
+}
+
+/* Mantenemos el estilo de tu título "PRENDAS" */
+.sidebar h3 {
+    padding-left: 20px;
+    color: #888;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.menu-prendas {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu-item {
+    padding: 15px 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: #ddd;
+    display: block;
+    transition: background 0.2s;
+    border-left: 4px solid transparent; /* Efecto visual al seleccionar */
+}
+
+.menu-item:hover { background-color: #333; }
+
+.menu-item.activo {
+    background-color: rgba(255,255,255,0.05);
+    color: white; font-weight: bold;
+    border-left-color: var(--rojo-levalier); /* Línea indicadora en rojo */
+}
+
+.menu-volver {
+    padding-left: 20px;
+    color: #aaa;
+    text-decoration: none;
+    font-size: 14px;
+}
+.menu-volver:hover { color: white; }
+
+/* =========================================
+   ÁREA DE TRABAJO Y MÓDULOS
+========================================= */
+
+
+/* Ocultamos todos los módulos por defecto */
+.modulo-prenda {
+    display: none; 
+}
+
+/* Solo mostramos el que tenga la clase 'activo' */
+.modulo-prenda.activo {
+    display: block;
+    animation: fadeIn 0.4s ease; /* Efecto de aparición suave */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+/* =========================================
+   MÓDULO PANTALÓN CORTO
+========================================= */
+#color-pantalon { 
+    background-color: #ffffff; 
+    mask-image: url('../imagenes/pantalon.png'); 
+    -webkit-mask-image: url('../imagenes/pantalon.png'); 
+}
+
+#textura-pantalon { 
+    background-image: url('../imagenes/pantalon.png'); 
+}
+
+/* =========================================
+   MÓDULO MUSCULOSA
+========================================= */
+
+.selector-genero {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.btn-genero {
+    flex: 1;
+    padding: 10px;
+    background-color: #f0f2f5;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #555;
+    transition: all 0.2s ease;
+}
+
+.btn-genero:hover { border-color: #b3c6ff; }
+
+.btn-genero.activa {
+    background-color: var(--azul-levalier); /* Azul Levalier */
+    color: white;
+    border-color: var(--azul-levalier);
+}
+
+/* Imágenes por defecto (Hombre) */
+#color-cuerpo-musc { 
+    background-color: #ffffff; 
+    mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); 
+    -webkit-mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); 
+}
+#color-ribetes-musc { 
+    background-color: #ffffff; 
+    mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); 
+    -webkit-mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); 
+}
+#textura-cuerpo-musc { background-image: url('../imagenes/musculosa_cuerpo_hombre.png'); }
+#textura-ribetes-musc { background-image: url('../imagenes/musculosa_ribetes_hombre.png'); }
+
+/* =========================================
+   MÓDULO MEDIAS
+========================================= */
+#color-medias { 
+    background-color: #ffffff; 
+    mask-image: url('../imagenes/medias.png'); 
+    -webkit-mask-image: url('../imagenes/medias.png'); 
+}
+#textura-medias { 
+    background-image: url('../imagenes/medias.png'); 
+}
+
+/* Paleta de colores fijos */
+.paleta-colores {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.btn-color {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-color:hover {
+    transform: scale(1.1);
+}
+
+.btn-color.activa {
+    border: 3px solid #0055ff;
+    box-shadow: 0 0 8px rgba(0, 85, 255, 0.5);
+}
+
+/* =========================================
+   MÓDULO GORRAS TRUCKER
+========================================= */
+#color-red-gorra { 
+    background-color: #000000; 
+    mask-image: url('../imagenes/gorra_red.png'); 
+    -webkit-mask-image: url('../imagenes/gorra_red.png'); 
+}
+
+#textura-gorra { 
+    background-image: url('../imagenes/gorra_completa.png'); 
+}
+
+/* =========================================
+   MÓDULO GORRAS DE GABARDINA
+========================================= */
+#color-gorra-gabardina { 
+    background-color: #ffffff; 
+    mask-image: url('../imagenes/gorra_gabardina.png'); 
+    -webkit-mask-image: url('../imagenes/gorra_gabardina.png'); 
+}
+
+#textura-gorra-gabardina { 
+    background-image: url('../imagenes/gorra_gabardina.png'); 
+}
+
+/* =========================================
+   CORRECCIÓN DEFINITIVA DE ESTRUCTURA Y ALINEACIÓN
+========================================= */
+/* 1. Apagamos el centrado vertical automático que desordena las cajas */
+body {
+    display: block !important; 
+    padding-top: 20px !important; /* Deja el espacio exacto para que la barra superior no tape nada */
+}
+
+/* 2. El módulo activo ocupa su espacio normalmente */
+.modulo-prenda.activo {
+    display: block !important;
+}
+
+/* 3. Fijamos el tamaño de la caja blanca para que TODAS sean idénticas */
+.contenedor-principal {
+    max-width: 1050px !important; /* Mismo ancho para remeras, pantalones y medias */
+    width: 92% !important;
+    margin: 0 auto 50px auto !important; /* Margen superior 0 (queda anclado arriba) y centrado horizontal */
+    padding: 30px 40px !important;
+    
+    /* Obligamos a que la imagen y los controles empiecen pegados arriba */
+    display: flex !important;
+    align-items: flex-start !important;
+    gap: 40px !important;
+    
+    /* Le damos una altura mínima para que las prendas pequeñas (medias) no achiquen la caja */
+    min-height: 500px !important;
+}
+/* =========================================
+   COMPACTAR ESPACIOS EN EL PANEL DE CONTROLES
+========================================= */
+/* 1. Achicamos la separación general obligatoria del panel (de 15px a 10px) */
+.panel-herramientas {
+    gap: 10px !important;
+}
+
+/* 2. Matamos los márgenes invisibles gigantes que el navegador le pone a los títulos */
+.panel-herramientas h2, 
+.panel-herramientas h3 {
+    margin: 0 !important;
+    padding-top: 5px !important; /* Apenitas un respiro arriba */
+}
+
+/* 3. Aplastamos la línea separadora gris */
+.panel-herramientas hr {
+    margin: 5px 0 !important;
+}
+
+/* 4. Hacemos que la zona donde se elige Clásico/Bicolor sea un poco más compacta */
+.grilla-modelos {
+    margin-bottom: 5px !important;
+}
+.tarjeta-modelo {
+    padding: 5px !important;
+}
+
+/* =========================================
+   MARCA DE AGUA (PROTECCIÓN DE DISEÑOS)
+========================================= */
+.lienzo-remera::after {
+    content: '';
+    position: absolute;
+    /* Hacemos la caja el doble de grande para poder inclinarla sin que queden huecos vacíos en las esquinas */
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    
+    /* Usamos tu logo como patrón */
+    background-image: url('../imagenes/logo_levalier.jpeg');
+    background-size: 180px auto; /* Tamaño de cada loquito repetido */
+    background-repeat: repeat;
+    
+    /* Lo inclinamos para darle el toque clásico de marca de agua */
+    transform: rotate(-30deg);
+    
+    /* Transparencia: 0.05 es muy sutil para que se vea, pero no tape el diseño de la ropa */
+    opacity: 0.03; 
+    
+    /* ESTO ES CLAVE: Evita que la marca de agua bloquee los clics del mouse cuando el cliente quiera mover un logo */
+    pointer-events: none; 
+    
+    /* Lo ponemos por encima de todas las capas de la ropa */
+    z-index: 50; 
+    
+    /* Como tu logo es JPG (tiene fondo blanco), esto hace que el fondo blanco se vuelva invisible y solo quede la tinta del logo */
+    mix-blend-mode: multiply; 
+}
