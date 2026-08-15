@@ -314,10 +314,11 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .hero-content h1 {
         font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
     }
-/* AGREGAR ESTO: Achicamos el borde y separamos las letras */
+/* AGREGAR ESTO: Corrección extrema para el texto transparente en celulares */
     .hero-content h1 span {
-        -webkit-text-stroke: 1px white !important; /* El !important obliga a que sí o sí tome este grosor */
-        letter-spacing: 2px; /* Le damos aire artificial entre letra y letra para que no choquen */
+        -webkit-text-stroke: 0.5px white !important; /* Medio píxel, queda súper fino y elegante */
+        font-weight: 600 !important; /* Le bajamos el grosor a la fuente para agrandar el hueco interior */
+        letter-spacing: 2px !important; /* Aseguramos la separación */
     }
     .hero-content p {
         font-size: 1rem;
