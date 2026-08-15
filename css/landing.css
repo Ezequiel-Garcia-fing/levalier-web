@@ -314,6 +314,10 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .hero-content h1 {
         font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
     }
+    /* AGREGAR ESTO: Achicamos el borde del texto transparente para celulares */
+    .hero-content h1 span {
+        -webkit-text-stroke: 1px white; 
+    }
     .hero-content p {
         font-size: 1rem;
     }
