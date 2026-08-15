@@ -314,11 +314,21 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .hero-content h1 {
         font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
     }
-/* AGREGAR ESTO: Corrección extrema para el texto transparente en celulares */
-/* PRUEBA DE CHOQUE PARA EL CELULAR */
+/* =========================================
+       SOLUCIÓN DEFINITIVA PARA EL TEXTO EN CELULARES
+    ========================================= */
     .hero-content h1 span {
-        -webkit-text-stroke: 0 !important; /* Apagamos el borde */
-        color: #FFD700 !important; /* Lo pintamos de amarillo oro */
+        -webkit-text-stroke: 0 !important; /* Apagamos el borde que rompe el navegador */
+        
+        /* OPCIÓN 1: Rojo Levalier (Recomendado para destacar) */
+        color: var(--rojo-levalier) !important; 
+        
+        /* OPCIÓN 2: Si preferís que sea blanco, borrá la línea de arriba y usá esta: */
+        /* color: white !important; */
+
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5) !important; /* Sombreado suave para que resalte contra la cancha */
+        letter-spacing: normal !important; /* Devolvemos el espaciado a la normalidad */
+        font-weight: 800 !important; /* Mantenemos la fuerza de la tipografía */
     }
     .hero-content p {
         font-size: 1rem;
