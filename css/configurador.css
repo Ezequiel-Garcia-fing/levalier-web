@@ -595,3 +595,65 @@ body {
     /* Como tu logo es JPG (tiene fondo blanco), esto hace que el fondo blanco se vuelva invisible y solo quede la tinta del logo */
     mix-blend-mode: multiply; 
 }
+
+/* =========================================
+   ADAPTACIÓN PARA PANTALLAS GIGANTES (> 1440px)
+========================================= */
+@media (min-width: 1440px) {
+    .contenedor-principal {
+        max-width: 1400px !important; /* Expandimos la tarjeta principal */
+    }
+    
+    .lienzo-remera {
+        /* Agrandamos el lienzo manteniendo la proporción exacta de 8:5 */
+        width: 1000px !important;
+        height: 625px !important;
+    }
+    
+    .panel-herramientas {
+        width: 320px !important; /* Le damos más respiro a los controles */
+    }
+}
+
+/* =========================================
+   ADAPTACIÓN PARA CELULARES Y TABLETS (< 900px)
+========================================= */
+@media (max-width: 900px) {
+    .contenedor-principal {
+        flex-direction: column !important; /* Apila el lienzo arriba y los controles abajo */
+        padding: 20px 15px !important;
+        gap: 20px !important;
+        width: 95% !important;
+        min-height: auto !important;
+    }
+
+    .lienzo-remera {
+        width: 100% !important;
+        /* Al usar aspect-ratio, el lienzo se achica solo manteniendo la forma rectangular perfecta */
+        height: auto !important;
+        aspect-ratio: 8 / 5;
+    }
+    
+    /* Obligamos al lienzo interno de Fabric.js a que acompañe el tamaño de la caja */
+    .canvas-container, 
+    .canvas-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+
+    .panel-herramientas {
+        width: 100% !important; /* Los controles ahora ocupan todo el ancho del celular */
+    }
+    
+    .area-trabajo {
+        margin-top: 85px !important; /* Reducimos el espacio con el techo */
+    }
+    
+    .topbar-config {
+        padding: 0 15px !important;
+    }
+    
+    .logo-config img {
+        height: 40px; /* Achicamos un pelín el logo para ganar espacio de aire */
+    }
+}
