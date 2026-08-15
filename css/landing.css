@@ -279,3 +279,77 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     }
 }
 
+
+/* =========================================
+   ADAPTACIÓN PARA PANTALLAS GIGANTES (> 1440px)
+========================================= */
+@media (min-width: 1440px) {
+    .seccion-configurador,
+    .contenedor-proceso,
+    .contenedor-nosotros {
+        max-width: 1400px; /* Expande los contenedores en monitores grandes */
+    }
+    .hero-content h1 {
+        font-size: 5.5rem; /* Agranda el título proporcionalmente */
+    }
+}
+
+/* =========================================
+   ADAPTACIÓN PARA CELULARES Y TABLETS (< 768px)
+========================================= */
+@media (max-width: 768px) {
+    /* Barra de Navegación */
+    .navbar {
+        padding: 15px 20px;
+        flex-direction: column; /* Apila el logo arriba del menú */
+        gap: 15px;
+    }
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Sección Hero (Inicio) */
+    .hero-content h1 {
+        font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
+    }
+    .hero-content p {
+        font-size: 1rem;
+    }
+    .btn-principal-whatsapp {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+    }
+
+    /* Configurador Superpuesto */
+    .seccion-configurador {
+        padding: 40px 20px;
+        margin: -40px 20px 60px 20px; /* Separa los bordes de la pantalla */
+    }
+    .contenido-config h2 {
+        font-size: 1.8rem;
+    }
+
+    /* Tarjetas del Proceso (Método) */
+    .contenedor-proceso {
+        flex-direction: column; /* Pone las 3 tarjetas una debajo de otra */
+        gap: 25px;
+    }
+
+    /* Sección Nosotros y Contacto */
+    .nosotros-texto h2 {
+        font-size: 2.2rem;
+    }
+    .tarjeta-oscura-contacto {
+        padding: 25px; /* Menos relleno para pantallas chicas */
+    }
+
+    /* Botones de Redes Sociales Flotantes */
+    .redes-flotantes {
+        bottom: 15px;
+        right: 15px;
+        transform: scale(0.85); /* Achica un 15% los botones para que no estorben */
+        transform-origin: bottom right;
+    }
+}
