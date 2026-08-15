@@ -57,7 +57,9 @@ const patronRayasFrente = document.getElementById('patron-rayas-frente');
 const patronRayasEspalda = document.getElementById('patron-rayas-espalda');
 
 const contenedorColor2 = document.getElementById('contenedor-color-2');
-const contenedorSlider = document.getElementById('contenedor-slider');
+const contenedorSlider = document.getElementById('contenedor-slider'); // <-- ¡Faltaba esta!
+const sliderMitad = document.getElementById('slider-mitad');
+const sliderRayas = document.getElementById('slider-rayas');
 const labelColor1 = document.getElementById('label-color-1');
 const labelColor2 = document.getElementById('label-color-2');
 const labelSlider = document.getElementById('label-slider');
@@ -65,29 +67,27 @@ const labelSlider = document.getElementById('label-slider');
 const selectorCuerpo = document.getElementById('selector-cuerpo');
 const selectorPatron = document.getElementById('selector-patron');
 const selectorMangas = document.getElementById('selector-mangas');
-const sliderCorte = document.getElementById('slider-corte');
+// (Borramos const sliderCorte que estaba acá)
 
 const capaCuerpo = document.getElementById('color-cuerpo');
 const capaMangas = document.getElementById('color-mangas');
 
 // --- FUNCIÓN CENTRAL: ACTUALIZAR DISEÑOS ---
 function actualizarPatrones() {
-    const colorSecundario = selectorPatron.value;
-    const valorSlider = sliderCorte.value;
+    const colorSecundario = selectorPatron.value; // (O el ID de tu input oculto si ya pusiste Pickr acá)
     const modeloActual = modeloActualGlobal;
 
     if (modeloActual === 'mitad') {
-        // Lógica para la mitad
+        const valorMitad = sliderMitad.value;
         patronMitadFrente.style.backgroundColor = colorSecundario;
         patronMitadEspalda.style.backgroundColor = colorSecundario;
-        patronMitadFrente.style.width = valorSlider + '%';
-        patronMitadEspalda.style.width = valorSlider + '%';
-    } 
-else if (modeloActual === 'rayas') {
-        const anchoRaya = valorSlider; 
+        patronMitadFrente.style.width = valorMitad + '%';
+        patronMitadEspalda.style.width = valorMitad + '%';
+        
+    } else if (modeloActual === 'rayas') {
+        const anchoRaya = sliderRayas.value; 
         const gradiente = `repeating-linear-gradient(to right, transparent, transparent ${anchoRaya}%, ${colorSecundario} ${anchoRaya}%, ${colorSecundario} ${anchoRaya * 2}%)`;
         
-        // Aplicamos el gradiente simétricamente a ambas mitades
         patronRayasFrente.style.background = gradiente;
         patronRayasEspalda.style.background = gradiente;
     }
@@ -110,37 +110,39 @@ tarjetasModelo.forEach(tarjeta => {
         patronRayasFrente.style.display = 'none';
         patronRayasEspalda.style.display = 'none';
 
-        // 4. Mostramos y ocultamos los controles según el modelo
+// 4. Mostramos y ocultamos los controles según el modelo
         if (modelo === 'mitad') {
             patronMitadFrente.style.display = 'block';
             patronMitadEspalda.style.display = 'block';
             contenedorColor2.classList.remove('oculto');
+            
             contenedorSlider.classList.remove('oculto');
+            sliderMitad.classList.remove('oculto'); // Mostramos el de mitad
+            sliderRayas.classList.add('oculto');    // Ocultamos el de rayas
             
             labelColor1.innerText = 'Color Principal (Derecha):';
             labelColor2.innerText = 'Color Secundario (Izquierda):';
             labelSlider.innerText = 'Ajustar Centro del Corte:';
             
-            sliderCorte.max = 50; 
-            sliderCorte.step = 0.5;
-            
         } else if (modelo === 'rayas') {
             patronRayasFrente.style.display = 'block';
             patronRayasEspalda.style.display = 'block';
             contenedorColor2.classList.remove('oculto');
+            
             contenedorSlider.classList.remove('oculto');
+            sliderRayas.classList.remove('oculto'); // Mostramos el de rayas
+            sliderMitad.classList.add('oculto');    // Ocultamos el de mitad
             
             labelColor1.innerText = 'Color Base:';
             labelColor2.innerText = 'Color de Rayas:';
             labelSlider.innerText = 'Grosor de las Rayas:';
             
-            sliderCorte.max = 20; 
-            sliderCorte.step = 1;
-            
         } else { 
             // Modelo Liso / Clásico
             contenedorColor2.classList.add('oculto');
             contenedorSlider.classList.add('oculto');
+            sliderMitad.classList.add('oculto');
+            sliderRayas.classList.add('oculto');
             labelColor1.innerText = 'Color Principal:';
         }
         
@@ -153,7 +155,8 @@ tarjetasModelo.forEach(tarjeta => {
 selectorCuerpo.addEventListener('input', (e) => capaCuerpo.style.backgroundColor = e.target.value);
 selectorMangas.addEventListener('input', (e) => capaMangas.style.backgroundColor = e.target.value);
 selectorPatron.addEventListener('input', actualizarPatrones);
-sliderCorte.addEventListener('input', actualizarPatrones);
+sliderMitad.addEventListener('input', actualizarPatrones);
+sliderRayas.addEventListener('input', actualizarPatrones);
 
 // --- MOTOR DE LOGOS (Fabric.js) ---
 const canvas = new fabric.Canvas('canvas-logos');

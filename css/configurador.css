@@ -153,15 +153,15 @@ body {
     z-index: 1;
 }
 
-#color-cuerpo { background-color: #ffffff; mask-image: url('../imagenes/cuerpo.png'); -webkit-mask-image: url('../imagenes/cuerpo.png'); }
-#color-mangas { background-color: #ffffff; mask-image: url('../imagenes/mangas.png'); -webkit-mask-image: url('../imagenes/mangas.png'); }
+#color-cuerpo { background-color: #0C43B5; mask-image: url('../imagenes/cuerpo.png'); -webkit-mask-image: url('../imagenes/cuerpo.png'); }
+#color-mangas { background-color: #7B7777; mask-image: url('../imagenes/mangas.png'); -webkit-mask-image: url('../imagenes/mangas.png'); }
 
 /* PATRÓN: Mitades Espejadas */
 .patron-mitad {
     position: absolute;
     top: 0; 
     height: 100%;
-    background-color: #5a2e8c;
+    background-color: #DD3939;
     display: none;
 }
 
@@ -389,7 +389,7 @@ input[type="file"] { display: none; }
    MÓDULO PANTALÓN CORTO
 ========================================= */
 #color-pantalon { 
-    background-color: #ffffff; 
+    background-color: #0C43B5; 
     mask-image: url('../imagenes/pantalon.png'); 
     -webkit-mask-image: url('../imagenes/pantalon.png'); 
 }
@@ -430,12 +430,12 @@ input[type="file"] { display: none; }
 
 /* Imágenes por defecto (Hombre) */
 #color-cuerpo-musc { 
-    background-color: #ffffff; 
+    background-color: #0C43B5; 
     mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); 
     -webkit-mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); 
 }
 #color-ribetes-musc { 
-    background-color: #ffffff; 
+    background-color: #DD3939; 
     mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); 
     -webkit-mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); 
 }
@@ -484,7 +484,7 @@ input[type="file"] { display: none; }
    MÓDULO GORRAS TRUCKER
 ========================================= */
 #color-red-gorra { 
-    background-color: #000000; 
+    background-color: #0C43B5; 
     mask-image: url('../imagenes/gorra_red.png'); 
     -webkit-mask-image: url('../imagenes/gorra_red.png'); 
 }
@@ -497,7 +497,7 @@ input[type="file"] { display: none; }
    MÓDULO GORRAS DE GABARDINA
 ========================================= */
 #color-gorra-gabardina { 
-    background-color: #ffffff; 
+    background-color: #0C43B5; 
     mask-image: url('../imagenes/gorra_gabardina.png'); 
     -webkit-mask-image: url('../imagenes/gorra_gabardina.png'); 
 }
@@ -700,4 +700,34 @@ body {
 .pickr .pcr-button:hover {
     border-color: var(--azul-levalier) !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* =========================================
+   ESTILOS PARA LOS SLIDERS (RANGOS)
+========================================= */
+input[type="range"] {
+    display: block;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 6px;
+    -webkit-appearance: none;
+    background: #d1d5db;
+    border-radius: 5px;
+    outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--azul-levalier);
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+input[type="range"].oculto {
+    display: none !important;
 }

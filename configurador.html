@@ -89,38 +89,43 @@
                         <label>Estilo de la Prenda:</label>
                         <div class="grilla-modelos">
                             <div class="tarjeta-modelo activa" data-modelo="liso">
-                                <img src="imagenes/thumb_clasico.jpg" alt="Clásico">
-                                <span>Clásico Base</span>
+                                <img src="imagenes/thumb_.jpg" alt="Clásico">
+                                <span>Clásico</span>
                             </div>
                             <div class="tarjeta-modelo" data-modelo="mitad">
                                 <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
-                                <span>Corte Bicolor</span>
+                                <span>Bicolor</span>
                             </div>
                             <div class="tarjeta-modelo" data-modelo="rayas">
                                 <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
-                                <span>Bastones Tradicionales</span>
+                                <span>A Rayas</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="grupo-control">
                         <label id="label-color-1">Color Principal:</label>
-                        <input type="color" id="selector-cuerpo" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#ffffff"></div>
+                        <input type="color" id="selector-cuerpo" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#0C43B5"></div>
                     </div>
                     <div class="grupo-control oculto" id="contenedor-color-2">
                         <label id="label-color-2">Color Secundario:</label>
-                        <input type="color" id="selector-patron" value="#5a2e8c" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#5a2e8c"></div>
+                        <input type="color" id="selector-patron" value="#DD3939" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
                     </div>
                     <div class="grupo-control oculto" id="contenedor-slider">
                         <label id="label-slider">Ajuste:</label>
-                        <input type="range" id="slider-corte" min="1" max="50" value="25" step="1">
+                        
+                        <!-- 1. Slider exclusivo para el modelo Mitad -->
+                        <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
+                        
+                        <!-- 2. Slider exclusivo para el modelo Rayas -->
+                        <input type="range" id="slider-rayas" class="oculto" min="1" max="20" step="1" value="10">
                     </div>
                     <div class="grupo-control">
                         <label>Color de Mangas:</label>
-                        <input type="color" id="selector-mangas" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-mangas" data-default="#ffffff"></div>
+                        <input type="color" id="selector-mangas" value="#7B7777" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-mangas" data-default="#7B7777"></div>
                     </div>
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
                     <h2>Logos</h2>
@@ -170,13 +175,13 @@
                     <!-- COLORES SIMPLES -->
                     <div class="grupo-control">
                         <label>Color Principal:</label>
-                        <input type="color" id="selector-cuerpo-musc" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-cuerpo-musc" data-default="#ffffff"></div>    
+                        <input type="color" id="selector-cuerpo-musc" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-cuerpo-musc" data-default="#0C43B5"></div>    
                     </div>
                     <div class="grupo-control">
                         <label>Color Ribetes/Cuello:</label>
-                        <input type="color" id="selector-ribetes-musc" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#ffffff"></div>
+                        <input type="color" id="selector-ribetes-musc" value="#DD3939" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#DD3939"></div>
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
@@ -217,8 +222,8 @@
                     
                     <div class="grupo-control">
                         <label>Color del Short:</label>
-                        <input type="color" id="selector-pantalon" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-pantalon" data-default="#ffffff"></div>    
+                        <input type="color" id="selector-pantalon" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-pantalon" data-default="#0C43B5"></div>    
                     </div>
 
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
@@ -312,8 +317,8 @@
                     
                     <div class="grupo-control">
                         <label>Color de Red y Visera:</label>
-                        <input type="color" id="selector-color-gorra" value="#000000" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-color-gorra" data-default="#000000"></div>
+                        <input type="color" id="selector-color-gorra" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-gorra" data-default="#0C43B5"></div>
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
@@ -354,8 +359,8 @@
                     <div class="grupo-control">
                         <label>Color de la Gorra:</label>
                         <!-- Por defecto arranca en blanco -->
-                        <input type="color" id="selector-color-gorra-gabardina" value="#ffffff" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-color-gorra-gabardina" data-default="#ffffff"></div>    
+                        <input type="color" id="selector-color-gorra-gabardina" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-gorra-gabardina" data-default="#0C43B5"></div>    
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
