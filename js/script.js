@@ -602,56 +602,40 @@ if (logoInicio && !window.location.pathname.includes('configurador')) {
 // INICIALIZACIÓN UNIVERSAL DE PICKR
 // =========================================
 
-// Buscamos todos los contenedores de Pickr en el HTML
 document.querySelectorAll('.pickr-contenedor').forEach(contenedor => {
     const targetId = contenedor.getAttribute('data-target');
     const colorPorDefecto = contenedor.getAttribute('data-default') || '#ffffff';
     const inputOculto = document.getElementById(targetId);
 
-    // Creamos la instancia de Pickr
     const pickr = Pickr.create({
         el: contenedor,
-        theme: 'classic', // Tema visual elegante
+        theme: 'classic',
         default: colorPorDefecto,
-        
-        // Podemos ofrecerle al cliente una pequeña paleta de acceso rápido (opcional)
         swatches: [
             '#ffffff', '#1a1e29', '#e32627', '#0055ff', '#f09433', '#25D366', '#000000'
         ],
-
         components: {
-            preview: true, // Muestra el color seleccionado
-            opacity: false, // Apagamos la transparencia porque la ropa es sólida
-            hue: true, // La barra del arcoíris
-
+            preview: true, 
+            opacity: false, 
+            hue: true, 
             interaction: {
-                hex: true,  // Muestra el código de color
-                input: true, // Permite escribir el código manual
+                hex: true,  
+                input: true, 
                 clear: false,
-                save: true  // Botón de guardar
+                save: false  /* <-- ¡ACÁ ESTÁ EL CAMBIO! Apagamos el botón */
             }
-        },
-        i18n: {
-            'btn:save': 'Aplicar Color', // Traducimos el botón al español
         }
     });
 
-    // EVENTO 1: Cuando el cliente mueve el dedo por los colores (cambio en vivo)
-    pickr.on('change', (color) => {
+// EVENTO: Cuando el cliente mueve el dedo por los colores (cambio en vivo)
+    pickr.on('change', (color, source, instance) => {
         const colorHex = color.toHEXA().toString();
         if (inputOculto) {
             inputOculto.value = colorHex;
-            inputOculto.dispatchEvent(new Event('input')); // Esto activa tu código de remeras rayadas al instante
+            inputOculto.dispatchEvent(new Event('input')); 
         }
-    });
-
-    // EVENTO 2: Cuando el cliente presiona "Aplicar Color"
-    pickr.on('save', (color) => {
-        const colorHex = color.toHEXA().toString();
-        if (inputOculto) {
-            inputOculto.value = colorHex;
-            inputOculto.dispatchEvent(new Event('input'));
-        }
-        pickr.hide(); // Cierra la ventana flotante
+        
+        // LA LÍNEA MÁGICA: Forzamos a que el cuadradito se pinte en vivo
+        instance.applyColor(true); 
     });
 });

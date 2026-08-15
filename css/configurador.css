@@ -685,3 +685,19 @@ body {
 .oculto { 
     display: none !important; 
 }
+
+/* =========================================
+   ESTILOS PARA EL BOTÓN DE PICKR (BLANCO SOBRE BLANCO)
+========================================= */
+.pickr .pcr-button {
+    border: 2px solid #d1d5db !important; /* Borde gris clarito para que resalte */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important; /* Sombra suave para darle volumen */
+    border-radius: 8px !important; /* Lo hacemos un poco más redondeado */
+    transition: all 0.3s ease !important;
+}
+
+/* Efecto hover: se pinta con el color de tu marca al pasar el mouse (en PC) */
+.pickr .pcr-button:hover {
+    border-color: var(--azul-levalier) !important;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+}
