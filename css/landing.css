@@ -315,10 +315,10 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
         font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
     }
 /* AGREGAR ESTO: Corrección extrema para el texto transparente en celulares */
+/* PRUEBA DE CHOQUE PARA EL CELULAR */
     .hero-content h1 span {
-        -webkit-text-stroke: 0.5px white !important; /* Medio píxel, queda súper fino y elegante */
-        font-weight: 600 !important; /* Le bajamos el grosor a la fuente para agrandar el hueco interior */
-        letter-spacing: 2px !important; /* Aseguramos la separación */
+        -webkit-text-stroke: 0 !important; /* Apagamos el borde */
+        color: #FFD700 !important; /* Lo pintamos de amarillo oro */
     }
     .hero-content p {
         font-size: 1rem;
