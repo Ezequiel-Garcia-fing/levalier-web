@@ -17,7 +17,7 @@ function alternarMenu() {
         btnMenu.style.backgroundColor = 'var(--rojo-levalier)';
     } else {
         // Si se cerró, vuelve a ser azul y dice "Menú"
-        btnMenu.innerHTML = '☰ Menú';
+        btnMenu.innerHTML = '☰ Prendas';
         btnMenu.style.backgroundColor = 'var(--azul-levalier)';
     }
 }
