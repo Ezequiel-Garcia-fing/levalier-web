@@ -178,6 +178,39 @@ document.getElementById('subir-logo').addEventListener('change', function(e) {
         });
     };
     lector.readAsDataURL(archivo);
+    // =========================================
+// NUEVO: LÓGICA PARA ELIMINAR LOGO REMERA
+// =========================================
+
+// Identificamos el botón en el HTML
+const btnEliminarRemera = document.getElementById('btn-eliminar-logo-remera');
+
+// Mostrar el botón cuando el cliente toca un logo en la remera
+canvas.on('selection:created', function() {
+    btnEliminarRemera.classList.remove('oculto');
+});
+
+// Mantener el botón visible si cambia la selección de un logo a otro
+canvas.on('selection:updated', function() {
+    btnEliminarRemera.classList.remove('oculto');
+});
+
+// Ocultar el botón cuando el cliente toca la remera vacía (deselecciona)
+canvas.on('selection:cleared', function() {
+    btnEliminarRemera.classList.add('oculto');
+});
+
+// Acción de borrar al hacer clic en el botón
+if (btnEliminarRemera) {
+    btnEliminarRemera.addEventListener('click', function() {
+        const logoActivo = canvas.getActiveObject();
+        if (logoActivo) {
+            canvas.remove(logoActivo);     // Lo elimina del dibujo
+            canvas.discardActiveObject();  // Quita los cuadraditos de selección
+            canvas.requestRenderAll();     // Refresca la imagen de la remera
+        }
+    });
+}
     e.target.value = ''; 
 });
 
@@ -220,6 +253,40 @@ document.getElementById('subir-logo-pantalon').addEventListener('change', functi
     lector.readAsDataURL(archivo);
     e.target.value = ''; 
 });
+
+// =========================================
+// NUEVO: LÓGICA PARA ELIMINAR LOGO PANTALÓN
+// =========================================
+
+// Identificamos el botón en el HTML
+const btnEliminarPantalon = document.getElementById('btn-eliminar-logo-pantalon');
+
+// Mostrar el botón cuando el cliente toca un logo
+canvasPantalon.on('selection:created', function() {
+    btnEliminarPantalon.classList.remove('oculto');
+});
+
+// Mantener el botón visible si cambia la selección de un logo a otro
+canvasPantalon.on('selection:updated', function() {
+    btnEliminarPantalon.classList.remove('oculto');
+});
+
+// Ocultar el botón cuando el cliente toca el fondo vacío (deselecciona)
+canvasPantalon.on('selection:cleared', function() {
+    btnEliminarPantalon.classList.add('oculto');
+});
+
+// Acción de borrar al hacer clic en el botón
+if (btnEliminarPantalon) {
+    btnEliminarPantalon.addEventListener('click', function() {
+        const logoActivo = canvasPantalon.getActiveObject();
+        if (logoActivo) {
+            canvasPantalon.remove(logoActivo);     // Lo elimina del dibujo
+            canvasPantalon.discardActiveObject();  // Quita los cuadraditos de selección
+            canvasPantalon.requestRenderAll();     // Refresca la imagen
+        }
+    });
+}
 
 
 // ==========================================
@@ -275,6 +342,24 @@ document.getElementById('subir-logo-musc').addEventListener('change', function(e
         });
     };
     lector.readAsDataURL(archivo);
+    const btnEliminarMusc = document.getElementById('btn-eliminar-logo-musc');
+
+if (typeof canvasMusc !== 'undefined') {
+    canvasMusc.on('selection:created', () => btnEliminarMusc.classList.remove('oculto'));
+    canvasMusc.on('selection:updated', () => btnEliminarMusc.classList.remove('oculto'));
+    canvasMusc.on('selection:cleared', () => btnEliminarMusc.classList.add('oculto'));
+
+    if (btnEliminarMusc) {
+        btnEliminarMusc.addEventListener('click', function() {
+            const logo = canvasMusc.getActiveObject();
+            if (logo) {
+                canvasMusc.remove(logo);
+                canvasMusc.discardActiveObject();
+                canvasMusc.requestRenderAll();
+            }
+        });
+    }
+}
     e.target.value = ''; 
 });
 
@@ -312,27 +397,25 @@ document.getElementById('subir-logo-medias').addEventListener('change', function
         });
     };
     lector.readAsDataURL(archivo);
-    e.target.value = ''; 
-});
+    const btnEliminarMedias = document.getElementById('btn-eliminar-logo-medias');
 
-// ==========================================
-// EVENTO GLOBAL DE BORRAR (ACTUALIZADO CON MEDIAS)
-// ==========================================
-// ¡Borrá el viejo window.addEventListener('keydown') y pegá este!
-window.addEventListener('keydown', function(e) {
-    if (e.key === 'Delete' || e.key === 'Backspace') {
-        const objRemera = typeof canvas !== 'undefined' ? canvas.getActiveObject() : null;
-        if (objRemera) canvas.remove(objRemera);
-        
-        const objPantalon = typeof canvasPantalon !== 'undefined' ? canvasPantalon.getActiveObject() : null;
-        if (objPantalon) canvasPantalon.remove(objPantalon);
+if (typeof canvasMedias !== 'undefined') {
+    canvasMedias.on('selection:created', () => btnEliminarMedias.classList.remove('oculto'));
+    canvasMedias.on('selection:updated', () => btnEliminarMedias.classList.remove('oculto'));
+    canvasMedias.on('selection:cleared', () => btnEliminarMedias.classList.add('oculto'));
 
-        const objMusc = typeof canvasMusc !== 'undefined' ? canvasMusc.getActiveObject() : null;
-        if (objMusc) canvasMusc.remove(objMusc);
-
-        const objMedias = typeof canvasMedias !== 'undefined' ? canvasMedias.getActiveObject() : null;
-        if (objMedias) canvasMedias.remove(objMedias);
+    if (btnEliminarMedias) {
+        btnEliminarMedias.addEventListener('click', function() {
+            const logo = canvasMedias.getActiveObject();
+            if (logo) {
+                canvasMedias.remove(logo);
+                canvasMedias.discardActiveObject();
+                canvasMedias.requestRenderAll();
+            }
+        });
     }
+}
+    e.target.value = ''; 
 });
 
 // ==========================================
@@ -370,6 +453,24 @@ document.getElementById('subir-logo-gorra').addEventListener('change', function(
         });
     };
     lector.readAsDataURL(archivo);
+    const btnEliminarGorras = document.getElementById('btn-eliminar-logo-gorras');
+
+if (typeof canvasGorras !== 'undefined') {
+    canvasGorras.on('selection:created', () => btnEliminarGorras.classList.remove('oculto'));
+    canvasGorras.on('selection:updated', () => btnEliminarGorras.classList.remove('oculto'));
+    canvasGorras.on('selection:cleared', () => btnEliminarGorras.classList.add('oculto'));
+
+    if (btnEliminarGorras) {
+        btnEliminarGorras.addEventListener('click', function() {
+            const logo = canvasGorras.getActiveObject();
+            if (logo) {
+                canvasGorras.remove(logo);
+                canvasGorras.discardActiveObject();
+                canvasGorras.requestRenderAll();
+            }
+        });
+    }
+}
     e.target.value = ''; 
 });
 
@@ -407,6 +508,24 @@ document.getElementById('subir-logo-gorra-gabardina').addEventListener('change',
         });
     };
     lector.readAsDataURL(archivo);
+    const btnEliminarGorrasGab = document.getElementById('btn-eliminar-logo-gorras-gab');
+
+if (typeof canvasGorrasGabardina !== 'undefined') {
+    canvasGorrasGabardina.on('selection:created', () => btnEliminarGorrasGab.classList.remove('oculto'));
+    canvasGorrasGabardina.on('selection:updated', () => btnEliminarGorrasGab.classList.remove('oculto'));
+    canvasGorrasGabardina.on('selection:cleared', () => btnEliminarGorrasGab.classList.add('oculto'));
+
+    if (btnEliminarGorrasGab) {
+        btnEliminarGorrasGab.addEventListener('click', function() {
+            const logo = canvasGorrasGabardina.getActiveObject();
+            if (logo) {
+                canvasGorrasGabardina.remove(logo);
+                canvasGorrasGabardina.discardActiveObject();
+                canvasGorrasGabardina.requestRenderAll();
+            }
+        });
+    }
+}
     e.target.value = ''; 
 });
 
@@ -416,23 +535,54 @@ document.getElementById('subir-logo-gorra-gabardina').addEventListener('change',
 // ¡Borrá el viejo window.addEventListener('keydown') y pegá este!
 window.addEventListener('keydown', function(e) {
     if (e.key === 'Delete' || e.key === 'Backspace') {
+        
+        // --- REMERA ---
         const objRemera = typeof canvas !== 'undefined' ? canvas.getActiveObject() : null;
-        if (objRemera) canvas.remove(objRemera);
+        if (objRemera) {
+            canvas.remove(objRemera);
+            canvas.discardActiveObject(); // Desmarca para que se oculte el botón
+            canvas.requestRenderAll();
+        }
         
+        // --- PANTALÓN ---
         const objPantalon = typeof canvasPantalon !== 'undefined' ? canvasPantalon.getActiveObject() : null;
-        if (objPantalon) canvasPantalon.remove(objPantalon);
+        if (objPantalon) {
+            canvasPantalon.remove(objPantalon);
+            canvasPantalon.discardActiveObject();
+            canvasPantalon.requestRenderAll();
+        }
 
+        // --- MUSCULOSA ---
         const objMusc = typeof canvasMusc !== 'undefined' ? canvasMusc.getActiveObject() : null;
-        if (objMusc) canvasMusc.remove(objMusc);
+        if (objMusc) {
+            canvasMusc.remove(objMusc);
+            canvasMusc.discardActiveObject();
+            canvasMusc.requestRenderAll();
+        }
 
+        // --- MEDIAS ---
         const objMedias = typeof canvasMedias !== 'undefined' ? canvasMedias.getActiveObject() : null;
-        if (objMedias) canvasMedias.remove(objMedias);
+        if (objMedias) {
+            canvasMedias.remove(objMedias);
+            canvasMedias.discardActiveObject();
+            canvasMedias.requestRenderAll();
+        }
         
+        // --- GORRAS ---
         const objGorras = typeof canvasGorras !== 'undefined' ? canvasGorras.getActiveObject() : null;
-        if (objGorras) canvasGorras.remove(objGorras);
+        if (objGorras) {
+            canvasGorras.remove(objGorras);
+            canvasGorras.discardActiveObject();
+            canvasGorras.requestRenderAll();
+        }
         
+        // --- GORRAS GABARDINA ---
         const objGorrasGab = typeof canvasGorrasGabardina !== 'undefined' ? canvasGorrasGabardina.getActiveObject() : null;
-        if (objGorrasGab) canvasGorrasGabardina.remove(objGorrasGab);
+        if (objGorrasGab) {
+            canvasGorrasGabardina.remove(objGorrasGab);
+            canvasGorrasGabardina.discardActiveObject();
+            canvasGorrasGabardina.requestRenderAll();
+        }
     }
 });
 
@@ -447,3 +597,61 @@ if (logoInicio && !window.location.pathname.includes('configurador')) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 }
+
+// =========================================
+// INICIALIZACIÓN UNIVERSAL DE PICKR
+// =========================================
+
+// Buscamos todos los contenedores de Pickr en el HTML
+document.querySelectorAll('.pickr-contenedor').forEach(contenedor => {
+    const targetId = contenedor.getAttribute('data-target');
+    const colorPorDefecto = contenedor.getAttribute('data-default') || '#ffffff';
+    const inputOculto = document.getElementById(targetId);
+
+    // Creamos la instancia de Pickr
+    const pickr = Pickr.create({
+        el: contenedor,
+        theme: 'classic', // Tema visual elegante
+        default: colorPorDefecto,
+        
+        // Podemos ofrecerle al cliente una pequeña paleta de acceso rápido (opcional)
+        swatches: [
+            '#ffffff', '#1a1e29', '#e32627', '#0055ff', '#f09433', '#25D366', '#000000'
+        ],
+
+        components: {
+            preview: true, // Muestra el color seleccionado
+            opacity: false, // Apagamos la transparencia porque la ropa es sólida
+            hue: true, // La barra del arcoíris
+
+            interaction: {
+                hex: true,  // Muestra el código de color
+                input: true, // Permite escribir el código manual
+                clear: false,
+                save: true  // Botón de guardar
+            }
+        },
+        i18n: {
+            'btn:save': 'Aplicar Color', // Traducimos el botón al español
+        }
+    });
+
+    // EVENTO 1: Cuando el cliente mueve el dedo por los colores (cambio en vivo)
+    pickr.on('change', (color) => {
+        const colorHex = color.toHEXA().toString();
+        if (inputOculto) {
+            inputOculto.value = colorHex;
+            inputOculto.dispatchEvent(new Event('input')); // Esto activa tu código de remeras rayadas al instante
+        }
+    });
+
+    // EVENTO 2: Cuando el cliente presiona "Aplicar Color"
+    pickr.on('save', (color) => {
+        const colorHex = color.toHEXA().toString();
+        if (inputOculto) {
+            inputOculto.value = colorHex;
+            inputOculto.dispatchEvent(new Event('input'));
+        }
+        pickr.hide(); // Cierra la ventana flotante
+    });
+});

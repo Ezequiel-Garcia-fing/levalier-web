@@ -6,6 +6,8 @@
     <title>Levalier | Diseñador 3D</title>
     <!-- Actualizamos la ruta al CSS -->
     <link rel="icon" type="image/x-icon" href="imagenes/logo_levalier.ico">
+    <!-- Pickr CSS (Tema Clásico) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
     <link rel="stylesheet" href="css/configurador.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
 </head>
@@ -102,11 +104,13 @@
 
                     <div class="grupo-control">
                         <label id="label-color-1">Color Principal:</label>
-                        <input type="color" id="selector-cuerpo" value="#ffffff">
+                        <input type="color" id="selector-cuerpo" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#ffffff"></div>
                     </div>
                     <div class="grupo-control oculto" id="contenedor-color-2">
                         <label id="label-color-2">Color Secundario:</label>
-                        <input type="color" id="selector-patron" value="#5a2e8c">
+                        <input type="color" id="selector-patron" value="#5a2e8c" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#5a2e8c"></div>
                     </div>
                     <div class="grupo-control oculto" id="contenedor-slider">
                         <label id="label-slider">Ajuste:</label>
@@ -114,13 +118,17 @@
                     </div>
                     <div class="grupo-control">
                         <label>Color de Mangas:</label>
-                        <input type="color" id="selector-mangas" value="#ffffff">
+                        <input type="color" id="selector-mangas" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-mangas" data-default="#ffffff"></div>
                     </div>
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                 </div>
             </div>
@@ -161,11 +169,13 @@
                     <!-- COLORES SIMPLES -->
                     <div class="grupo-control">
                         <label>Color Principal:</label>
-                        <input type="color" id="selector-cuerpo-musc" value="#ffffff">
+                        <input type="color" id="selector-cuerpo-musc" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-cuerpo-musc" data-default="#ffffff"></div>    
                     </div>
                     <div class="grupo-control">
                         <label>Color Ribetes/Cuello:</label>
-                        <input type="color" id="selector-ribetes-musc" value="#ffffff">
+                        <input type="color" id="selector-ribetes-musc" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#ffffff"></div>
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
@@ -174,6 +184,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-musc" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                 </div>
                 
@@ -203,7 +216,8 @@
                     
                     <div class="grupo-control">
                         <label>Color del Short:</label>
-                        <input type="color" id="selector-pantalon" value="#ffffff">
+                        <input type="color" id="selector-pantalon" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-pantalon" data-default="#ffffff"></div>    
                     </div>
 
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
@@ -211,13 +225,18 @@
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-pantalon" class="btn-subir">Subir Logo (.PNG)</label>
-                        <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg">
+                        <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg" class="oculto">
+                        
+                        <!-- NUEVO BOTÓN ELIMINAR (Oculto por defecto) -->
+                        <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                     
                     <p style="font-size: 12px; color: #666;">
-                        Hacé clic en el escudo o número para moverlo. Usá "Suprimir" para borrarlo.
+                        Hacé clic en el escudo o número para moverlo. Usá "Suprimir" en PC o el botón para borrarlo.
                     </p>
-                </div>
+                    </div>
                 
             </div>
         </div>
@@ -261,6 +280,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-medias" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-medias" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                 </div>
             </div>
@@ -289,7 +311,8 @@
                     
                     <div class="grupo-control">
                         <label>Color de Red y Visera:</label>
-                        <input type="color" id="selector-color-gorra" value="#000000">
+                        <input type="color" id="selector-color-gorra" value="#000000" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-gorra" data-default="#000000"></div>
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
@@ -298,6 +321,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-gorra" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                 </div>
             </div>
@@ -327,7 +353,8 @@
                     <div class="grupo-control">
                         <label>Color de la Gorra:</label>
                         <!-- Por defecto arranca en blanco -->
-                        <input type="color" id="selector-color-gorra-gabardina" value="#ffffff">
+                        <input type="color" id="selector-color-gorra-gabardina" value="#ffffff" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-gorra-gabardina" data-default="#ffffff"></div>    
                     </div>
                     
                     <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
@@ -336,11 +363,15 @@
                     <div class="grupo-control">
                         <label for="subir-logo-gorra-gabardina" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra-gabardina" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">
+                            Eliminar Logo Seleccionado
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
-
+        <!-- Pickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     <!-- Actualizamos la ruta al JS -->
     <script src="js/script.js"></script>
 </body>

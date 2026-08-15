@@ -657,3 +657,31 @@ body {
         height: 40px; /* Achicamos un pelín el logo para ganar espacio de aire */
     }
 }
+
+/* =========================================
+   BOTÓN ELIMINAR LOGO (MÓVIL Y PC)
+========================================= */
+.btn-eliminar {
+    background-color: transparent;
+    color: var(--rojo-levalier);
+    border: 2px solid var(--rojo-levalier);
+    padding: 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 5px; /* Separación con el botón de subir */
+    transition: all 0.3s ease;
+    width: 100%;
+    display: block; /* Para que ocupe todo el ancho del panel */
+}
+
+.btn-eliminar:hover {
+    background-color: var(--rojo-levalier);
+    color: white;
+}
+
+.oculto { 
+    display: none !important; 
+}
