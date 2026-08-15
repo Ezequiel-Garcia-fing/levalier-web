@@ -584,7 +584,7 @@ body {
     transform: rotate(-30deg);
     
     /* Transparencia: 0.05 es muy sutil para que se vea, pero no tape el diseño de la ropa */
-    opacity: 0.04; 
+    opacity: 0.035; 
     
     /* ESTO ES CLAVE: Evita que la marca de agua bloquee los clics del mouse cuando el cliente quiera mover un logo */
     pointer-events: none; 
