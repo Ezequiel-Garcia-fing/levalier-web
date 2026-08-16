@@ -279,11 +279,14 @@ input[type="file"] { display: none; }
 ========================================= */
 .sidebar {
     height: 100%; width: 250px; position: fixed; top: 0; left: auto; right: -250px;
-    background-color: var(--azul-oscuro); /* Volvemos al color sólido para máxima legibilidad */
+    background-color: var(--azul-oscuro); 
     padding-top: 20px; transition: right 0.3s ease; z-index: 1001; color: white;
     box-shadow: -4px 0 15px rgba(0,0,0,0.3);
-    border-left: 3px solid var(--rojo-levalier); /* Mantenemos el detalle de marca */
-    overflow: hidden; /* Evita que las líneas se escapen del menú */
+    border-left: 3px solid var(--rojo-levalier); 
+    
+    /* ACÁ ESTÁ EL CAMBIO MAGICO: */
+    overflow-y: auto; /* Permite hacer scroll hacia arriba y abajo si falta espacio */
+    overflow-x: hidden; /* Sigue bloqueando que las cosas se escapen hacia los costados */
 }
 
 /* La clase que abre el menú */
@@ -689,14 +692,19 @@ body {
 /* =========================================
    ESTILOS PARA EL BOTÓN DE PICKR (BLANCO SOBRE BLANCO)
 ========================================= */
+.pickr {
+    width: 100% !important; /* Obligamos a la caja de la librería a estirarse */
+}
+
 .pickr .pcr-button {
-    border: 2px solid #d1d5db !important; /* Borde gris clarito para que resalte */
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important; /* Sombra suave para darle volumen */
-    border-radius: 8px !important; /* Lo hacemos un poco más redondeado */
+    width: 100% !important; /* Obligamos al botón de color a ocupar todo el ancho */
+    height: 45px !important; /* Le damos la misma altura que a los demás botones */
+    border: 2px solid #d1d5db !important; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08) !important; 
+    border-radius: 8px !important; 
     transition: all 0.3s ease !important;
 }
 
-/* Efecto hover: se pinta con el color de tu marca al pasar el mouse (en PC) */
 .pickr .pcr-button:hover {
     border-color: var(--azul-levalier) !important;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
