@@ -731,3 +731,77 @@ input[type="range"]::-webkit-slider-thumb {
 input[type="range"].oculto {
     display: none !important;
 }
+
+/* =========================================
+   ADAPTACIÓN PARA MONITORES MUY GRANDES (Full HD, 2K, 4K)
+========================================= */
+
+/* Regla para que el área de diseño de Fabric.js siempre acompañe el tamaño de la remera */
+@media (min-width: 1440px) {
+    .canvas-container, 
+    .canvas-container canvas {
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+/* Pantallas de 1900px o más (Monitores grandes típicos) */
+@media (min-width: 1900px) {
+    .contenedor-principal {
+        max-width: 1700px !important; 
+        padding: 40px 60px !important;
+    }
+    
+    .lienzo-remera {
+        width: 1200px !important;
+        height: 750px !important; /* Mantenemos la proporción perfecta 8:5 */
+    }
+    
+    .panel-herramientas {
+        width: 380px !important; 
+    }
+    
+    /* Agrandamos textos y botones para que se lean bien de lejos */
+    .panel-herramientas label, 
+    .panel-herramientas h2 {
+        font-size: 18px !important;
+    }
+    select, .btn-subir, .btn-eliminar, .pickr .pcr-button {
+        font-size: 16px !important;
+        padding: 15px !important;
+    }
+    .tarjeta-modelo span {
+        font-size: 14px !important;
+    }
+}
+
+/* Pantallas de 2500px o más (Monitores Ultra Wide o 4K) */
+@media (min-width: 2500px) {
+    .contenedor-principal {
+        max-width: 2200px !important; 
+        padding: 60px 80px !important;
+    }
+    
+    .lienzo-remera {
+        width: 1600px !important;
+        height: 1000px !important; 
+    }
+    
+    .panel-herramientas {
+        width: 450px !important; 
+        gap: 20px !important;
+    }
+
+    /* En 4K todo debe ser bastante más grande */
+    .panel-herramientas label, 
+    .panel-herramientas h2 {
+        font-size: 22px !important;
+    }
+    select, .btn-subir, .btn-eliminar {
+        font-size: 18px !important;
+        padding: 20px !important;
+    }
+    .tarjeta-modelo span {
+        font-size: 16px !important;
+    }
+}

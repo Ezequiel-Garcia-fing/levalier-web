@@ -295,6 +295,76 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 }
 
 /* =========================================
+   ADAPTACIÓN PARA MONITORES GRANDES (1900px o más)
+========================================= */
+@media (min-width: 1900px) {
+    .seccion-configurador,
+    .contenedor-proceso,
+    .contenedor-nosotros {
+        max-width: 1700px; /* Agrandamos el tope de las cajas */
+    }
+    
+    /* Textos del Hero (Inicio) */
+    .hero-content h1 { font-size: 6.5rem; }
+    .hero-content p { font-size: 1.5rem; }
+    .btn-principal-whatsapp { font-size: 1.5rem; padding: 20px 50px; }
+
+    /* Textos de la Sección Método */
+    .titulo-seccion { font-size: 2.8rem; }
+    .tarjeta-flotante h3 { font-size: 1.8rem; }
+    .tarjeta-flotante p { font-size: 1.2rem; }
+    .icono-paso { width: 100px; height: 100px; font-size: 40px; }
+
+    /* Textos de la Sección Nosotros */
+    .nosotros-texto h2 { font-size: 3.5rem; }
+    .nosotros-texto p { font-size: 1.3rem; }
+    .tarjeta-oscura-contacto { padding: 60px; }
+    .tarjeta-oscura-contacto h3 { font-size: 2rem; }
+    .lista-contacto li span { font-size: 1.3rem; }
+    
+    /* Navegación */
+    .navbar { padding: 20px 80px; }
+    .nav-links li a { font-size: 18px; }
+}
+
+/* =========================================
+   ADAPTACIÓN PARA MONITORES ULTRA WIDE / 4K (2500px o más)
+========================================= */
+@media (min-width: 2500px) {
+    .seccion-configurador,
+    .contenedor-proceso,
+    .contenedor-nosotros {
+        max-width: 2200px; /* Expansión máxima para 4K */
+    }
+    
+    /* Textos del Hero (Inicio) */
+    .hero-content h1 { font-size: 8rem; margin-bottom: 40px; }
+    .hero-content p { font-size: 2rem; margin-bottom: 60px; }
+    .btn-principal-whatsapp { font-size: 1.8rem; padding: 25px 60px; }
+
+    /* Textos de la Sección Método */
+    .titulo-seccion { font-size: 3.8rem; margin-bottom: 80px; }
+    .tarjeta-flotante { padding: 60px 40px; }
+    .tarjeta-flotante h3 { font-size: 2.2rem; }
+    .tarjeta-flotante p { font-size: 1.5rem; }
+    .icono-paso { width: 130px; height: 130px; font-size: 50px; }
+
+    /* Textos de la Sección Nosotros */
+    .nosotros-texto h2 { font-size: 4.5rem; }
+    .nosotros-texto p { font-size: 1.6rem; }
+    .tarjeta-oscura-contacto { padding: 80px; }
+    .tarjeta-oscura-contacto h3 { font-size: 2.5rem; }
+    .lista-contacto li i { width: 70px; height: 70px; font-size: 34px; }
+    .lista-contacto li span { font-size: 1.6rem; }
+    .lista-contacto li strong { font-size: 1.1rem; }
+    
+    /* Navegación */
+    .navbar { padding: 30px 120px; }
+    .nav-links li a { font-size: 22px; }
+    .logo img { height: 70px; }
+}
+
+/* =========================================
    ADAPTACIÓN PARA CELULARES Y TABLETS (< 768px)
 ========================================= */
 @media (max-width: 768px) {
