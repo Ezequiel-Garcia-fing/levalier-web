@@ -281,87 +281,109 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 
 
 /* =========================================
-   ADAPTACIÓN PARA PANTALLAS GIGANTES (> 1440px)
+   ADAPTACIÓN PARA PANTALLAS GRANDES (> 1440px)
 ========================================= */
 @media (min-width: 1440px) {
     .seccion-configurador,
     .contenedor-proceso,
     .contenedor-nosotros {
-        max-width: 1400px; /* Expande los contenedores en monitores grandes */
+        max-width: 1400px;
     }
     .hero-content h1 {
-        font-size: 5.5rem; /* Agranda el título proporcionalmente */
+        font-size: 5.5rem;
     }
 }
 
 /* =========================================
-   ADAPTACIÓN PARA MONITORES GRANDES (1900px o más)
+   ADAPTACIÓN PARA MONITORES MUY GRANDES (> 1900px)
+   (Sobreescribe suavemente las reglas de 1440px)
 ========================================= */
 @media (min-width: 1900px) {
-    .seccion-configurador,
-    .contenedor-proceso,
+    /* Aumentamos el tamaño base para que todo crezca proporcionalmente */
+    html { font-size: 20px; }
+    
+    .seccion-configurador, 
+    .contenedor-proceso, 
     .contenedor-nosotros {
-        max-width: 1700px; /* Agrandamos el tope de las cajas */
+        max-width: 1600px; 
     }
-    
-    /* Textos del Hero (Inicio) */
-    .hero-content h1 { font-size: 6.5rem; }
-    .hero-content p { font-size: 1.5rem; }
-    .btn-principal-whatsapp { font-size: 1.5rem; padding: 20px 50px; }
-
-    /* Textos de la Sección Método */
-    .titulo-seccion { font-size: 2.8rem; }
-    .tarjeta-flotante h3 { font-size: 1.8rem; }
-    .tarjeta-flotante p { font-size: 1.2rem; }
-    .icono-paso { width: 100px; height: 100px; font-size: 40px; }
-
-    /* Textos de la Sección Nosotros */
-    .nosotros-texto h2 { font-size: 3.5rem; }
-    .nosotros-texto p { font-size: 1.3rem; }
-    .tarjeta-oscura-contacto { padding: 60px; }
-    .tarjeta-oscura-contacto h3 { font-size: 2rem; }
-    .lista-contacto li span { font-size: 1.3rem; }
-    
-    /* Navegación */
     .navbar { padding: 20px 80px; }
-    .nav-links li a { font-size: 18px; }
+    .nav-links li a { font-size: 20px; }
+    .logo img { height: 70px; }
 }
 
 /* =========================================
-   ADAPTACIÓN PARA MONITORES ULTRA WIDE / 4K (2500px o más)
+   ADAPTACIÓN PARA 4K Y ULTRA WIDE (> 2500px)
+   (Tamaños fluidos basados en el ancho de la pantalla)
 ========================================= */
 @media (min-width: 2500px) {
-    .seccion-configurador,
-    .contenedor-proceso,
+    /* 1. Contenedores Principales (Los agrandamos al 80% de la pantalla) */
+    .seccion-configurador, 
+    .contenedor-proceso, 
     .contenedor-nosotros {
-        max-width: 2200px; /* Expansión máxima para 4K */
+        max-width: 80vw !important; 
+        padding: 4vw !important;
     }
-    
-    /* Textos del Hero (Inicio) */
-    .hero-content h1 { font-size: 8rem; margin-bottom: 40px; }
-    .hero-content p { font-size: 2rem; margin-bottom: 60px; }
-    .btn-principal-whatsapp { font-size: 1.8rem; padding: 25px 60px; }
 
-    /* Textos de la Sección Método */
-    .titulo-seccion { font-size: 3.8rem; margin-bottom: 80px; }
-    .tarjeta-flotante { padding: 60px 40px; }
-    .tarjeta-flotante h3 { font-size: 2.2rem; }
-    .tarjeta-flotante p { font-size: 1.5rem; }
-    .icono-paso { width: 130px; height: 130px; font-size: 50px; }
+    /* 2. Barra de Navegación */
+    .navbar { padding: 1.5vw 4vw; }
+    .logo img { height: 3.5vw; }
+    .nav-links { gap: 3vw; }
+    .nav-links li a { font-size: 1.2vw; }
+    .btn-nav-borde { padding: 0.8vw 2vw; border-radius: 2vw; border-width: 0.2vw; }
 
-    /* Textos de la Sección Nosotros */
-    .nosotros-texto h2 { font-size: 4.5rem; }
-    .nosotros-texto p { font-size: 1.6rem; }
-    .tarjeta-oscura-contacto { padding: 80px; }
-    .tarjeta-oscura-contacto h3 { font-size: 2.5rem; }
-    .lista-contacto li i { width: 70px; height: 70px; font-size: 34px; }
-    .lista-contacto li span { font-size: 1.6rem; }
-    .lista-contacto li strong { font-size: 1.1rem; }
+    /* 3. Hero (Inicio) */
+    .hero-content { max-width: 60vw; }
+    .hero-content h1 { font-size: 5vw; margin-bottom: 1.5vw; -webkit-text-stroke: 0.1vw white; }
+    .hero-content p { font-size: 1.5vw; margin-bottom: 2.5vw; }
+    .btn-principal-whatsapp { font-size: 1.2vw; padding: 1.2vw 3vw; gap: 0.8vw; border-radius: 3vw; }
+    .subtexto-hero { font-size: 0.8vw; margin-top: 1vw; }
+
+    /* 4. Módulo Configurador Superpuesto */
+    /* ACÁ ESTABA EL CULPABLE: Destrabamos los 700px fijos */
+    .contenido-config { max-width: 50vw !important; } 
     
-    /* Navegación */
-    .navbar { padding: 30px 120px; }
-    .nav-links li a { font-size: 22px; }
-    .logo img { height: 70px; }
+    .seccion-configurador { margin-top: -6vw; margin-bottom: 6vw; border-radius: 1.5vw; }
+    .contenido-config h2 { font-size: 3vw; margin-bottom: 1.5vw; }
+    .contenido-config p { font-size: 1.4vw; margin-bottom: 2.5vw; }
+    .btn-configurador { font-size: 1.4vw; padding: 1.5vw 3vw; border-radius: 0.8vw; }
+
+    /* 5. Método (Tarjetas Blancas) */
+    .proceso-levalier { padding: 4vw 2vw 8vw 2vw; }
+    .titulo-seccion { font-size: 3.5vw; margin-bottom: 4vw; }
+    .contenedor-proceso { gap: 4vw; }
+    .tarjeta-flotante { padding: 4vw 3vw; border-radius: 1.5vw; }
+    .icono-paso { width: 8vw; height: 8vw; font-size: 3vw; margin-bottom: 2vw; }
+    .tarjeta-flotante h3 { font-size: 2vw; margin-bottom: 1vw; }
+    .tarjeta-flotante p { font-size: 1.2vw; line-height: 1.6; }
+
+    /* 6. Nosotros y Contacto */
+    .seccion-nosotros { padding: 6vw 2vw 8vw 2vw; }
+    .contenedor-nosotros { gap: 6vw; }
+    .nosotros-texto h2 { font-size: 3.5vw; margin-bottom: 1vw; }
+    .linea-separadora-roja { width: 6vw; height: 0.5vw; margin-bottom: 2.5vw; }
+    .nosotros-texto p { font-size: 1.3vw; margin-bottom: 1.5vw; line-height: 1.6; }
+    
+    .tarjeta-oscura-contacto { padding: 4vw; border-radius: 1.5vw; border-left-width: 0.5vw; }
+    .tarjeta-oscura-contacto h3 { font-size: 2.2vw; margin-bottom: 2.5vw; }
+    .lista-contacto li { gap: 1.5vw; margin-bottom: 2vw; }
+    .lista-contacto li i { width: 4.5vw; height: 4.5vw; font-size: 2vw; }
+    .lista-contacto li strong { font-size: 1vw; margin-bottom: 0.4vw; }
+    .lista-contacto li span { font-size: 1.3vw; }
+    
+
+        /* CORRECCIÓN DEL MAPA: 
+       Usamos una proporción panorámica (21:9) para que crezca armónicamente.
+       Al mantener una buena proporción, Google no oculta la tarjeta de información. */
+    .mapa-ubicacion iframe { 
+        width: 100% !important; 
+        height: auto !important;
+        aspect-ratio: 21 / 9 !important; 
+        min-height: 500px !important; 
+    }
+    /* 7. Redes Flotantes */
+    .redes-flotantes { bottom: 3vw; right: 3vw; gap: 1vw; }
+    .btn-social { width: 4.5vw; height: 4.5vw; font-size: 2.2vw; }
 }
 
 /* =========================================

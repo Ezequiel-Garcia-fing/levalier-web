@@ -733,11 +733,10 @@ input[type="range"].oculto {
 }
 
 /* =========================================
-   ADAPTACIÓN PARA MONITORES MUY GRANDES (Full HD, 2K, 4K)
+   ADAPTACIÓN PARA PANTALLAS GRANDES (> 1440px)
 ========================================= */
-
-/* Regla para que el área de diseño de Fabric.js siempre acompañe el tamaño de la remera */
 @media (min-width: 1440px) {
+    /* Regla para que el área de diseño de Fabric.js siempre acompañe el tamaño de la remera */
     .canvas-container, 
     .canvas-container canvas {
         width: 100% !important;
@@ -745,63 +744,131 @@ input[type="range"].oculto {
     }
 }
 
-/* Pantallas de 1900px o más (Monitores grandes típicos) */
+/* =========================================
+   ADAPTACIÓN PARA MONITORES MUY GRANDES (> 1900px)
+========================================= */
 @media (min-width: 1900px) {
     .contenedor-principal {
-        max-width: 1700px !important; 
-        padding: 40px 60px !important;
+        max-width: 1700px !important;
+        padding: 40px 50px !important;
+        gap: 60px !important;
     }
     
     .lienzo-remera {
-        width: 1200px !important;
-        height: 750px !important; /* Mantenemos la proporción perfecta 8:5 */
+        width: 1150px !important;
+        height: 718px !important; /* Mantenemos la proporción perfecta 8:5 */
     }
     
-    .panel-herramientas {
-        width: 380px !important; 
-    }
+    .panel-herramientas { width: 380px !important; }
     
-    /* Agrandamos textos y botones para que se lean bien de lejos */
-    .panel-herramientas label, 
-    .panel-herramientas h2 {
-        font-size: 18px !important;
+    .topbar-config { height: 90px; }
+    .logo-config img { height: 60px; }
+    .area-trabajo { margin-top: 120px; }
+    
+    /* Agrandamos Textos y Botones */
+    label, .panel-herramientas h2, .panel-herramientas h3 { font-size: 18px !important; }
+    select, .btn-subir, .btn-eliminar, .pickr .pcr-button { 
+        font-size: 16px !important; 
+        padding: 15px !important; 
+        height: auto; 
     }
-    select, .btn-subir, .btn-eliminar, .pickr .pcr-button {
-        font-size: 16px !important;
-        padding: 15px !important;
+    .tarjeta-modelo span { font-size: 14px !important; }
+    /* Botones de Hombre / Mujer */
+    .btn-genero { 
+        font-size: 16px !important; 
+        padding: 15px !important; 
     }
-    .tarjeta-modelo span {
-        font-size: 14px !important;
+    .selector-genero { gap: 15px !important; }
+    /* Botón de Volver a la Web */
+    .menu-volver { 
+        font-size: 16px !important; 
+        padding-left: 30px !important; 
     }
 }
 
-/* Pantallas de 2500px o más (Monitores Ultra Wide o 4K) */
+/* =========================================
+   ADAPTACIÓN PARA 4K Y ULTRA WIDE (> 2500px)
+   (Modo Fluido con 'vw')
+========================================= */
 @media (min-width: 2500px) {
-    .contenedor-principal {
-        max-width: 2200px !important; 
-        padding: 60px 80px !important;
-    }
+    /* 1. Barra Superior */
+    .topbar-config { height: 5vw; padding: 0 4vw; }
+    .logo-config img { height: 3vw; }
+    .btn-hamburguesa { font-size: 1.2vw; padding: 0.8vw 1.2vw; border-radius: 0.5vw; }
     
-    .lienzo-remera {
-        width: 1600px !important;
-        height: 1000px !important; 
-    }
-    
-    .panel-herramientas {
-        width: 450px !important; 
-        gap: 20px !important;
-    }
+    /* 2. Área General */
+    .area-trabajo { margin-top: 7vw; }
 
-    /* En 4K todo debe ser bastante más grande */
-    .panel-herramientas label, 
-    .panel-herramientas h2 {
-        font-size: 22px !important;
+    .contenedor-principal {
+        max-width: 85vw !important;
+        padding: 3vw 4vw !important;
+        gap: 4vw !important;
+        border-radius: 1vw;
     }
-    select, .btn-subir, .btn-eliminar {
-        font-size: 18px !important;
-        padding: 20px !important;
+    
+    /* 3. Lienzo de la Ropa (Proporción perfecta automática) */
+    .lienzo-remera {
+        width: 55vw !important;
+        height: auto !important;
+        aspect-ratio: 8 / 5; 
+        border-radius: 0.5vw;
     }
-    .tarjeta-modelo span {
-        font-size: 16px !important;
+    
+    /* 4. Panel de Herramientas */
+    .panel-herramientas {
+        width: 22vw !important;
+        gap: 1.5vw !important;
+    }
+    
+    /* 5. Controles, Inputs y Textos */
+    label, .panel-herramientas h2, .panel-herramientas h3 { 
+        font-size: 1.2vw !important; 
+        margin-bottom: 0.5vw !important;
+    }
+    select { 
+        height: 3.5vw !important; 
+        border-radius: 0.5vw !important;
+        font-size: 1vw !important;
+        padding: 0 1vw !important;
+    }
+    .btn-subir, .btn-eliminar { 
+        font-size: 1vw !important; 
+        padding: 1vw !important; 
+        border-radius: 0.5vw !important;
+        margin-top: 0.5vw;
+    }
+    
+    /* 6. Grilla de Modelos (Clásico, Bicolor, etc) */
+    .grilla-modelos { gap: 1vw !important; margin-bottom: 1vw !important; }
+    .tarjeta-modelo { padding: 0.8vw !important; border-radius: 0.5vw !important; border-width: 0.2vw; }
+    .tarjeta-modelo span { font-size: 0.9vw !important; margin-top: 0.5vw; }
+    
+    /* 7. Sliders (Barritas de ajuste) */
+    input[type="range"] { height: 0.5vw !important; margin: 1vw 0 !important; }
+    input[type="range"]::-webkit-slider-thumb { width: 1.5vw !important; height: 1.5vw !important; }
+    
+    /* 8. Cuadraditos de Color (Pickr y Medias) */
+    .pickr .pcr-button { border-radius: 0.5vw !important; width: 100% !important; height: 3.5vw !important; }
+    .btn-color { width: 3vw !important; height: 3vw !important; border-width: 0.2vw !important; }
+
+    /* 9. Menú Lateral de Prendas (Desplegable) */
+    .sidebar { width: 20vw; right: -20vw; padding-top: 2vw; border-left-width: 0.3vw; }
+    .sidebar h3 { font-size: 1.2vw; padding-left: 2vw; margin-bottom: 1vw; }
+    .menu-item { padding: 1.5vw 2vw; font-size: 1.2vw; border-left-width: 0.3vw; }
+    .sidebar.abierta { right: 0 !important; }
+    .btn-desplazado { transform: translateX(-20vw) !important; }
+    /* Botones de Hombre / Mujer fluidos */
+    .btn-genero { 
+        font-size: 1vw !important; 
+        padding: 1vw !important; 
+        border-radius: 0.5vw !important; 
+        border-width: 0.15vw !important;
+    }
+    .selector-genero { gap: 1vw !important; margin-bottom: 1vw !important; }
+    /* Botón de Volver a la Web fluido */
+    .menu-volver { 
+        font-size: 1vw !important; 
+        padding-left: 2vw !important; 
+        margin-top: 2vw !important; /* Le damos un poquito de aire arriba */
     }
 }
