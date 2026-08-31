@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light">
     <title>Levalier | Diseñador 3D</title>
-    <!-- Actualizamos la ruta al CSS -->
     <link rel="icon" type="image/x-icon" href="imagenes/logo_levalier.ico">
     <!-- Pickr CSS (Tema Clásico) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
@@ -15,7 +14,7 @@
 <body>
 
     <!-- ========================================== -->
-    <!-- NUEVO: DECORACIÓN DEPORTIVA (Líneas de fondo) -->
+    <!-- DECORACIÓN DEPORTIVA DE FONDO              -->
     <!-- ========================================== -->
     <div class="lineas-decorativas">
         <div class="linea-azul-1"></div>
@@ -25,27 +24,19 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- NUEVO: BARRA SUPERIOR FIJA CON EL LOGO -->
-    <!-- ========================================== -->
-<!-- ========================================== -->
-    <!-- BARRA SUPERIOR FIJA (Logo a la Izquierda)  -->
+    <!-- BARRA SUPERIOR FIJA                        -->
     <!-- ========================================== -->
     <header class="topbar-config">
-<!-- Logo a la izquierda (Convertido en enlace para volver al inicio) -->
         <a href="index.html" id="logo-inicio" class="logo-config">
             <img src="imagenes/logo_levalier.jpeg" alt="Logo Levalier">
         </a>
-        
-        <!-- Botón a la derecha -->
         <button id="btn-menu" class="btn-hamburguesa">☰ Prendas</button>
     </header>
 
-    <!-- 2. EL MENÚ LATERAL OCULTO (Limpio, sin logo) -->
+    <!-- ========================================== -->
+    <!-- MENÚ LATERAL DESPLEGABLE                   -->
+    <!-- ========================================== -->
     <div id="sidebar" class="sidebar">
-        
-        
-        <!-- ACÁ BORRAMOS EL BLOQUE DEL LOGO QUE ESTABA ANTES -->
-
         <h3>Prendas</h3>
         <ul class="menu-prendas">
             <li><a href="#" data-target="modulo-remera" class="menu-item activo">Remeras</a></li>
@@ -59,14 +50,17 @@
         <a href="index.html" class="menu-volver">&larr; Volver a la web</a>
     </div>
 
-    <!-- 3. EL CONTENEDOR DE LAS APLICACIONES -->
+    <!-- ========================================== -->
+    <!-- ÁREA DE TRABAJO PRINCIPAL                  -->
+    <!-- ========================================== -->
     <div class="area-trabajo">
         
-        <!-- MÓDULO REMERA (Acá adentro quedó tu código) -->
+        <!-- ========================================== -->
+        <!-- MÓDULO 1: REMERA                           -->
+        <!-- ========================================== -->
         <div id="modulo-remera" class="modulo-prenda activo">
-            
             <div class="contenedor-principal">
-                <!-- VISUALIZADOR -->
+                <!-- Visualizador -->
                 <div class="lienzo-remera">
                     <div class="capa-absoluta capa-color" id="color-cuerpo">
                         <div id="patron-mitad-frente" class="patron-mitad" style="left: 0; width: 25%;"></div>
@@ -74,16 +68,14 @@
                         <div id="patron-rayas-frente" class="patron-rayas" style="left: 0; width: 50%;"></div>
                         <div id="patron-rayas-espalda" class="patron-rayas" style="right: 0; width: 50%;"></div>
                     </div>
-                    
                     <div class="capa-absoluta capa-color" id="color-mangas"></div>
                     <canvas id="canvas-logos" width="800" height="500"></canvas>
                     <div class="capa-absoluta capa-textura" id="textura-cuerpo"></div>
                     <div class="capa-absoluta capa-textura" id="textura-mangas"></div>
                 </div>
 
-                <!-- CONTROLES -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
-                    
                     <h2>Diseño Base</h2>
                     <div class="grupo-control">
                         <label>Estilo de la Prenda:</label>
@@ -115,11 +107,7 @@
                     </div>
                     <div class="grupo-control oculto" id="contenedor-slider">
                         <label id="label-slider">Ajuste:</label>
-                        
-                        <!-- 1. Slider exclusivo para el modelo Mitad -->
                         <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
-                        
-                        <!-- 2. Slider exclusivo para el modelo Rayas -->
                         <input type="range" id="slider-rayas" class="oculto" min="1" max="20" step="1" value="10">
                     </div>
                     <div class="grupo-control">
@@ -127,43 +115,34 @@
                         <input type="color" id="selector-mangas" value="#7B7777" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-mangas" data-default="#7B7777"></div>
                     </div>
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
                 </div>
             </div>
+        </div>
 
-        </div> <!-- Fin módulo remera -->
-
-       <!-- ========================================== -->
-        <!-- MÓDULO MUSCULOSA (Simplificado)            -->
+        <!-- ========================================== -->
+        <!-- MÓDULO 2: PECHERAS / MUSCULOSAS            -->
         <!-- ========================================== -->
         <div id="modulo-musculosa" class="modulo-prenda">
             <div class="contenedor-principal">
-                
-                <!-- VISUALIZADOR -->
+                <!-- Visualizador -->
                 <div class="lienzo-remera">
-                    <!-- Capas limpias sin patrones geométricos adentro -->
                     <div class="capa-absoluta capa-color" id="color-cuerpo-musc"></div>
                     <div class="capa-absoluta capa-color" id="color-ribetes-musc"></div>
-                    
                     <canvas id="canvas-logos-musc" width="800" height="500"></canvas>
-                    
                     <div class="capa-absoluta capa-textura" id="textura-cuerpo-musc"></div>
                     <div class="capa-absoluta capa-textura" id="textura-ribetes-musc"></div>
                 </div>
 
-                <!-- CONTROLES -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
                     <h2>Diseño Pecheras</h2>
-                    
-                    <!-- SELECTOR DE CORTE (HOMBRE / MUJER) -->
                     <div class="grupo-control">
                         <label>Corte de la Prenda:</label>
                         <div class="selector-genero">
@@ -171,8 +150,6 @@
                             <button class="btn-genero" data-genero="mujer">Mujer</button>
                         </div>
                     </div>
-
-                    <!-- COLORES SIMPLES -->
                     <div class="grupo-control">
                         <label>Color Principal:</label>
                         <input type="color" id="selector-cuerpo-musc" value="#0C43B5" class="oculto">
@@ -183,85 +160,63 @@
                         <input type="color" id="selector-ribetes-musc" value="#DD3939" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#DD3939"></div>
                     </div>
-                    
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 10px 0;">
-                    
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-musc" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
                 </div>
-                
             </div>
         </div>
 
-        <!-- MÓDULO PANTALÓN (Por ahora vacío) -->
-<!-- MÓDULO PANTALÓN -->
+        <!-- ========================================== -->
+        <!-- MÓDULO 3: PANTALÓN                         -->
+        <!-- ========================================== -->
         <div id="modulo-pantalon" class="modulo-prenda">
             <div class="contenedor-principal">
-                
-                <!-- VISUALIZADOR DEL PANTALÓN -->
-                <div class="lienzo-remera"> <!-- Reutilizamos la clase para mantener el tamaño 800x500 -->
-                    <!-- Capa de color base -->
+                <!-- Visualizador -->
+                <div class="lienzo-remera">
                     <div class="capa-absoluta capa-color" id="color-pantalon"></div>
-                    
-                    <!-- Lienzo independiente para los logos del short -->
                     <canvas id="canvas-logos-pantalon" width="800" height="500"></canvas>
-                    
-                    <!-- Capa de sombras y arrugas -->
                     <div class="capa-absoluta capa-textura" id="textura-pantalon"></div>
                 </div>
 
-                <!-- CONTROLES DEL PANTALÓN -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
                     <h2>Diseño de Pantalón</h2>
-                    
                     <div class="grupo-control">
                         <label>Color del Short:</label>
                         <input type="color" id="selector-pantalon" value="#0C43B5" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-pantalon" data-default="#0C43B5"></div>    
                     </div>
-
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
-                    
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-pantalon" class="btn-subir">Subir Logo (.PNG)</label>
-                        <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg" class="oculto">
-                        
-                        <!-- NUEVO BOTÓN ELIMINAR (Oculto por defecto) -->
-                        <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg">
+                        <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
-                    </div>
-                
+                </div>
             </div>
         </div>
 
-    </div>
-    <!-- ========================================== -->
-        <!-- MÓDULO MEDIAS                              -->
+        <!-- ========================================== -->
+        <!-- MÓDULO 4: MEDIAS                           -->
         <!-- ========================================== -->
         <div id="modulo-medias" class="modulo-prenda">
             <div class="contenedor-principal">
-                
-                <!-- VISUALIZADOR -->
+                <!-- Visualizador -->
                 <div class="lienzo-remera">
                     <div class="capa-absoluta capa-color" id="color-medias"></div>
                     <canvas id="canvas-logos-medias" width="800" height="500"></canvas>
                     <div class="capa-absoluta capa-textura" id="textura-medias"></div>
                 </div>
 
-                <!-- CONTROLES -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
                     <h2>Diseño Medias</h2>
-                    
-                    <!-- PALETA DE COLORES FIJOS -->
                     <div class="grupo-control">
                         <label>Color de las Medias:</label>
                         <div class="paleta-colores">
@@ -275,106 +230,83 @@
                             <button class="btn-color" style="background-color: #00aaff;" data-color="#00aaff" title="Celeste"></button>
                         </div>
                     </div>
-                    
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
-                    
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-medias" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-medias" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- ========================================== -->
-        <!-- MÓDULO GORRAS TRUCKER                      -->
+        <!-- MÓDULO 5: GORRAS TRUCKER                   -->
         <!-- ========================================== -->
         <div id="modulo-gorras" class="modulo-prenda">
             <div class="contenedor-principal">
-                
-                <!-- VISUALIZADOR -->
+                <!-- Visualizador -->
                 <div class="lienzo-remera">
-                    <!-- Capa de color (Afecta solo a la red y solapa) -->
                     <div class="capa-absoluta capa-color" id="color-red-gorra"></div>
-                    
                     <canvas id="canvas-logos-gorras" width="800" height="500"></canvas>
-                    
-                    <!-- Capa de textura (Gorra completa con sombras) -->
                     <div class="capa-absoluta capa-textura" id="textura-gorra"></div>
                 </div>
 
-                <!-- CONTROLES -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
                     <h2>Diseño Gorra Trucker</h2>
-                    
                     <div class="grupo-control">
                         <label>Color de Red y Visera:</label>
                         <input type="color" id="selector-color-gorra" value="#0C43B5" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-color-gorra" data-default="#0C43B5"></div>
                     </div>
-                    
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
-                    
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-gorra" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- ========================================== -->
-        <!-- MÓDULO GORRAS DE GABARDINA                 -->
+        <!-- MÓDULO 6: GORRAS DE GABARDINA              -->
         <!-- ========================================== -->
         <div id="modulo-gorras-gabardina" class="modulo-prenda">
             <div class="contenedor-principal">
-                
-                <!-- VISUALIZADOR -->
+                <!-- Visualizador -->
                 <div class="lienzo-remera">
-                    <!-- Capa de color (Afecta a la gorra completa) -->
                     <div class="capa-absoluta capa-color" id="color-gorra-gabardina"></div>
-                    
                     <canvas id="canvas-logos-gorras-gabardina" width="800" height="500"></canvas>
-                    
-                    <!-- Capa de textura (Sombras y detalles de la tela) -->
                     <div class="capa-absoluta capa-textura" id="textura-gorra-gabardina"></div>
                 </div>
 
-                <!-- CONTROLES -->
+                <!-- Controles -->
                 <div class="panel-herramientas">
                     <h2>Diseño Gorra Gabardina</h2>
-                    
                     <div class="grupo-control">
                         <label>Color de la Gorra:</label>
-                        <!-- Por defecto arranca en blanco -->
                         <input type="color" id="selector-color-gorra-gabardina" value="#0C43B5" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-color-gorra-gabardina" data-default="#0C43B5"></div>    
                     </div>
-                    
-                    <hr style="width: 100%; border: 0; border-top: 1px solid #ddd; margin: 15px 0;">
-                    
+                    <hr>
                     <h2>Logos</h2>
                     <div class="grupo-control">
                         <label for="subir-logo-gorra-gabardina" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra-gabardina" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">
-                            Eliminar Logo Seleccionado
-                        </button>
+                        <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Pickr JS -->
+
+    </div> <!-- Cierre FIN del área de trabajo -->
+
+    <!-- Pickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
-    <!-- Actualizamos la ruta al JS -->
     <script src="js/script.js"></script>
 </body>
 </html>

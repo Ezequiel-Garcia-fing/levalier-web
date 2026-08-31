@@ -1,9 +1,9 @@
-
 html {
     scroll-behavior: smooth;
 }
+
 /* =========================================
-   VARIABLES DE COLOR Y FUENTES
+   1. VARIABLES GLOBALES Y RESETEO
 ========================================= */
 :root {
     --azul-levalier: #2b3245;
@@ -17,11 +17,12 @@ html {
 body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overflow-x: hidden; }
 
 /* =========================================
-   BARRA DE NAVEGACIÓN
+   2. ELEMENTOS COMPARTIDOS
 ========================================= */
+/* Barra de Navegación */
 .navbar {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 10px 50px; /* ACÁ ACHICAMOS EL ESPACIO VERTICAL */
+    padding: 10px 50px; 
     background-color: white; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     position: sticky; top: 0; z-index: 1000;
 }
@@ -29,14 +30,12 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 .nav-links { list-style: none; display: flex; align-items: center; gap: 35px; }
 .nav-links li a { text-decoration: none; color: var(--azul-levalier); font-weight: 600; font-size: 15px; transition: color 0.3s; }
 .nav-links li a:hover { color: var(--rojo-levalier); }
-/* Estilo para la página actual */
 .nav-links li a.activo {
     color: var(--rojo-levalier);
     border-bottom: 2px solid var(--rojo-levalier);
     padding-bottom: 4px;
-    transition: all 0.3s ease; /* Para que la línea roja aparezca suavemente */
+    transition: all 0.3s ease;
 }
-
 .btn-nav-borde {
     border: 2px solid var(--azul-levalier);
     padding: 8px 20px;
@@ -45,102 +44,7 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 }
 .btn-nav-borde:hover { background-color: var(--azul-levalier); color: white !important; }
 
-/* =========================================
-   HERO CON DEGRADADO
-========================================= */
-.hero {
-    position: relative;
-    min-height: 90vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    /* Agregamos padding-bottom extra para que la tarjeta superpuesta no tape el contenido */
-    padding: 0 20px 120px 20px;
-    background: linear-gradient(135deg, rgba(43, 50, 69, 0.9) 0%, rgba(227, 38, 39, 0.7) 100%), url('../imagenes/fondo_deporte.jpg') center/cover no-repeat;
-}
-
-.hero-content { max-width: 850px; z-index: 2; position: relative; }
-.hero-content h1 { font-size: 4.5rem; color: white; margin-bottom: 20px; line-height: 1.1; font-weight: 800; }
-.hero-content h1 span { color: transparent; -webkit-text-stroke: 2px white; } 
-.hero-content p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; }
-
-.btn-principal-whatsapp {
-    display: inline-flex; align-items: center; gap: 10px;
-    background-color: #25D366; color: white;
-    padding: 18px 45px; font-size: 1.3rem; font-weight: bold;
-    text-decoration: none; border-radius: 50px;
-    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
-    transition: all 0.3s ease; animation: latido 2s infinite;
-}
-.btn-principal-whatsapp:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6); }
-
-@keyframes latido {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-.subtexto-hero { display: block; margin-top: 15px; font-size: 0.9rem; color: #ccc; letter-spacing: 1px; text-transform: uppercase; }
-
-/* =========================================
-   CONFIGURADOR (ESTILO TARJETA SUPERPUESTA)
-========================================= */
-.seccion-configurador {
-    max-width: 1100px;
-    /* El margen negativo arriba la sube por encima del hero */
-    margin: -80px auto 80px auto; 
-    background: linear-gradient(135deg, var(--azul-levalier) 0%, #3a435c 100%);
-    padding: 60px 40px;
-    border-radius: 24px;
-    text-align: center;
-    color: white;
-    position: relative;
-    z-index: 10;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-}
-
-.contenido-config { max-width: 700px; margin: 0 auto; }
-.contenido-config h2 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; }
-.contenido-config p { font-size: 1.1rem; margin-bottom: 30px; color: #cbd0d8; line-height: 1.6; }
-
-.btn-configurador {
-    display: inline-block; background-color: var(--rojo-levalier); color: white;
-    padding: 15px 35px; border-radius: 12px; font-weight: bold; text-decoration: none; font-size: 1.1rem;
-    transition: transform 0.3s, background 0.3s;
-}
-.btn-configurador:hover { background-color: white; color: var(--rojo-levalier); transform: translateY(-3px); }
-
-/* =========================================
-   SECCIÓN MÉTODO (TARJETAS ORGÁNICAS)
-========================================= */
-.proceso-levalier { padding: 40px 20px 100px 20px; background-color: var(--blanco-fondo); }
-.titulo-seccion { text-align: center; color: var(--azul-levalier); font-size: 2.2rem; margin-bottom: 50px; font-weight: 800; }
-
-.contenedor-proceso { max-width: 1100px; margin: 0 auto; display: flex; gap: 40px; }
-
-.tarjeta-flotante {
-    flex: 1; background: white; padding: 40px 30px; border-radius: 20px;
-    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
-    transition: all 0.4s ease; border-bottom: 4px solid transparent;
-}
-.tarjeta-flotante:hover { transform: translateY(-10px); border-bottom-color: var(--rojo-levalier); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
-
-.icono-paso {
-    width: 80px; height: 80px; margin: 0 auto 20px;
-    background: linear-gradient(135deg, var(--azul-levalier), var(--azul-oscuro));
-    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 30px; color: white; transition: border-radius 0.3s ease;
-}
-.tarjeta-flotante:hover .icono-paso { border-radius: 50%; background: var(--rojo-levalier); }
-
-.tarjeta-flotante h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--azul-levalier); }
-.tarjeta-flotante p { color: var(--texto-gris); line-height: 1.6; }
-
-/* =========================================
-   REDES FLOTANTES
-========================================= */
+/* Redes Flotantes */
 .redes-flotantes { position: fixed; bottom: 30px; right: 30px; display: flex; flex-direction: column; gap: 15px; z-index: 1000; }
 .btn-social {
     width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
@@ -151,204 +55,220 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 .instagram { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); }
 
 /* =========================================
-   SECCIÓN NOSOTROS Y CONTACTO
+   3. SECCIONES DE LA PÁGINA (Por orden visual)
 ========================================= */
-.seccion-nosotros {
-    padding: 80px 20px 120px 20px;
-    background-color: white; /* Contraste limpio con el fondo gris de la sección anterior */
+
+/* --- Inicio (Hero) --- */
+.hero {
     position: relative;
-}
-
-.contenedor-nosotros {
-    max-width: 1100px;
-    margin: 0 auto;
-    display: flex;
-    gap: 60px;
-    align-items: center;
-}
-
-/* --- Columna Izquierda (Texto) --- */
-.nosotros-texto {
-    flex: 1;
-}
-
-.nosotros-texto h2 {
-    font-size: 2.8rem;
-    color: var(--azul-levalier);
-    font-weight: 800;
-    margin-bottom: 10px;
-    letter-spacing: -1px;
-}
-
-.destaque-rojo {
-    color: var(--rojo-levalier);
-}
-
-.linea-separadora-roja {
-    width: 60px;
-    height: 5px;
-    background-color: var(--rojo-levalier);
-    margin-bottom: 30px;
-    border-radius: 3px;
-}
-
-.nosotros-texto p {
-    font-size: 1.1rem;
-    color: var(--texto-gris);
-    line-height: 1.7;
-    margin-bottom: 20px;
-}
-
-.nosotros-texto strong {
-    color: var(--azul-levalier);
-}
-
-/* --- Columna Derecha (Tarjeta de Contacto) --- */
-.nosotros-contacto {
-    flex: 1;
-}
-
-.tarjeta-oscura-contacto {
-    background: linear-gradient(135deg, var(--azul-levalier) 0%, var(--azul-oscuro) 100%);
-    padding: 40px;
-    border-radius: 20px;
-    color: white;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
-    border-left: 5px solid var(--rojo-levalier); /* Conexión estética con el menú lateral 3D */
-}
-
-.tarjeta-oscura-contacto h3 {
-    font-size: 1.6rem;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.lista-contacto {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
-.lista-contacto li {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.lista-contacto li i {
-    font-size: 24px;
-    color: var(--rojo-levalier);
-    background: rgba(227, 38, 39, 0.1);
-    width: 50px;
-    height: 50px;
+    min-height: 90vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 50%;
+    text-align: center;
+    padding: 0 20px 120px 20px;
+    background: linear-gradient(135deg, rgba(43, 50, 69, 0.9) 0%, rgba(227, 38, 39, 0.7) 100%), url('../imagenes/fondo_deporte.jpg') center/cover no-repeat;
 }
+.hero-content { max-width: 850px; z-index: 2; position: relative; }
+.hero-content h1 { font-size: 4.5rem; color: white; margin-bottom: 20px; line-height: 1.1; font-weight: 800; }
+.hero-content h1 span { color: transparent; -webkit-text-stroke: 2px white; } 
+.hero-content p { font-size: 1.2rem; color: rgba(255,255,255,0.9); margin-bottom: 40px; font-weight: 300; }
+.btn-principal-whatsapp {
+    display: inline-flex; align-items: center; gap: 10px;
+    background-color: #25D366; color: white;
+    padding: 18px 45px; font-size: 1.3rem; font-weight: bold;
+    text-decoration: none; border-radius: 50px;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease; animation: latido 2s infinite;
+}
+.btn-principal-whatsapp:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.6); }
+@keyframes latido {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+.subtexto-hero { display: block; margin-top: 15px; font-size: 0.9rem; color: #ccc; letter-spacing: 1px; text-transform: uppercase; }
 
-.lista-contacto li div {
-    display: flex;
-    flex-direction: column;
+/* --- Configurador Superpuesto --- */
+.seccion-configurador {
+    max-width: 1100px;
+    margin: -80px auto 80px auto; 
+    background: linear-gradient(135deg, var(--azul-levalier) 0%, #3a435c 100%);
+    padding: 60px 40px;
+    border-radius: 24px;
+    text-align: center;
+    color: white;
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
+.contenido-config { max-width: 700px; margin: 0 auto; }
+.contenido-config h2 { font-size: 2.2rem; margin-bottom: 15px; font-weight: 700; }
+.contenido-config p { font-size: 1.1rem; margin-bottom: 30px; color: #cbd0d8; line-height: 1.6; }
+.btn-configurador {
+    display: inline-block; background-color: var(--rojo-levalier); color: white;
+    padding: 15px 35px; border-radius: 12px; font-weight: bold; text-decoration: none; font-size: 1.1rem;
+    transition: transform 0.3s, background 0.3s;
+}
+.btn-configurador:hover { background-color: white; color: var(--rojo-levalier); transform: translateY(-3px); }
 
-.lista-contacto li strong {
-    font-size: 0.9rem;
-    color: #cbd0d8;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 4px;
+/* --- Vista de Productos --- */
+.seccion-vista-productos {
+    padding: 80px 20px 100px 20px;
+    background-color: white; 
+    overflow: hidden; 
 }
+.contenedor-vista-productos {
+    max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 60px;
+}
+.vista-productos-texto { flex: 1; }
+.vista-productos-texto h2 { font-size: 2.8rem; color: var(--azul-levalier); font-weight: 800; margin-bottom: 10px; }
+.vista-productos-texto p { font-size: 1.1rem; color: var(--texto-gris); line-height: 1.7; margin-bottom: 20px; }
+.btn-rojo-levalier {
+    display: inline-flex; align-items: center; gap: 10px; background-color: var(--rojo-levalier);
+    color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none;
+    font-weight: bold; font-size: 1.1rem; transition: transform 0.3s, background-color 0.3s; margin-top: 15px;
+}
+.btn-rojo-levalier:hover { background-color: var(--azul-levalier); transform: translateX(5px); }
 
-.lista-contacto li span {
-    font-size: 1.1rem;
-    font-weight: bold;
+/* Animación de la Imagen */
+.vista-productos-imagen { flex: 1.2; display: flex; justify-content: flex-end; }
+.imagen-desplazable {
+    width: 100%; max-width: 600px; height: auto; border-radius: 12px;
+    opacity: 0; transform: translateX(-150px); transition: all 1s ease-out; 
 }
+.imagen-desplazable.aparecer { opacity: 1; transform: translateX(0); }
 
-.mapa-ubicacion {
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+/* --- Nosotros y Contacto --- */
+.seccion-nosotros {
+    padding: 80px 20px 120px 20px;
+    background-color: white; 
+    position: relative;
 }
+.contenedor-nosotros { max-width: 1100px; margin: 0 auto; display: flex; gap: 60px; align-items: center; }
+.nosotros-texto { flex: 1; }
+.nosotros-texto h2 { font-size: 2.8rem; color: var(--azul-levalier); font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
+.destaque-rojo { color: var(--rojo-levalier); }
+.linea-separadora-roja { width: 60px; height: 5px; background-color: var(--rojo-levalier); margin-bottom: 30px; border-radius: 3px; }
+.nosotros-texto p { font-size: 1.1rem; color: var(--texto-gris); line-height: 1.7; margin-bottom: 20px; }
+.nosotros-texto strong { color: var(--azul-levalier); }
 
-/* --- Adaptación para celulares --- */
-@media (max-width: 900px) {
-    .contenedor-nosotros {
-        flex-direction: column;
-        gap: 40px;
-    }
+.nosotros-contacto { flex: 1; }
+.tarjeta-oscura-contacto {
+    background: linear-gradient(135deg, var(--azul-levalier) 0%, var(--azul-oscuro) 100%);
+    padding: 40px; border-radius: 20px; color: white;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-left: 5px solid var(--rojo-levalier); 
 }
+.tarjeta-oscura-contacto h3 { font-size: 1.6rem; margin-bottom: 30px; letter-spacing: 1px; }
+.lista-contacto { list-style: none; margin-bottom: 30px; }
+.lista-contacto li { display: flex; align-items: center; gap: 20px; margin-bottom: 25px; }
+.lista-contacto li i {
+    font-size: 24px; color: var(--rojo-levalier); background: rgba(227, 38, 39, 0.1);
+    width: 50px; height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 50%;
+}
+.lista-contacto li div { display: flex; flex-direction: column; }
+.lista-contacto li strong { font-size: 0.9rem; color: #cbd0d8; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+.lista-contacto li span { font-size: 1.1rem; font-weight: bold; }
+.mapa-ubicacion { border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+
+/* --- Nuestro Método --- */
+.proceso-levalier { padding: 40px 20px 100px 20px; background-color: var(--blanco-fondo); }
+.titulo-seccion { text-align: center; color: var(--azul-levalier); font-size: 2.2rem; margin-bottom: 50px; font-weight: 800; }
+.contenedor-proceso { max-width: 1100px; margin: 0 auto; display: flex; gap: 40px; }
+.tarjeta-flotante {
+    flex: 1; background: white; padding: 40px 30px; border-radius: 20px;
+    text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+    transition: all 0.4s ease; border-bottom: 4px solid transparent;
+}
+.tarjeta-flotante:hover { transform: translateY(-10px); border-bottom-color: var(--rojo-levalier); box-shadow: 0 15px 40px rgba(0,0,0,0.08); }
+.icono-paso {
+    width: 80px; height: 80px; margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--azul-levalier), var(--azul-oscuro));
+    border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; display: flex; align-items: center; justify-content: center;
+    font-size: 30px; color: white; transition: border-radius 0.3s ease;
+}
+.tarjeta-flotante:hover .icono-paso { border-radius: 50%; background: var(--rojo-levalier); }
+.tarjeta-flotante h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--azul-levalier); }
+.tarjeta-flotante p { color: var(--texto-gris); line-height: 1.6; }
 
 
 /* =========================================
-   ADAPTACIÓN PARA PANTALLAS GRANDES (> 1440px)
+   4. ADAPTACIONES RESPONSIVE (MEDIA QUERIES)
 ========================================= */
-@media (min-width: 1440px) {
-    .seccion-configurador,
-    .contenedor-proceso,
-    .contenedor-nosotros {
-        max-width: 1400px;
-    }
-    .hero-content h1 {
-        font-size: 5.5rem;
-    }
-}
 
-/* =========================================
-   ADAPTACIÓN PARA MONITORES MUY GRANDES (> 1900px)
-   (Sobreescribe suavemente las reglas de 1440px)
-========================================= */
-@media (min-width: 1900px) {
-    /* Aumentamos el tamaño base para que todo crezca proporcionalmente */
-    html { font-size: 20px; }
+/* --- Celulares y Tablets pequeñas (< 768px) --- */
+@media (max-width: 768px) {
+    .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
+    .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+
+    .hero-content h1 { font-size: 2.8rem; }
+    .hero-content h1 span {
+        -webkit-text-stroke: 0 !important; 
+        color: var(--rojo-levalier) !important; 
+        text-shadow: 2px 2px 8px rgba(0,0,0,0.5) !important; 
+        letter-spacing: normal !important; 
+        font-weight: 800 !important; 
+    }
+    .hero-content p { font-size: 1rem; }
+    .btn-principal-whatsapp { padding: 15px 30px; font-size: 1.1rem; }
+
+    .seccion-configurador { padding: 40px 20px; margin: -40px 20px 60px 20px; }
+    .contenido-config h2 { font-size: 1.8rem; }
+
+    .contenedor-proceso { flex-direction: column; gap: 25px; }
     
-    .seccion-configurador, 
-    .contenedor-proceso, 
-    .contenedor-nosotros {
-        max-width: 1600px; 
-    }
+    .nosotros-texto h2 { font-size: 2.2rem; }
+    .tarjeta-oscura-contacto { padding: 25px; }
+
+    .redes-flotantes { bottom: 15px; right: 15px; transform: scale(0.85); transform-origin: bottom right; }
+}
+
+/* --- Tablets y pantallas medias (< 900px) --- */
+@media (max-width: 900px) {
+    .contenedor-vista-productos { flex-direction: column; text-align: center; gap: 40px; }
+    .vista-productos-texto h2 { font-size: 2.2rem; }
+    .linea-separadora-roja { margin: 0 auto 25px auto; }
+    
+    .contenedor-nosotros { flex-direction: column; gap: 40px; }
+}
+
+/* --- Pantallas Grandes (> 1440px) --- */
+@media (min-width: 1440px) {
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 1400px; }
+    .hero-content h1 { font-size: 5.5rem; }
+}
+
+/* --- Monitores Muy Grandes (> 1900px) --- */
+@media (min-width: 1900px) {
+    html { font-size: 20px; }
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 1600px; }
     .navbar { padding: 20px 80px; }
     .nav-links li a { font-size: 20px; }
     .logo img { height: 70px; }
 }
 
-/* =========================================
-   ADAPTACIÓN PARA 4K Y ULTRA WIDE (> 2500px)
-   (Tamaños fluidos basados en el ancho de la pantalla)
-========================================= */
+/* --- Pantallas 4K y Ultra Wide (> 2500px) --- */
 @media (min-width: 2500px) {
-    /* 1. Contenedores Principales (Los agrandamos al 80% de la pantalla) */
-    .seccion-configurador, 
-    .contenedor-proceso, 
-    .contenedor-nosotros {
-        max-width: 80vw !important; 
-        padding: 4vw !important;
-    }
-
-    /* 2. Barra de Navegación */
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 80vw !important; padding: 4vw !important; }
+    
     .navbar { padding: 1.5vw 4vw; }
     .logo img { height: 3.5vw; }
     .nav-links { gap: 3vw; }
     .nav-links li a { font-size: 1.2vw; }
     .btn-nav-borde { padding: 0.8vw 2vw; border-radius: 2vw; border-width: 0.2vw; }
 
-    /* 3. Hero (Inicio) */
     .hero-content { max-width: 60vw; }
     .hero-content h1 { font-size: 5vw; margin-bottom: 1.5vw; -webkit-text-stroke: 0.1vw white; }
     .hero-content p { font-size: 1.5vw; margin-bottom: 2.5vw; }
     .btn-principal-whatsapp { font-size: 1.2vw; padding: 1.2vw 3vw; gap: 0.8vw; border-radius: 3vw; }
     .subtexto-hero { font-size: 0.8vw; margin-top: 1vw; }
 
-    /* 4. Módulo Configurador Superpuesto */
-    /* ACÁ ESTABA EL CULPABLE: Destrabamos los 700px fijos */
     .contenido-config { max-width: 50vw !important; } 
-    
     .seccion-configurador { margin-top: -6vw; margin-bottom: 6vw; border-radius: 1.5vw; }
     .contenido-config h2 { font-size: 3vw; margin-bottom: 1.5vw; }
     .contenido-config p { font-size: 1.4vw; margin-bottom: 2.5vw; }
     .btn-configurador { font-size: 1.4vw; padding: 1.5vw 3vw; border-radius: 0.8vw; }
 
-    /* 5. Método (Tarjetas Blancas) */
     .proceso-levalier { padding: 4vw 2vw 8vw 2vw; }
     .titulo-seccion { font-size: 3.5vw; margin-bottom: 4vw; }
     .contenedor-proceso { gap: 4vw; }
@@ -357,7 +277,6 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .tarjeta-flotante h3 { font-size: 2vw; margin-bottom: 1vw; }
     .tarjeta-flotante p { font-size: 1.2vw; line-height: 1.6; }
 
-    /* 6. Nosotros y Contacto */
     .seccion-nosotros { padding: 6vw 2vw 8vw 2vw; }
     .contenedor-nosotros { gap: 6vw; }
     .nosotros-texto h2 { font-size: 3.5vw; margin-bottom: 1vw; }
@@ -371,93 +290,7 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .lista-contacto li strong { font-size: 1vw; margin-bottom: 0.4vw; }
     .lista-contacto li span { font-size: 1.3vw; }
     
-
-        /* CORRECCIÓN DEL MAPA: 
-       Usamos una proporción panorámica (21:9) para que crezca armónicamente.
-       Al mantener una buena proporción, Google no oculta la tarjeta de información. */
-    .mapa-ubicacion iframe { 
-        width: 100% !important; 
-        height: auto !important;
-        aspect-ratio: 21 / 9 !important; 
-        min-height: 500px !important; 
-    }
-    /* 7. Redes Flotantes */
+    .mapa-ubicacion iframe { width: 100% !important; height: auto !important; aspect-ratio: 21 / 9 !important; min-height: 500px !important; }
     .redes-flotantes { bottom: 3vw; right: 3vw; gap: 1vw; }
     .btn-social { width: 4.5vw; height: 4.5vw; font-size: 2.2vw; }
-}
-
-/* =========================================
-   ADAPTACIÓN PARA CELULARES Y TABLETS (< 768px)
-========================================= */
-@media (max-width: 768px) {
-    /* Barra de Navegación */
-    .navbar {
-        padding: 15px 20px;
-        flex-direction: column; /* Apila el logo arriba del menú */
-        gap: 15px;
-    }
-    .nav-links {
-        gap: 15px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-    /* Sección Hero (Inicio) */
-    .hero-content h1 {
-        font-size: 2.8rem; /* Achica el título para que entre en la pantalla */
-    }
-/* =========================================
-       SOLUCIÓN DEFINITIVA PARA EL TEXTO EN CELULARES
-    ========================================= */
-    .hero-content h1 span {
-        -webkit-text-stroke: 0 !important; /* Apagamos el borde que rompe el navegador */
-        
-        /* OPCIÓN 1: Rojo Levalier (Recomendado para destacar) */
-        color: var(--rojo-levalier) !important; 
-        
-        /* OPCIÓN 2: Si preferís que sea blanco, borrá la línea de arriba y usá esta: */
-        /* color: white !important; */
-
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.5) !important; /* Sombreado suave para que resalte contra la cancha */
-        letter-spacing: normal !important; /* Devolvemos el espaciado a la normalidad */
-        font-weight: 800 !important; /* Mantenemos la fuerza de la tipografía */
-    }
-    .hero-content p {
-        font-size: 1rem;
-    }
-    .btn-principal-whatsapp {
-        padding: 15px 30px;
-        font-size: 1.1rem;
-    }
-
-    /* Configurador Superpuesto */
-    .seccion-configurador {
-        padding: 40px 20px;
-        margin: -40px 20px 60px 20px; /* Separa los bordes de la pantalla */
-    }
-    .contenido-config h2 {
-        font-size: 1.8rem;
-    }
-
-    /* Tarjetas del Proceso (Método) */
-    .contenedor-proceso {
-        flex-direction: column; /* Pone las 3 tarjetas una debajo de otra */
-        gap: 25px;
-    }
-
-    /* Sección Nosotros y Contacto */
-    .nosotros-texto h2 {
-        font-size: 2.2rem;
-    }
-    .tarjeta-oscura-contacto {
-        padding: 25px; /* Menos relleno para pantallas chicas */
-    }
-
-    /* Botones de Redes Sociales Flotantes */
-    .redes-flotantes {
-        bottom: 15px;
-        right: 15px;
-        transform: scale(0.85); /* Achica un 15% los botones para que no estorben */
-        transform-origin: bottom right;
-    }
 }

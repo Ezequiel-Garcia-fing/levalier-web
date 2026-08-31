@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-
-
 <!-- 1. BARRA DE NAVEGACIÓN -->
     <nav class="navbar">
         <a href="#inicio" id="logo-inicio" class="logo">
@@ -26,8 +24,11 @@
         </ul>
     </nav>
 
-    <!-- 2. SECCIÓN PRINCIPAL (Agregamos id="inicio") -->
-    <header class="hero" id="inicio">
+    <!-- ========================================== -->
+    <!-- GRUPO 1: INICIO                            -->
+    <!-- ========================================== -->
+    
+    <header class="hero" id="inicio" data-nav="inicio">
         <div class="hero-content">
             <h1>Llevamos tu pasión <br><span>al siguiente nivel</span></h1>
             <p>Somos fabricantes directos de indumentaria deportiva. Calidad premium, diseños únicos y atención personalizada para que tu club vista como un campeón.</p>
@@ -39,8 +40,7 @@
         </div>
     </header>
 
-    <!-- 3. SECCIÓN DEL CONFIGURADOR (Agregamos id="productos") -->
-    <section class="seccion-configurador" id="productos">
+    <section class="seccion-configurador" data-nav="inicio">
         <div class="contenido-config">
             <h2>¿Tenés una idea en mente?</h2>
             <p>Jugá con nuestros colores, subí los escudos de tu equipo y visualizá tu indumentaria antes de hablar con nosotros usando nuestro módulo interactivo.</p>
@@ -50,15 +50,41 @@
         </div>
     </section>
 
-    <!-- 4. SECCIÓN CÓMO TRABAJAMOS (Agregamos id="nosotros") -->
-    <section class="proceso-levalier" id="metodo">
-        <!-- ========================================== -->
-    <!-- NUEVA SECCIÓN: NOSOTROS Y CONTACTO         -->
+
     <!-- ========================================== -->
-    <section class="seccion-nosotros" id="nosotros">
+    <!-- GRUPO 2: PRODUCTOS                         -->
+    <!-- ========================================== -->
+    
+    <section class="seccion-vista-productos" id="productos" data-nav="productos">
+        <div class="contenedor-vista-productos">
+            <!-- Texto (Izquierda) -->
+            <div class="vista-productos-texto">
+                <h2>NUESTROS <span class="destaque-rojo">PRODUCTOS</span></h2>
+                <div class="linea-separadora-roja"></div>
+                <p>Fabricamos indumentaria deportiva de alto rendimiento adaptada a las exigencias de cada disciplina. Desde camisetas y pantalones reforzados, hasta medias y gorras institucionales.</p>
+                <p>Utilizamos telas de última tecnología que garantizan máxima durabilidad, respirabilidad y confort en la cancha.</p>
+                
+                <a href="catalogo.html" class="btn-rojo-levalier">
+                    Conocé todos nuestros productos <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <!-- Imagen Animada (Derecha) -->
+            <div class="vista-productos-imagen">
+                <img src="imagenes/todos_los_productos.png" alt="Catálogo de Productos Levalier" class="imagen-desplazable">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- GRUPO 3: NOSOTROS                          -->
+    <!-- ========================================== -->
+    
+    <!-- Somos Levalier -->
+    <section class="seccion-nosotros" id="nosotros" data-nav="nosotros">
         <div class="contenedor-nosotros">
             
-            <!-- Columna Izquierda: Descripción -->
             <div class="nosotros-texto">
                 <h2>SOMOS <span class="destaque-rojo">LEVALIER</span></h2>
                 <div class="linea-separadora-roja"></div>
@@ -66,7 +92,6 @@
                 <p>No hacemos simple ropa deportiva; creamos la armadura que tu equipo va a defender en la cancha. <strong>Tu pasión, es nuestro motor.</strong></p>
             </div>
 
-            <!-- Columna Derecha: Tarjeta de Contacto -->
             <div class="nosotros-contacto">
                 <div class="tarjeta-oscura-contacto">
                     <h3>Contactanos</h3>
@@ -94,7 +119,6 @@
                         </li>
                     </ul>
                     
-                    <!-- Mapa de Google Embebido (Podés cambiar el src por tu ubicación real de Google Maps) -->
                     <div class="mapa-ubicacion">
                         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.5217976709123!2d-68.82748042554103!3d-32.88436967361889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09dbbf91c54b%3A0x1062fdf4ff42544b!2sLevalier!5e0!3m2!1ses!2sar!4v1786738825585!5m2!1ses!2sar" width="100%" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>
                     </div>
@@ -103,6 +127,9 @@
 
         </div>
     </section>
+
+    <!-- Nuestro Método -->
+    <section class="proceso-levalier" data-nav="nosotros">
         <h2 class="titulo-seccion">NUESTRO MÉTODO</h2>
         <div class="contenedor-proceso">
             
@@ -127,39 +154,18 @@
         </div>
     </section>
 
-    <!-- BOTONES FLOTANTES DE REDES -->
+    <!-- ========================================== -->
+    <!-- ELEMENTOS FLOTANTES Y SCRIPTS              -->
+    <!-- ========================================== -->
+    
+    <!-- Redes -->
     <div class="redes-flotantes">
         <a href="https://wa.me/5492613656819?text=Hola%20Levalier,%20quiero%20consultar%20por%20indumentaria%20deportiva" class="btn-social whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="https://www.instagram.com/levalier_/" class="btn-social instagram" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
 
-    <!-- NUEVO: SCRIPT PARA DETECTAR EL SCROLL -->
-    <script>
-        // Seleccionamos todas las secciones y los botones del menú
-        const secciones = document.querySelectorAll('header[id], section[id]');
-        const enlacesMenu = document.querySelectorAll('.nav-item');
+    <!-- Script Externo -->
+    <script src="js/landing.js" defer></script>
 
-        // Configuramos el "vigilante" (Se activa cuando la mitad de la sección está en pantalla)
-        const observer = new IntersectionObserver((entradas) => {
-            entradas.forEach(entrada => {
-                if(entrada.isIntersecting) {
-                    // Borramos la línea roja de todos los enlaces
-                    enlacesMenu.forEach(enlace => enlace.classList.remove('activo'));
-                    
-                    // Buscamos el enlace que coincide con la sección actual y le ponemos la línea roja
-                    const idActual = entrada.target.getAttribute('id');
-                    const enlaceActivo = document.querySelector(`.nav-links a[href="#${idActual}"]`);
-                    if(enlaceActivo) {
-                        enlaceActivo.classList.add('activo');
-                    }
-                }
-            });
-        }, { threshold: 0.5 }); // 0.5 significa el 50% de la sección
-
-        // Le decimos al vigilante que empiece a mirar cada sección
-        secciones.forEach(seccion => {
-            observer.observe(seccion);
-        });
-    </script>
 </body>
 </html>
