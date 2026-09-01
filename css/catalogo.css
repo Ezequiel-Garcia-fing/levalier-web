@@ -38,13 +38,14 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.03);
 }
 .filtros-scroll {
-    max-width: 1200px;
+    width: 90%;
+    max-width: 1600px;
     margin: 0 auto;
     display: flex;
     gap: 15px;
-    padding: 0 20px;
+    padding: 0;
     overflow-x: auto;
-    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+    scrollbar-width: none;
 }
 .filtros-scroll::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome */
 
@@ -71,9 +72,10 @@
    GRILLA DE PRODUCTOS
 ========================================= */
 .contenedor-catalogo {
-    max-width: 1200px;
+    width: 90%; /* Misma proporción que la página principal */
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 50px 20px 100px 20px;
+    padding: 50px 0 100px 0;
 }
 .grupo-deporte { margin-bottom: 60px; }
 
@@ -221,4 +223,55 @@
     .filtros-scroll { padding: 0 15px; }
     .titulo-deporte { font-size: 1.8rem; }
     .grilla-productos { grid-template-columns: 1fr; gap: 20px; }
+}
+
+/* =========================================
+   ADAPTACIONES PARA MONITORES GRANDES (CATÁLOGO)
+========================================= */
+
+/* --- Pantallas Grandes (> 1440px) --- */
+@media (min-width: 1440px) {
+    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 1400px; }
+}
+
+/* --- Monitores Muy Grandes (> 1900px) --- */
+@media (min-width: 1900px) {
+    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 1600px; }
+}
+
+/* --- Pantallas 4K y Ultra Wide (> 2500px) --- */
+@media (min-width: 2500px) {
+    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 80vw !important; }
+    
+    /* Hero */
+    .hero-catalogo { padding: 8vw 2vw 6vw 2vw; }
+    .hero-catalogo h1 { font-size: 5vw; margin-bottom: 1.5vw; }
+    .hero-catalogo p { font-size: 1.5vw; max-width: 50vw; line-height: 1.6; }
+
+    /* Barra de filtros */
+    .contenedor-filtros { top: 3.5vw; padding: 1vw 0; border-bottom-width: 0.1vw; }
+    .btn-filtro { padding: 1vw 2vw; font-size: 1vw; border-radius: 2vw; }
+
+    /* Grilla y Títulos */
+    .contenedor-catalogo { padding: 4vw 0 8vw 0; }
+    .titulo-deporte { font-size: 3vw; margin-bottom: 2vw; gap: 1.5vw; }
+    .linea-deporte { height: 0.2vw; }
+    .titulo-prenda { font-size: 1.8vw; margin-bottom: 1.5vw; border-left-width: 0.3vw; padding-left: 1vw; }
+    
+    /* Magia para las tarjetas en 4K */
+    .grilla-productos { 
+        gap: 2.5vw; 
+        margin-bottom: 3vw; 
+        /* Se adapta usando unidades vw para mantener proporción */
+        grid-template-columns: repeat(auto-fill, minmax(18vw, 1fr)); 
+    }
+
+    .tarjeta-producto { border-radius: 1vw; border-width: 0.1vw; box-shadow: 0 0.5vw 2vw rgba(0,0,0,0.05); }
+    .tarjeta-producto:hover { transform: translateY(-0.8vw); box-shadow: 0 1.5vw 3vw rgba(0,0,0,0.1); }
+    
+    .info-producto { padding: 2vw; }
+    .tag-tech { padding: 0.5vw 1vw; font-size: 0.8vw; border-radius: 2vw; }
+    .etiquetas { margin-bottom: 1vw; }
+    .info-producto h4 { font-size: 1.6vw; margin-bottom: 1vw; }
+    .info-producto p { font-size: 1.1vw; margin-bottom: 2vw; line-height: 1.6; }
 }

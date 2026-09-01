@@ -25,12 +25,21 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
 
-            // 4. Hacemos un scroll suave hacia el inicio del catálogo
-            const alturaBarra = document.getElementById('barra-filtros').offsetHeight;
-            const topCatalogo = document.querySelector('.contenedor-catalogo').offsetTop;
+            // 4. Hacemos un scroll suave calculando la distancia exacta
+            const navbar = document.querySelector('.navbar');
+            const barraFiltros = document.getElementById('barra-filtros');
+            const contenedorCatalogo = document.querySelector('.contenedor-catalogo');
+            
+            // Medimos la altura real de ambas barras en este preciso momento
+            const alturaNavbar = navbar ? navbar.offsetHeight : 0;
+            const alturaFiltros = barraFiltros ? barraFiltros.offsetHeight : 0;
+            
+            // Calculamos el inicio de la sección de ropa y le descontamos las barras.
+            // Sumamos 30px extra para asegurar que la foto del inicio quede totalmente oculta.
+            const posicionDestino = contenedorCatalogo.offsetTop - alturaNavbar - alturaFiltros + 40;
             
             window.scrollTo({
-                top: topCatalogo - alturaBarra - 90, // Descuenta la altura de la navbar y la barra de filtros
+                top: posicionDestino,
                 behavior: 'smooth'
             });
         });

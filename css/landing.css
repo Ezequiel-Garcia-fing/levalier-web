@@ -120,7 +120,13 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     overflow: hidden; 
 }
 .contenedor-vista-productos {
-    max-width: 1100px; margin: 0 auto; display: flex; align-items: center; gap: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 90%; /* Se adapta al 90% de cualquier monitor */
+    max-width: 1600px; /* Límite máximo para pantallas gigantes/ultrawide */
+    margin: 0 auto;
 }
 .vista-productos-texto { flex: 1; }
 .vista-productos-texto h2 { font-size: 2.8rem; color: var(--azul-levalier); font-weight: 800; margin-bottom: 10px; }
@@ -146,7 +152,15 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     background-color: white; 
     position: relative;
 }
-.contenedor-nosotros { max-width: 1100px; margin: 0 auto; display: flex; gap: 60px; align-items: center; }
+.contenedor-nosotros {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+    width: 90%; /* Se adapta al 90% de cualquier monitor */
+    max-width: 1600px; /* Límite máximo para pantallas gigantes/ultrawide */
+    margin: 0 auto;
+}
 .nosotros-texto { flex: 1; }
 .nosotros-texto h2 { font-size: 2.8rem; color: var(--azul-levalier); font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
 .destaque-rojo { color: var(--rojo-levalier); }
@@ -283,14 +297,14 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 
 /* --- Pantallas Grandes (> 1440px) --- */
 @media (min-width: 1440px) {
-    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 1400px; }
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros, .contenedor-vista-productos { max-width: 1400px; }
     .hero-content h1 { font-size: 5.5rem; }
 }
 
 /* --- Monitores Muy Grandes (> 1900px) --- */
 @media (min-width: 1900px) {
     html { font-size: 20px; }
-    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 1600px; }
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros, .contenedor-vista-productos { max-width: 1600px; }
     .navbar { padding: 20px 80px; }
     .nav-links li a { font-size: 20px; }
     .logo img { height: 70px; }
@@ -298,7 +312,7 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 
 /* --- Pantallas 4K y Ultra Wide (> 2500px) --- */
 @media (min-width: 2500px) {
-    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros { max-width: 80vw !important; padding: 4vw !important; }
+    .seccion-configurador, .contenedor-proceso, .contenedor-nosotros, .contenedor-vista-productos { max-width: 80vw !important; padding: 4vw !important; }
     
     .navbar { padding: 1.5vw 4vw; }
     .logo img { height: 3.5vw; }
@@ -317,6 +331,24 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .contenido-config h2 { font-size: 3vw; margin-bottom: 1.5vw; }
     .contenido-config p { font-size: 1.4vw; margin-bottom: 2.5vw; }
     .btn-configurador { font-size: 1.4vw; padding: 1.5vw 3vw; border-radius: 0.8vw; }
+
+    /* NUEVO: Escala proporcional para la sección productos */
+    .contenedor-vista-productos { gap: 6vw; }
+    .vista-productos-texto h2 { font-size: 3.5vw; margin-bottom: 1vw; }
+    .vista-productos-texto p { font-size: 1.3vw; margin-bottom: 1.5vw; line-height: 1.6; }
+    .btn-rojo-levalier { font-size: 1.2vw; padding: 1.2vw 3vw; border-radius: 3vw; }
+    
+    
+/* --- Imagen de la sección productos en pantallas gigantes --- */
+    .vista-productos-imagen { 
+        width: 45vw !important; 
+        max-width: none !important; /* Destruye el límite anterior de píxeles */
+    }
+    .imagen-desplazable { 
+        width: 100% !important; 
+        max-width: none !important; /* Destruye el límite anterior de píxeles */
+        height: auto !important; 
+    }
 
     .proceso-levalier { padding: 4vw 2vw 8vw 2vw; }
     .titulo-seccion { font-size: 3.5vw; margin-bottom: 4vw; }
