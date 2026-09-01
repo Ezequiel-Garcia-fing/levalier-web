@@ -1,0 +1,37 @@
+<div class="tarjeta-producto">
+    <!-- INICIO CARRUSEL -->
+    <div class="carrusel-producto">
+        <div class="pista-carrusel">
+            <!-- Foto 1 -->
+            <div class="imagen-placeholder">
+                <span>FOTO 1<br>(Frente)</span>
+            </div>
+            <!-- Foto 2 (Le pongo un fondo un poco más oscuro solo para que notes que cambia) -->
+            <div class="imagen-placeholder" style="background-color: #dee2e6;">
+                <span>FOTO 2<br>(Espalda)</span>
+            </div>
+            <!-- Foto 3 -->
+            <div class="imagen-placeholder" style="background-color: #ced4da;">
+                <span>FOTO 3<br>(Detalle Tela)</span>
+            </div>
+        </div>
+        
+        <!-- Flechas de navegación -->
+        <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+        
+        <!-- Puntitos inferiores -->
+        <div class="indicadores-carrusel">
+            <span class="punto activo"></span>
+            <span class="punto"></span>
+            <span class="punto"></span>
+        </div>
+    </div>
+    <!-- FIN CARRUSEL -->
+
+    <div class="info-producto">
+        <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+        <h4>Camiseta Titular Pro</h4>
+        <p>Corte entallado, tela respirable con microperforaciones láser y costuras planas de seguridad.</p>
+    </div>
+</div>

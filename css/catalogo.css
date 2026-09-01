@@ -148,6 +148,78 @@
     transform: scale(1.03);
 }
 
+/* =========================================
+   CARRUSEL DE IMÁGENES (ESTILO INSTAGRAM)
+========================================= */
+.carrusel-producto {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden; /* Esconde las fotos que están hacia los costados */
+}
+
+.pista-carrusel {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.carrusel-producto .imagen-placeholder {
+    min-width: 100%; /* Obliga a cada foto a ocupar todo el ancho */
+    height: 100%;
+}
+
+/* Botones (Flechas) */
+.btn-carrusel {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--azul-levalier);
+    font-size: 1rem;
+    opacity: 0; /* Ocultas por defecto */
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 2;
+}
+
+/* Las flechas aparecen solo al pasar el mouse por encima de la foto */
+.carrusel-producto:hover .btn-carrusel { opacity: 1; }
+.btn-carrusel.prev { left: 10px; }
+.btn-carrusel.next { right: 10px; }
+.btn-carrusel:hover { background: white; transform: translateY(-50%) scale(1.1); }
+
+/* Puntitos indicadores */
+.indicadores-carrusel {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+}
+.punto {
+    width: 6px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+.punto.activo {
+    background: white;
+    transform: scale(1.4);
+}
+
 .info-producto {
     padding: 25px 20px;
     flex: 1;
@@ -227,51 +299,90 @@
 
 /* =========================================
    ADAPTACIONES PARA MONITORES GRANDES (CATÁLOGO)
+   (Escalado estricto y proporcional completo)
 ========================================= */
+
+/* --- Pantallas Medias / Notebooks / 1080p con Escala (> 1200px) --- */
+@media (min-width: 1200px) {
+    /* Atrapamos tu monitor y forzamos las 4 columnas */
+    .grilla-productos { 
+        grid-template-columns: repeat(4, 1fr) !important; /*cant columnas
+        gap: 2.5vw; 
+    }
+}
 
 /* --- Pantallas Grandes (> 1440px) --- */
 @media (min-width: 1440px) {
-    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 1400px; }
+    /* Liberamos el ancho máximo para que la página pueda estirarse */
+    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { 
+        max-width: 90vw !important; 
+    }
+    .grilla-productos { 
+        grid-template-columns: repeat(4, 1fr) !important; 
+        gap: 3vw; 
+    }
 }
 
 /* --- Monitores Muy Grandes (> 1900px) --- */
 @media (min-width: 1900px) {
-    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 1600px; }
+    /* Escalado de textos y márgenes de la tarjeta */
+    .titulo-deporte { font-size: 2.5vw; margin-bottom: 1.5vw; gap: 1vw; }
+    .titulo-prenda { font-size: 1.5vw; margin-bottom: 1vw; }
+    
+    .info-producto { padding: 1.5vw; }
+    .info-producto h4 { font-size: 1.2vw; margin-bottom: 0.8vw; }
+    .info-producto p { font-size: 0.9vw; line-height: 1.6; margin-bottom: 1.5vw; }
+    .tag-tech { font-size: 0.7vw; padding: 0.4vw 0.8vw; border-radius: 1vw; }
+
+    /* Escalado de los botones pegajosos */
+    .btn-filtro { 
+        font-size: 0.8vw; 
+        padding: 0.6vw 1.5vw; 
+        border-radius: 2vw; 
+    }
 }
 
 /* --- Pantallas 4K y Ultra Wide (> 2500px) --- */
 @media (min-width: 2500px) {
-    .hero-catalogo-contenido, .filtros-scroll, .contenedor-catalogo { max-width: 80vw !important; }
-    
     /* Hero */
     .hero-catalogo { padding: 8vw 2vw 6vw 2vw; }
-    .hero-catalogo h1 { font-size: 5vw; margin-bottom: 1.5vw; }
-    .hero-catalogo p { font-size: 1.5vw; max-width: 50vw; line-height: 1.6; }
+    .hero-catalogo h1 { font-size: 4vw; margin-bottom: 1.5vw; }
+    .hero-catalogo p { font-size: 1.2vw; max-width: 50vw; line-height: 1.6; }
 
-    /* Barra de filtros */
+    /* Barra de filtros (Botones pegajosos) */
     .contenedor-filtros { top: 3.5vw; padding: 1vw 0; border-bottom-width: 0.1vw; }
-    .btn-filtro { padding: 1vw 2vw; font-size: 1vw; border-radius: 2vw; }
+    .btn-filtro { font-size: 0.7vw; padding: 0.6vw 1.8vw; border-radius: 2vw; }
 
-    /* Grilla y Títulos */
+    /* Tarjetas y detalles */
     .contenedor-catalogo { padding: 4vw 0 8vw 0; }
-    .titulo-deporte { font-size: 3vw; margin-bottom: 2vw; gap: 1.5vw; }
-    .linea-deporte { height: 0.2vw; }
-    .titulo-prenda { font-size: 1.8vw; margin-bottom: 1.5vw; border-left-width: 0.3vw; padding-left: 1vw; }
-    
-    /* Magia para las tarjetas en 4K */
-    .grilla-productos { 
-        gap: 2.5vw; 
-        margin-bottom: 3vw; 
-        /* Se adapta usando unidades vw para mantener proporción */
-        grid-template-columns: repeat(auto-fill, minmax(18vw, 1fr)); 
-    }
-
     .tarjeta-producto { border-radius: 1vw; border-width: 0.1vw; box-shadow: 0 0.5vw 2vw rgba(0,0,0,0.05); }
     .tarjeta-producto:hover { transform: translateY(-0.8vw); box-shadow: 0 1.5vw 3vw rgba(0,0,0,0.1); }
     
-    .info-producto { padding: 2vw; }
-    .tag-tech { padding: 0.5vw 1vw; font-size: 0.8vw; border-radius: 2vw; }
-    .etiquetas { margin-bottom: 1vw; }
-    .info-producto h4 { font-size: 1.6vw; margin-bottom: 1vw; }
-    .info-producto p { font-size: 1.1vw; margin-bottom: 2vw; line-height: 1.6; }
+    /* Grilla estricta en 4K */
+    .grilla-productos { 
+        gap: 2.5vw; 
+        margin-bottom: 3vw; 
+        grid-template-columns: repeat(4, 1fr) !important; 
+    }
+
+    /* Escalado del carrusel para monitores 4K */
+    .btn-carrusel { width: 2.5vw; height: 2.5vw; font-size: 1vw; }
+    .btn-carrusel.prev { left: 0.8vw; }
+    .btn-carrusel.next { right: 0.8vw; }
+    .indicadores-carrusel { bottom: 1vw; gap: 0.5vw; }
+    .punto { width: 0.4vw; height: 0.4vw; }
+}
+
+/* --- Adaptación del carrusel para celulares --- */
+@media (max-width: 768px) {
+    .btn-carrusel {
+        opacity: 0.8; /* Siempre visibles, un poco transparentes para no tapar la ropa */
+        width: 30px;
+        height: 30px;
+        font-size: 0.8rem;
+    }
+    .btn-carrusel:active {
+        background: white;
+        opacity: 1;
+    }
 }

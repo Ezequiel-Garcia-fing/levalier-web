@@ -81,3 +81,79 @@ window.addEventListener('scroll', () => {
     
     ultimoScroll = scrollActual;
 });
+
+// ==========================================
+// LÓGICA DE CARRUSELES TIPO INSTAGRAM
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const carruseles = document.querySelectorAll('.carrusel-producto');
+
+    carruseles.forEach(carrusel => {
+        const pista = carrusel.querySelector('.pista-carrusel');
+        const btnPrev = carrusel.querySelector('.prev');
+        const btnNext = carrusel.querySelector('.next');
+        const puntos = carrusel.querySelectorAll('.punto');
+        // Cuenta cuántas fotos hay adentro (usamos children.length por si pones <img> en vez de los div)
+        const totalSlides = pista.children.length; 
+        let slideActual = 0;
+
+        function actualizarCarrusel() {
+            // Mueve la pista hacia la izquierda según el número de foto
+            pista.style.transform = `translateX(-${slideActual * 100}%)`;
+            
+            // Actualiza los puntitos blancos
+            puntos.forEach((punto, index) => {
+                if(index === slideActual) punto.classList.add('activo');
+                else punto.classList.remove('activo');
+            });
+            
+            // Esconde la flecha izquierda si estamos en la primer foto, y la derecha en la última
+            if (btnPrev) btnPrev.style.display = slideActual === 0 ? 'none' : 'flex';
+            if (btnNext) btnNext.style.display = slideActual === totalSlides - 1 ? 'none' : 'flex';
+        }
+
+        if (btnNext) {
+            btnNext.addEventListener('click', (e) => {
+                e.preventDefault(); 
+                if (slideActual < totalSlides - 1) {
+                    slideActual++;
+                    actualizarCarrusel();
+                }
+            });
+        }
+
+        if (btnPrev) {
+            btnPrev.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (slideActual > 0) {
+                    slideActual--;
+                    actualizarCarrusel();
+                }
+            });
+        }
+
+        // Ejecutar una vez al cargar para configurar las flechas y puntos iniciales
+        actualizarCarrusel();
+        // Soporte táctil para celulares (Swipe)
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        pista.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        pista.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            // Si el cliente desliza hacia la izquierda más de 50px
+            if (touchStartX - touchEndX > 50 && slideActual < totalSlides - 1) {
+                slideActual++;
+                actualizarCarrusel();
+            } 
+            // Si el cliente desliza hacia la derecha más de 50px
+            else if (touchEndX - touchStartX > 50 && slideActual > 0) {
+                slideActual--;
+                actualizarCarrusel();
+            }
+        }, { passive: true });
+    });
+});
