@@ -1,0 +1,224 @@
+/* =========================================
+   HERO DEL CATÁLOGO
+========================================= */
+.hero-catalogo {
+    background: linear-gradient(135deg, rgba(43, 50, 69, 0.95) 0%, rgba(26, 30, 41, 0.95) 100%), url('../imagenes/fondo_deporte.jpg') center/cover;
+    padding: 100px 20px 80px 20px;
+    text-align: center;
+    color: white;
+}
+.hero-catalogo h1 {
+    font-size: 4rem;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+.hero-catalogo h1 span {
+    color: var(--rojo-levalier);
+}
+.hero-catalogo p {
+    font-size: 1.2rem;
+    color: #cbd0d8;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* =========================================
+   BARRA DE FILTROS PEGAJOSA
+========================================= */
+.contenedor-filtros {
+    position: sticky;
+    top: 70px; /* Queda justo debajo de la barra de navegación */
+    background-color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #eee;
+    z-index: 900;
+    padding: 15px 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+}
+.filtros-scroll {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 15px;
+    padding: 0 20px;
+    overflow-x: auto;
+    scrollbar-width: none; /* Oculta scrollbar en Firefox */
+}
+.filtros-scroll::-webkit-scrollbar { display: none; } /* Oculta scrollbar en Chrome */
+
+.btn-filtro {
+    background-color: #f0f2f5;
+    color: var(--texto-gris);
+    border: none;
+    padding: 10px 25px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.btn-filtro:hover { background-color: #e2e5ea; }
+.btn-filtro.activo {
+    background-color: var(--azul-levalier);
+    color: white;
+    box-shadow: 0 4px 10px rgba(43, 50, 69, 0.2);
+}
+
+/* =========================================
+   GRILLA DE PRODUCTOS
+========================================= */
+.contenedor-catalogo {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 50px 20px 100px 20px;
+}
+.grupo-deporte { margin-bottom: 60px; }
+
+/* Títulos con línea decorativa */
+.titulo-deporte {
+    font-size: 2.2rem;
+    color: var(--azul-levalier);
+    font-weight: 800;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.linea-deporte {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(to right, var(--rojo-levalier), transparent);
+}
+.titulo-prenda {
+    font-size: 1.3rem;
+    color: var(--texto-gris);
+    margin-bottom: 20px;
+    padding-left: 10px;
+    border-left: 4px solid var(--rojo-levalier);
+}
+
+/* La Grilla CSS: Magia responsiva automática */
+.grilla-productos {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+/* =========================================
+   TARJETAS DE PRODUCTO PREMIUM
+========================================= */
+.tarjeta-producto {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    border: 1px solid #f0f2f5;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.tarjeta-producto:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    border-color: #dce1eb;
+}
+
+/* Espacio temporal para tus fotos (Mantiene proporción 4:5 perfecta) */
+.imagen-placeholder {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background-color: #e9ecef;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #adb5bd;
+    font-weight: bold;
+    font-size: 1.2rem;
+    transition: transform 0.5s ease;
+}
+/* Efecto de Zoom al pasar el mouse por la foto */
+.tarjeta-producto:hover .imagen-placeholder {
+    transform: scale(1.03);
+}
+
+.info-producto {
+    padding: 25px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background: white; /* Asegura que el zoom de la foto no se escape */
+    z-index: 2;
+}
+
+.etiquetas { margin-bottom: 12px; }
+.tag-tech {
+    background-color: rgba(43, 50, 69, 0.05);
+    color: var(--azul-levalier);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.info-producto h4 {
+    font-size: 1.4rem;
+    color: var(--azul-levalier);
+    margin-bottom: 10px;
+    font-weight: 800;
+}
+.info-producto p {
+    font-size: 0.95rem;
+    color: var(--texto-gris);
+    line-height: 1.6;
+    margin-bottom: 25px;
+    flex: 1; /* Empuja los botones hacia abajo */
+}
+
+/* Botones de Acción */
+.acciones-producto {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.btn-accion {
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+.primario {
+    background-color: var(--azul-levalier);
+    color: white;
+}
+.primario:hover { background-color: var(--rojo-levalier); }
+.secundario {
+    background-color: #25D366;
+    color: white;
+}
+.secundario:hover { background-color: #1ebd5a; }
+
+/* Animación para que los filtros suban cuando el menú se oculta */
+.contenedor-filtros {
+    transition: top 0.3s ease-in-out;
+}
+.contenedor-filtros.tope {
+    top: 0 !important; 
+}
+
+/* Adaptación a celulares */
+@media (max-width: 768px) {
+    .hero-catalogo h1 { font-size: 2.8rem; }
+    .contenedor-filtros { top: 60px; } /* Ajuste de altura de barra en móviles */
+    .filtros-scroll { padding: 0 15px; }
+    .titulo-deporte { font-size: 1.8rem; }
+    .grilla-productos { grid-template-columns: 1fr; gap: 20px; }
+}

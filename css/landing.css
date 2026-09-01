@@ -192,7 +192,44 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 .tarjeta-flotante h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--azul-levalier); }
 .tarjeta-flotante p { color: var(--texto-gris); line-height: 1.6; }
 
+/* =========================================
+   TRANSICIONES DE PÁGINA TIPO APP
+========================================= */
+#contenedor-animado {
+    /* Esta transición es para la salida */
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.4s ease;
+    width: 100%;
+}
 
+/* --- Clases de SALIDA (Se activan con el clic) --- */
+.salir-hacia-izquierda {
+    transform: translateX(-50px);
+    opacity: 0;
+}
+
+.salir-hacia-derecha {
+    transform: translateX(50px);
+    opacity: 0;
+}
+
+/* --- Clases de ENTRADA (Se activan al cargar la página) --- */
+.entrar-desde-derecha {
+    animation: deslizarDesdeDerecha 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.entrar-desde-izquierda {
+    animation: deslizarDesdeIzquierda 0.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes deslizarDesdeDerecha {
+    0% { transform: translateX(50px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes deslizarDesdeIzquierda {
+    0% { transform: translateX(-50px); opacity: 0; }
+    100% { transform: translateX(0); opacity: 1; }
+}
 /* =========================================
    4. ADAPTACIONES RESPONSIVE (MEDIA QUERIES)
 ========================================= */
@@ -305,4 +342,12 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
     .mapa-ubicacion iframe { width: 100% !important; height: auto !important; aspect-ratio: 21 / 9 !important; min-height: 500px !important; }
     .redes-flotantes { bottom: 3vw; right: 3vw; gap: 1vw; }
     .btn-social { width: 4.5vw; height: 4.5vw; font-size: 2.2vw; }
+}
+
+/* Animación para el menú inteligente */
+.navbar {
+    transition: transform 0.3s ease-in-out;
+}
+.navbar.oculta {
+    transform: translateY(-100%);
 }

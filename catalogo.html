@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
+    <title>Levalier | Catálogo de Productos</title>
+    <link rel="icon" type="image/x-icon" href="imagenes/logo_levalier.ico">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/catalogo.css">
+</head>
+<body>
+
+    <!-- BARRA DE NAVEGACIÓN (Afuera de la animación) -->
+    <nav class="navbar">
+        <a href="index.html" class="logo link-transicion" data-salida="derecha">
+            <img src="imagenes/logo_levalier.jpeg" alt="Logo Levalier">
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-item link-transicion" data-salida="derecha">Inicio</a></li>
+            <li><a href="#" class="nav-item activo">Productos</a></li>
+            <li><a href="index.html#nosotros" class="nav-item link-transicion" data-salida="derecha">Nosotros</a></li>
+            <li><a href="configurador.html" class="btn-nav-borde">Diseñador 3D</a></li>
+        </ul>
+    </nav>
+
+    <!-- ========================================== -->
+    <!-- ENVOLTORIO ANIMADO -->
+    <!-- ========================================== -->
+    <div id="contenedor-animado">
+
+        <!-- HERO DEL CATÁLOGO -->
+        <header class="hero-catalogo">
+            <div class="hero-catalogo-contenido">
+                <h1>La armadura de <br><span>tu equipo</span></h1>
+                <p>Explorá nuestra línea de indumentaria deportiva. Telas de alta tecnología, costuras reforzadas y moldería adaptada a cada disciplina.</p>
+            </div>
+        </header>
+
+        <!-- BARRA DE FILTROS PEGAJOSA -->
+        <div class="contenedor-filtros" id="barra-filtros">
+            <div class="filtros-scroll">
+                <button class="btn-filtro activo" data-filtro="todos">Todos los Deportes</button>
+                <button class="btn-filtro" data-filtro="futbol">Fútbol</button>
+                <button class="btn-filtro" data-filtro="basquet">Básquet</button>
+                <button class="btn-filtro" data-filtro="voley">Vóley</button>
+                <button class="btn-filtro" data-filtro="entrenamiento">Entrenamiento</button>
+            </div>
+        </div>
+
+        <!-- GRILLA DE PRODUCTOS -->
+        <main class="contenedor-catalogo">
+            
+            <!-- SECCIÓN: FÚTBOL -->
+            <div class="grupo-deporte" data-deporte="futbol">
+                <h2 class="titulo-deporte">Fútbol <span class="linea-deporte"></span></h2>
+                
+                <h3 class="titulo-prenda">Camisetas</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta de Producto 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="imagen-placeholder">
+                            <span>FOTO 4:5<br>(Ej: Camiseta Frente)</span>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+                            <h4>Camiseta Titular Pro</h4>
+                            <p>Corte entallado, tela respirable con microperforaciones láser y costuras planas de seguridad.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta de Producto 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="imagen-placeholder">
+                            <span>FOTO 4:5<br>(Ej: Camiseta Dorso)</span>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield-alt"></i> Reforzada</span></div>
+                            <h4>Camiseta Alternativa</h4>
+                            <p>Cuello en V tejido, refuerzo en zonas de impacto y máxima absorción de sudor.</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="titulo-prenda">Pantalones y Medias</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta de Producto 3 -->
+                    <div class="tarjeta-producto">
+                        <div class="imagen-placeholder">
+                            <span>FOTO 4:5<br>(Ej: Short)</span>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-compress"></i> Spandex</span></div>
+                            <h4>Short Competencia</h4>
+                            <p>Movilidad absoluta. Cintura elástica reforzada y tela resistente a agarrones.</p>
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECCIÓN: BÁSQUET -->
+            <div class="grupo-deporte" data-deporte="basquet">
+                <h2 class="titulo-deporte">Básquet <span class="linea-deporte"></span></h2>
+                <h3 class="titulo-prenda">Equipaciones</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="imagen-placeholder">
+                            <span>FOTO 4:5<br>(Ej: Musculosa)</span>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Ultra Light</span></div>
+                            <h4>Musculosa Reversible</h4>
+                            <p>Moldería holgada para saltos sin restricción. Ribetes reforzados en cuello y sisas.</p>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    
+    <!-- ========================================== -->
+    <!-- FIN DEL ENVOLTORIO ANIMADO -->
+    <!-- ========================================== -->
+    </div> 
+
+    <!-- REDES FLOTANTES (Afuera de la animación) -->
+    <div class="redes-flotantes">
+        <a href="https://wa.me/5492613656819" class="btn-social whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.instagram.com/levalier_/" class="btn-social instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="js/landing.js"></script>
+    <script src="js/catalogo.js"></script>
+</body>
+</html>
