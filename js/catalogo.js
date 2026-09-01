@@ -44,18 +44,30 @@ let ultimoScroll = window.scrollY;
 const navbar = document.querySelector('.navbar');
 const barraFiltros = document.getElementById('barra-filtros');
 
+// 1. Ajuste inicial: Al entrar a la página, ubicamos los filtros justo debajo de la navbar
+if (barraFiltros && navbar) {
+    barraFiltros.style.top = navbar.offsetHeight + 'px';
+}
+
 window.addEventListener('scroll', () => {
     let scrollActual = window.scrollY;
     
-    // Si bajamos más de 150px y vamos hacia abajo -> Ocultamos menú
+    // Si bajamos más de 150px y vamos hacia abajo -> Ocultamos menú principal
     if (scrollActual > 150 && scrollActual > ultimoScroll) {
         navbar.classList.add('oculta');
-        if (barraFiltros) barraFiltros.classList.add('tope');
+        if (barraFiltros) {
+            barraFiltros.classList.add('tope');
+            barraFiltros.style.top = '0px'; // Los filtros suben al borde de la pantalla
+        }
     } 
-    // Si vamos hacia arriba -> Mostramos menú
+    // Si vamos hacia arriba -> Mostramos menú principal
     else if (scrollActual < ultimoScroll) {
         navbar.classList.remove('oculta');
-        if (barraFiltros) barraFiltros.classList.remove('tope');
+        if (barraFiltros) {
+            barraFiltros.classList.remove('tope');
+            // Magia pura: recalculamos la altura en vivo para que nunca se encimen
+            barraFiltros.style.top = navbar.offsetHeight + 'px'; 
+        }
     }
     
     ultimoScroll = scrollActual;
