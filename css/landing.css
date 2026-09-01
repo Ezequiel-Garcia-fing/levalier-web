@@ -198,9 +198,21 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 
 /* --- Celulares y Tablets pequeñas (< 768px) --- */
 @media (max-width: 768px) {
-    .navbar { padding: 15px 20px; flex-direction: column; gap: 15px; }
-    .nav-links { gap: 15px; flex-wrap: wrap; justify-content: center; }
+    /* 1. Barra de navegación y botones horizontales */
+    .navbar { padding: 15px 10px; flex-direction: column; gap: 15px; }
+    .nav-links { 
+        display: flex;
+        flex-direction: row; /* Mantiene los botones a lo largo */
+        flex-wrap: wrap; /* Si la pantalla es muy finita, se acomodan solos */
+        justify-content: center; 
+        gap: 12px; 
+    }
+    .nav-links li { margin: 0; }
+    
+    /* 2. Frenamos el scroll SOLO en celulares porque la barra es más alta */
+    section[id], header[id] { scroll-margin-top: 60px; }
 
+    /* 3. El resto de las adaptaciones que ya tenías */
     .hero-content h1 { font-size: 2.8rem; }
     .hero-content h1 span {
         -webkit-text-stroke: 0 !important; 
@@ -222,7 +234,6 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 
     .redes-flotantes { bottom: 15px; right: 15px; transform: scale(0.85); transform-origin: bottom right; }
 }
-
 /* --- Tablets y pantallas medias (< 900px) --- */
 @media (max-width: 900px) {
     .contenedor-vista-productos { flex-direction: column; text-align: center; gap: 40px; }
