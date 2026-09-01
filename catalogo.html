@@ -38,11 +38,13 @@
             </div>
         </header>
 
-        <!-- BARRA DE FILTROS PEGAJOSA -->
+<!-- BARRA DE FILTROS PEGAJOSA -->
         <div class="contenedor-filtros" id="barra-filtros">
             <div class="filtros-scroll">
                 <button class="btn-filtro activo" data-filtro="todos">Todos los Deportes</button>
                 <button class="btn-filtro" data-filtro="futbol">Fútbol</button>
+                <button class="btn-filtro" data-filtro="rugby">Rugby</button>
+                <button class="btn-filtro" data-filtro="hockey">Hockey</button>
                 <button class="btn-filtro" data-filtro="basquet">Básquet</button>
                 <button class="btn-filtro" data-filtro="voley">Vóley</button>
                 <button class="btn-filtro" data-filtro="entrenamiento">Entrenamiento</button>
@@ -143,41 +145,422 @@
                     </div>
                 </div>
 
-                <h3 class="titulo-prenda">Pantalones y Medias</h3>
+            <!-- =========================================
+                    SUBSECCIÓN: SHORTS (FÚTBOL)
+                ========================================= -->
+                <h3 class="titulo-prenda">Shorts</h3>
                 <div class="grilla-productos">
-                    <!-- Tarjeta de Producto 3 -->
+                    
+                    <!-- Tarjeta Short 1 -->
                     <div class="tarjeta-producto">
-                        <div class="imagen-placeholder">
-                            <span>FOTO 4:5<br>(Ej: Short)</span>
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 1<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
                         </div>
                         <div class="info-producto">
-                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-compress"></i> Spandex</span></div>
-                            <h4>Short Competencia</h4>
-                            <p>Movilidad absoluta. Cintura elástica reforzada y tela resistente a agarrones.</p>
-                           
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Ultra Liviano</span></div>
+                            <h4>Short Titular Pro</h4>
+                            <p>Cintura elástica reforzada con cordón ajustable. Tela resistente a tirones con paneles de ventilación.</p>
                         </div>
                     </div>
-                </div>
+
+                    <!-- Tarjeta Short 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 2<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Ultra Liviano</span></div>
+                            <h4>Short Alternativo</h4>
+                            <p>Diseño clásico con vivos laterales. Máxima libertad de movimiento para alto rendimiento.</p>
+                        </div>
+                    </div>
+                    
+                </div> <!-- Fin Grilla Shorts -->
+
+                <!-- =========================================
+                    SUBSECCIÓN: MEDIAS (FÚTBOL)
+                ========================================= -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    
+                    <!-- Tarjeta Medias 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 1<br>(Detalle Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield-halved"></i> Reforzadas</span></div>
+                            <h4>Medias de Compresión</h4>
+                            <p>Tejido antideslizante en la suela y compresión gradual en el gemelo para evitar calambres.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Medias 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Detalle Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield-halved"></i> Reforzadas</span></div>
+                            <h4>Medias Clásicas</h4>
+                            <p>Modelo tradicional con caña alta elástica y refuerzo en talón y puntera para mayor durabilidad.</p>
+                        </div>
+                    </div>
+
+                </div> <!-- Fin Grilla Medias -->
             </div>
 
-            <!-- SECCIÓN: BÁSQUET -->
-            <div class="grupo-deporte" data-deporte="basquet">
-                <h2 class="titulo-deporte">Básquet <span class="linea-deporte"></span></h2>
-                <h3 class="titulo-prenda">Equipaciones</h3>
+            <!-- =========================================
+                 NUEVA SECCIÓN: RUGBY
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="rugby">
+                <h2 class="titulo-deporte">Rugby <div class="linea-deporte"></div></h2>
+
+                <!-- Rugby: Camisetas -->
+                <h3 class="titulo-prenda">Camisetas</h3>
                 <div class="grilla-productos">
                     <div class="tarjeta-producto">
-                        <div class="imagen-placeholder">
-                            <span>FOTO 4:5<br>(Ej: Musculosa)</span>
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 1<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
                         </div>
                         <div class="info-producto">
-                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Ultra Light</span></div>
-                            <h4>Musculosa Reversible</h4>
-                            <p>Moldería holgada para saltos sin restricción. Ribetes reforzados en cuello y sisas.</p>
-                        
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield"></i> Anti-Agarre</span></div>
+                            <h4>Camiseta Titular Pro</h4>
+                            <p>Corte ultra entallado. Tela de máxima resistencia a tirones con costuras de seguridad dobles.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 2<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield"></i> Anti-Agarre</span></div>
+                            <h4>Camiseta Alternativa</h4>
+                            <p>Diseño anatómico con cuello reforzado especial para soportar el desgaste de los scrums.</p>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <!-- Rugby: Pantalones -->
+                <h3 class="titulo-prenda">Shorts</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>PANTALÓN 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>PANTALÓN 1<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-layer-group"></i> Gabardina Pesada</span></div>
+                            <h4>Short de Juego Clásico</h4>
+                            <p>Tela de máxima densidad. Incluye refuerzo en la entrepierna para asegurar total libertad sin roturas.</p>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>PANTALÓN 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>PANTALÓN 2<br>(Dorso)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-layer-group"></i> Gabardina Pesada</span></div>
+                            <h4>Short de Juego Moderno</h4>
+                            <p>Corte ligeramente más alto y ajustado. Paneles elásticos estratégicos para mayor comodidad en carrera.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rugby: Medias -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+
+                        <div class="carrusel-producto">
+
+                            <div class="pista-carrusel">
+                                    <div class="imagen-placeholder">
+                                        <span>FOTO 1<br>(Frente)</span>
+                                    </div>
+                                    <div class="imagen-placeholder" style="background-color: #dee2e6;">
+                                        <span>FOTO 2<br>(Dorso)</span>
+                                    </div>
+                                    
+                                    <div class="imagen-placeholder" style="background-color: #ced4da;">
+                                        <span>FOTO 3<br>(Detalle de Tela)</span>
+                                    </div>
+                                </div>
+                            
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-plus"></i> Extragruesas</span></div>
+                            <h4>Medias de Rugby Pro</h4>
+                            <p>Caña gruesa ideal para proteger pantorrillas. Base acolchada para absorber impactos en los tapones.</p>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Detalle)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-plus"></i> Extragruesas</span></div>
+                            <h4>Medias de Entrenamiento</h4>
+                            <p>Modelo altamente resistente a lavados frecuentes, con banda elástica superior para evitar caídas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- FIN SECCIÓN RUGBY -->
+
+            <!-- =========================================
+                 NUEVA SECCIÓN: HOCKEY
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="hockey">
+                <h2 class="titulo-deporte">Hockey <div class="linea-deporte"></div></h2>
+
+                <!-- =========================================
+                     HOCKEY: CAMISETAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Camisetas</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Camiseta 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CAMISETA 1<br>(Detalle Tela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+                            <h4>Camiseta Titular Pro</h4>
+                            <p>Corte entallado (sin mangas). Tela ultra respirable para máxima frescura y libertad de movimiento con el palo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Camiseta 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 2<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CAMISETA 2<br>(Cuello)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+                            <h4>Camiseta Alternativa</h4>
+                            <p>Diseño clásico con mangas cortas. Incorpora paneles laterales de malla para una ventilación superior.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================
+                     HOCKEY: SHORTS / POLLERAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Shorts</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Short 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>POLLERA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>POLLERA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>POLLERA 1<br>(Calza Interna)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-check"></i> Skort Pro</span></div>
+                            <h4>Pollera con Calza (Skort)</h4>
+                            <p>Pollera deportiva con calza interna ajustada. Garantiza total seguridad y comodidad durante el juego.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Short 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>SHORT 1<br>(Cintura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Liviano</span></div>
+                            <h4>Short de Juego Masculino</h4>
+                            <p>Corte clásico de hockey sobre césped, tela liviana sin fricción y cintura elástica ajustable.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================
+                     HOCKEY: MEDIAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Medias 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 1<br>(Frente/Espinilla)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 1<br>(Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-expand"></i> Extra Anchas</span></div>
+                            <h4>Medias Pro Porta-Canillera</h4>
+                            <p>Caña elástica de mayor amplitud diseñada específicamente para colocar la canillera de hockey sin deformarse.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Medias 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Textura)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 2<br>(Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield-halved"></i> Reforzadas</span></div>
+                            <h4>Medias de Entrenamiento</h4>
+                            <p>Tejido altamente resistente a la abrasión del pasto sintético, con zonas de ventilación en el empeine.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- FIN SECCIÓN HOCKEY -->
 
         </main>
     
