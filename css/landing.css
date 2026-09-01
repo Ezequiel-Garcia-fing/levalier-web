@@ -115,7 +115,8 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 /* --- Vista de Productos --- */
 .seccion-vista-productos {
     padding: 80px 20px 100px 20px;
-    background-color: white; 
+    /* Gradiente diagonal usando un 4% del Azul Levalier fusionado con blanco */
+    background: linear-gradient(135deg, rgba(43, 50, 69, 0.04) 0%, #ffffff 100%); 
     overflow: hidden; 
 }
 .contenedor-vista-productos {
