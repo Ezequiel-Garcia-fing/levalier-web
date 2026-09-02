@@ -40,14 +40,33 @@
 
 <!-- BARRA DE FILTROS PEGAJOSA -->
         <div class="contenedor-filtros" id="barra-filtros">
-            <div class="filtros-scroll">
-                <button class="btn-filtro activo" data-filtro="todos">Todos los Deportes</button>
-                <button class="btn-filtro" data-filtro="futbol">Fútbol</button>
-                <button class="btn-filtro" data-filtro="rugby">Rugby</button>
-                <button class="btn-filtro" data-filtro="hockey">Hockey</button>
-                <button class="btn-filtro" data-filtro="basquet">Básquet</button>
-                <button class="btn-filtro" data-filtro="voley">Vóley</button>
-                <button class="btn-filtro" data-filtro="entrenamiento">Entrenamiento</button>
+            <div class="filtros-wrapper">
+                
+                <!-- Flecha Izquierda (arranca oculta porque estamos al inicio) -->
+                <button class="flecha-filtro izq oculto" id="scroll-izq" aria-label="Desplazar a la izquierda">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+
+                <!-- Píldoras de Deportes -->
+                <div class="filtros-scroll" id="contenedor-scroll-filtros">
+                    <button class="btn-filtro activo" data-filtro="todos">Todos los Deportes</button>
+                    <button class="btn-filtro" data-filtro="futbol">Fútbol</button>
+                    <button class="btn-filtro" data-filtro="rugby">Rugby</button>
+                    <button class="btn-filtro" data-filtro="hockey">Hockey</button>
+                    <button class="btn-filtro" data-filtro="basquet">Básquet</button>
+                    <button class="btn-filtro" data-filtro="ciclismo">Ciclismo</button>
+                    <button class="btn-filtro" data-filtro="karate">Karate</button>
+                    <button class="btn-filtro" data-filtro="voley">Vóley</button>
+                    <button class="btn-filtro" data-filtro="entrenamiento">Entrenamiento</button>
+                    <button class="btn-filtro" data-filtro="paseo">Línea de Paseo</button>
+                    <button class="btn-filtro" data-filtro="accesorios">Accesorios</button>
+                </div>
+
+                <!-- Flecha Derecha -->
+                <button class="flecha-filtro der" id="scroll-der" aria-label="Desplazar a la derecha">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+
             </div>
         </div>
 
@@ -244,6 +263,32 @@
                     </div>
 
                 </div> <!-- Fin Grilla Medias -->
+
+                <!-- Fútbol: Salida de Cancha -->
+                <h3 class="titulo-prenda">Salida de Cancha</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMPERÓN 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMPERÓN 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CAMPERÓN 1<br>(Interior)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-temperature-arrow-up"></i> Térmico</span></div>
+                            <h4>Camperón de Banco</h4>
+                            <p>Abrigo largo e impermeable, ideal para suplentes o cuerpo técnico en días de lluvia y frío.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- =========================================
@@ -561,6 +606,687 @@
                 </div>
 
             </div> <!-- FIN SECCIÓN HOCKEY -->
+
+            <!-- =========================================
+                 SECCIÓN: BÁSQUET
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="basquet">
+                <h2 class="titulo-deporte">Básquet <div class="linea-deporte"></div></h2>
+
+                <!-- Básquet: Camisetas (Musculosas) -->
+                <h3 class="titulo-prenda">Musculosas</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Musculosa 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MUSCULOSA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MUSCULOSA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MUSCULOSA 1<br>(Detalle Sisa)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-arrows-up-down"></i> Corte Largo</span></div>
+                            <h4>Musculosa de Juego Pro</h4>
+                            <p>Corte clásico de básquet, más holgado y largo. Sisa amplia para un rango de tiro perfecto y sin restricciones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Musculosa 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MUSCULOSA 2<br>(Frente Lado A)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MUSCULOSA 2<br>(Dorso Lado A)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MUSCULOSA 2<br>(Lado B - Reversible)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-rotate"></i> Reversible</span></div>
+                            <h4>Musculosa Doble Faz</h4>
+                            <p>Doble capa de tela microperforada. Ideal para entrenamientos, permitiendo tener dos colores de equipo en una sola prenda.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Básquet: Shorts -->
+                <h3 class="titulo-prenda">Shorts</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Short Básquet 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>SHORT 1<br>(Detalle Cintura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-maximize"></i> Oversize</span></div>
+                            <h4>Short de Juego Clásico</h4>
+                            <p>Corte amplio por debajo de la rodilla. Cintura elástica gruesa con cordón reforzado para un ajuste seguro en saltos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Short Básquet 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 2<br>(Lado A)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 2<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>SHORT 2<br>(Lado B - Reversible)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-rotate"></i> Reversible</span></div>
+                            <h4>Short Doble Faz</h4>
+                            <p>Complemento perfecto para la musculosa reversible. Tela liviana que no suma peso extra al jugador pese a su doble capa.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Básquet: Medias -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 1<br>(Suela Acolchada)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 1<br>(Talón)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-layer-group"></i> Base Acolchada</span></div>
+                            <h4>Medias Media Caña Pro</h4>
+                            <p>Refuerzo extra grueso en planta y talón para absorber el impacto constante de los saltos en el parquet.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Textura)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 2<br>(Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-compress"></i> Compresión</span></div>
+                            <h4>Medias de Caña Alta</h4>
+                            <p>Soporte de compresión gradual en el tobillo para prevenir esguinces. Tejido respirable que mantiene el pie seco.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- FIN SECCIÓN BÁSQUET -->
+
+
+            <!-- =========================================
+                 NUEVA SECCIÓN: CICLISMO
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="ciclismo">
+                <h2 class="titulo-deporte">Ciclismo <div class="linea-deporte"></div></h2>
+
+                <!-- Ciclismo: Jerseys (Camisetas) -->
+                <h3 class="titulo-prenda">Jerseys (Maillots)</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>JERSEY 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>JERSEY 1<br>(Dorso / Bolsillos)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>JERSEY 1<br>(Detalle Cierre)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Aerodinámico</span></div>
+                            <h4>Jersey Pro Fit</h4>
+                            <p>Corte ajustado "segunda piel". Cierre frontal completo, banda antideslizante en la cintura y 3 bolsillos traseros.</p>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>JERSEY 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>JERSEY 2<br>(Dorso / Bolsillos)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>JERSEY 2<br>(Detalle Reflectivo)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-sun"></i> UV Protect</span></div>
+                            <h4>Jersey Regular Fit</h4>
+                            <p>Ideal para entrenamientos largos. Corte levemente más holgado, protección UV 50+ y detalles reflectivos de seguridad.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ciclismo: Calzas / Shorts -->
+                <h3 class="titulo-prenda">Calzas y Bib Shorts</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CALZA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CALZA 1<br>(Dorso / Tiradores)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CALZA 1<br>(Interior Badana)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-cushion"></i> Badana Gel</span></div>
+                            <h4>Bib Short con Tiradores</h4>
+                            <p>Calza corta de compresión con tiradores de malla respirable. Badana de gel de alta densidad para rodadas de +4 horas.</p>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CALZA 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CALZA 2<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CALZA 2<br>(Banda Elástica)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-cushion"></i> Badana Espuma</span></div>
+                            <h4>Calza Corta sin Tiradores</h4>
+                            <p>Modelo a la cintura con banda elástica anatómica. Badana ergonómica de espuma para entrenamientos de media distancia.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ciclismo: Medias -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 1<br>(Frente Aero)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 1<br>(Detalle Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Aero</span></div>
+                            <h4>Medias Aero Pro</h4>
+                            <p>Caña alta con tejido canalado aerodinámico que corta el viento. Base super fina para máxima sensibilidad en el pedal.</p>
+                        </div>
+                    </div>
+
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Textura Malla)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 2<br>(Talón)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+                            <h4>Medias de Verano Livianas</h4>
+                            <p>Construcción sin costuras con empeine de malla abierta para una ventilación extrema en días calurosos.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- FIN SECCIÓN CICLISMO -->
+
+            <!-- =========================================
+                 NUEVA SECCIÓN: KARATE
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="karate">
+                <h2 class="titulo-deporte">Karate <div class="linea-deporte"></div></h2>
+
+                <!-- Karate: Uniformes (Kimonos) -->
+                <h3 class="titulo-prenda">Kimonos (Karateguis)</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Kimono 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>KIMONO 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>KIMONO 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>KIMONO 1<br>(Detalle Costura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-weight-hanging"></i> Lona 14 oz</span></div>
+                            <h4>Karategui Kata Pro</h4>
+                            <p>Lona de algodón de alta densidad. Corte tradicional japonés que genera el característico efecto sonoro (snap) en cada técnica.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Kimono 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>KIMONO 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>KIMONO 2<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>KIMONO 2<br>(Textura Tela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-feather"></i> Microfibra 8 oz</span></div>
+                            <h4>Karategui Kumite Aero</h4>
+                            <p>Diseño ultraligero especial para combate. Tela con zonas de ventilación estratégicas para máxima velocidad y frescura en el tatami.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- FIN SECCIÓN KARATE -->
+
+            <!-- =========================================
+                 SECCIÓN: VÓLEY
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="voley">
+                <h2 class="titulo-deporte">Vóley <div class="linea-deporte"></div></h2>
+
+                <!-- =========================================
+                     VÓLEY: CAMISETAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Camisetas y Musculosas</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Camiseta 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CAMISETA 1<br>(Detalle Sisa)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-expand"></i> Spandex Flex</span></div>
+                            <h4>Camiseta de Juego Femenina</h4>
+                            <p>Corte entallado sin mangas. Tela ultra elástica que acompaña la extensión máxima del brazo en el remate sin generar tirones.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Camiseta 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CAMISETA 2<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CAMISETA 2<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CAMISETA 2<br>(Textura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-droplet"></i> Dry-Fit</span></div>
+                            <h4>Camiseta de Juego Masculina</h4>
+                            <p>Corte anatómico con mangas cortas. Diseño super liviano con paneles de respirabilidad extrema para mantener la frescura.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================
+                     VÓLEY: SHORTS Y CALZAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Shorts y Calzas</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Short 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CALZA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CALZA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CALZA 1<br>(Cintura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-check"></i> Calce Perfecto</span></div>
+                            <h4>Calza Corta Pro (Femenina)</h4>
+                            <p>Tiro alto con elástico antideslizante. Diseño ceñido de máxima compresión que no se sube durante los desplazamientos defensivos.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Short 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>SHORT 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>SHORT 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>SHORT 1<br>(Textura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-wind"></i> Liviano</span></div>
+                            <h4>Short de Juego (Masculino)</h4>
+                            <p>Largo intermedio y corte amplio. Confeccionado en tela microfibra sin rozamiento para saltos libres y ágiles.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- =========================================
+                     VÓLEY: MEDIAS
+                ========================================= -->
+                <h3 class="titulo-prenda">Medias</h3>
+                <div class="grilla-productos">
+                    <!-- Tarjeta Medias 1 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 1<br>(Suela)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 1<br>(Talón)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-layer-group"></i> Anti-Fricción</span></div>
+                            <h4>Medias de Caña Alta</h4>
+                            <p>Ideales para evitar el roce con las rodilleras. Talón y punta reforzados con felpa para amortiguar la caída del bloqueo.</p>
+                        </div>
+                    </div>
+
+                    <!-- Tarjeta Medias 2 -->
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>MEDIAS 2<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>MEDIAS 2<br>(Empeine)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>MEDIAS 2<br>(Suela)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-compress"></i> Compresión</span></div>
+                            <h4>Medias Media Caña</h4>
+                            <p>Ajuste anatómico en el arco del pie que evita desplazamientos internos en las zapatillas durante los frenos bruscos.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div> <!-- FIN SECCIÓN VÓLEY -->
+
+            <!-- =========================================
+                 SECCIÓN: ENTRENAMIENTO
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="entrenamiento">
+                <h2 class="titulo-deporte">Entrenamiento <div class="linea-deporte"></div></h2>
+
+                <!-- Pecheras -->
+                <h3 class="titulo-prenda">Pecheras</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>PECHERA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>PECHERA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>PECHERA 1<br>(Textura)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-compress"></i> Malla Calada</span></div>
+                            <h4>Pechera Reversible Pro</h4>
+                            <p>Tela microperforada ultra resistente para armar equipos rápidos. Colores flúor de alta visibilidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- FIN ENTRENAMIENTO -->
+
+            <!-- =========================================
+                 SECCIÓN: LÍNEA DE PASEO
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="paseo">
+                <h2 class="titulo-deporte">Línea de Paseo <div class="linea-deporte"></div></h2>
+
+                <!-- Conjuntos Deportivos -->
+                <h3 class="titulo-prenda">Conjuntos Deportivos</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CONJUNTO 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CONJUNTO 1<br>(Pantalón)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CONJUNTO 1<br>(Detalle)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shield"></i> Microfibra</span></div>
+                            <h4>Conjunto Institucional de Viaje</h4>
+                            <p>Campera con cierre completo y pantalón chupín. Tela deportiva de excelente caída, ideal para representar al club.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chombas -->
+                <h3 class="titulo-prenda">Chombas</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>CHOMBA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>CHOMBA 1<br>(Dorso)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>CHOMBA 1<br>(Cuello)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-shirt"></i> Piqué Premium</span></div>
+                            <h4>Chomba de Paseo y Cuerpo Técnico</h4>
+                            <p>Corte clásico con cuello tejido. Aporta presencia y elegancia para eventos institucionales o viajes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- FIN LÍNEA DE PASEO -->
+
+            <!-- =========================================
+                 SECCIÓN: ACCESORIOS
+            ========================================= -->
+            <div class="grupo-deporte" data-deporte="accesorios">
+                <h2 class="titulo-deporte">Accesorios <div class="linea-deporte"></div></h2>
+
+                <!-- Equipamiento -->
+                <h3 class="titulo-prenda">Gorras y Botineros</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>GORRA 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>GORRA 1<br>(Perfil)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>BOTINERO 1<br>(Interior)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-bag-shopping"></i> Uso Diario</span></div>
+                            <h4>Gorra Trucker y Botinero Pro</h4>
+                            <p>Gorra con malla respirable trasera. Botinero impermeable con compartimento ventilado para calzado y cierre reforzado.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Merchandising -->
+                <h3 class="titulo-prenda">Merchandising</h3>
+                <div class="grilla-productos">
+                    <div class="tarjeta-producto">
+                        <div class="carrusel-producto">
+                            <div class="pista-carrusel">
+                                <div class="imagen-placeholder"><span>TAZA 1<br>(Diseño)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #dee2e6;"><span>LLAVERO 1<br>(Frente)</span></div>
+                                <div class="imagen-placeholder" style="background-color: #ced4da;"><span>STICKERS 1<br>(Plancha)</span></div>
+                            </div>
+                            <button class="btn-carrusel prev"><i class="fas fa-chevron-left"></i></button>
+                            <button class="btn-carrusel next"><i class="fas fa-chevron-right"></i></button>
+                            <div class="indicadores-carrusel">
+                                <span class="punto activo"></span>
+                                <span class="punto"></span>
+                                <span class="punto"></span>
+                            </div>
+                        </div>
+                        <div class="info-producto">
+                            <div class="etiquetas"><span class="tag-tech"><i class="fas fa-star"></i> Oficial</span></div>
+                            <h4>Pack del Hincha</h4>
+                            <p>Taza cerámica apta microondas, llavero de polímero inyectado y plancha de stickers troquelados del club.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- FIN ACCESORIOS -->
 
         </main>
     

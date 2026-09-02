@@ -157,3 +157,50 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     });
 });
+
+// ==========================================
+// DESPLAZAMIENTO LATERAL DE FILTROS EN PC
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const contenedorScroll = document.getElementById('contenedor-scroll-filtros');
+    const btnIzq = document.getElementById('scroll-izq');
+    const btnDer = document.getElementById('scroll-der');
+
+    if (contenedorScroll && btnIzq && btnDer) {
+        function actualizarVisibilidadFlechas() {
+            const scrollActual = contenedorScroll.scrollLeft;
+            const maxScroll = contenedorScroll.scrollWidth - contenedorScroll.clientWidth;
+
+            // Flecha Izquierda: si estamos al principio del scroll, se oculta
+            if (scrollActual <= 5) {
+                btnIzq.classList.add('oculto');
+            } else {
+                btnIzq.classList.remove('oculto');
+            }
+
+            // Flecha Derecha: si no sobra contenido o ya llegamos al final, se oculta
+            if (maxScroll <= 5 || scrollActual >= maxScroll - 5) {
+                btnDer.classList.add('oculto');
+            } else {
+                btnDer.classList.remove('oculto');
+            }
+        }
+
+        // Desplazamiento al hacer clic
+        btnDer.addEventListener('click', () => {
+            contenedorScroll.scrollBy({ left: 320, behavior: 'smooth' });
+        });
+
+        btnIzq.addEventListener('click', () => {
+            contenedorScroll.scrollBy({ left: -320, behavior: 'smooth' });
+        });
+
+        // Escuchadores de eventos para actualizar visibilidad en vivo
+        contenedorScroll.addEventListener('scroll', actualizarVisibilidadFlechas);
+        window.addEventListener('resize', actualizarVisibilidadFlechas);
+
+        // Comprobación inicial al cargar
+        actualizarVisibilidadFlechas();
+        window.addEventListener('load', actualizarVisibilidadFlechas);
+    }
+});
