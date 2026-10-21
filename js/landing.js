@@ -108,3 +108,38 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// ==========================================
+// INTERCEPCIÓN DEL BOTÓN CATÁLOGO (EN CONSTRUCCIÓN)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const btnLanzamiento = document.getElementById('btn-lanzamiento');
+    const modalConstruccion = document.getElementById('modal-construccion');
+    const btnCerrarModal = document.getElementById('cerrar-modal');
+    const btnEntendido = document.getElementById('btn-entendido');
+
+    if (btnLanzamiento && modalConstruccion) {
+        // 1. Al hacer clic en el botón, evitamos ir al catálogo y mostramos el modal
+        btnLanzamiento.addEventListener('click', (e) => {
+            e.preventDefault(); // Frena la navegación
+            modalConstruccion.classList.add('activo');
+        });
+
+        // 2. Cerrar con la cruz
+        btnCerrarModal.addEventListener('click', () => {
+            modalConstruccion.classList.remove('activo');
+        });
+
+        // 3. Cerrar con el botón "Entendido"
+        btnEntendido.addEventListener('click', () => {
+            modalConstruccion.classList.remove('activo');
+        });
+
+        // 4. Cerrar haciendo clic afuera del cartel blanco
+        window.addEventListener('click', (e) => {
+            if (e.target === modalConstruccion) {
+                modalConstruccion.classList.remove('activo');
+            }
+        });
+    }
+});

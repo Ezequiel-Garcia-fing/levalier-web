@@ -383,3 +383,136 @@ body { background-color: var(--blanco-fondo); color: var(--azul-levalier); overf
 .navbar.oculta {
     transform: translateY(-100%);
 }
+
+/* =========================================
+   BOTONES DESTACADOS (Lanzamiento y Modal)
+========================================= */
+#btn-lanzamiento, 
+#btn-entendido {
+    display: inline-block;
+    background-color: #d92525 !important; /* Rojo de la marca */
+    color: #ffffff !important;
+    font-size: 18px;
+    font-weight: 600;
+    padding: 15px 40px;
+    border-radius: 50px !important; /* Bordes completamente redondeados */
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: 0 6px 15px rgba(217, 37, 37, 0.3); /* Sombra roja sutil para resaltar */
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+#btn-lanzamiento:hover, 
+#btn-entendido:hover {
+    background-color: #b81f1f !important; /* Rojo ligeramente más oscuro */
+    transform: translateY(-3px); /* Pequeño salto hacia arriba */
+    box-shadow: 0 10px 20px rgba(217, 37, 37, 0.5);
+    color: #ffffff !important;
+}
+
+/* --- Adaptación para Monitores Gigantes / 4K (> 1900px) --- */
+@media (min-width: 1900px) {
+    #btn-lanzamiento, 
+    #btn-entendido {
+        font-size: 1.2vw;
+        padding: 1vw 2.5vw;
+        border-radius: 3vw !important;
+        box-shadow: 0 0.4vw 1vw rgba(217, 37, 37, 0.3);
+        letter-spacing: 0.1vw;
+    }
+    
+    #btn-lanzamiento:hover, 
+    #btn-entendido:hover {
+        transform: translateY(-0.2vw);
+        box-shadow: 0 0.8vw 1.5vw rgba(217, 37, 37, 0.5);
+    }
+}
+
+/* =========================================
+   MODAL "EN CONSTRUCCIÓN"
+========================================= */
+.modal-oculto {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 17, 17, 0.85); /* Fondo oscuro difuminado */
+    z-index: 9999; /* Por encima de la barra de navegación */
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-oculto.activo {
+    display: flex;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.modal-contenido {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    text-align: center;
+    max-width: 90%;
+    width: 450px;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-top: 5px solid #d92525; /* Detalle rojo marca */
+}
+
+.btn-cerrar-modal {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.btn-cerrar-modal:hover { color: #d92525; }
+
+.icono-modal {
+    font-size: 50px;
+    color: #d92525;
+    margin-bottom: 20px;
+}
+
+.modal-contenido h3 {
+    font-size: 24px;
+    color: #111111;
+    margin-bottom: 15px;
+}
+
+.modal-contenido p {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Adaptación para Monitores Gigantes / 4K (> 1900px) --- */
+@media (min-width: 1900px) {
+    .modal-contenido { 
+        width: 25vw; 
+        padding: 2.5vw; 
+        border-radius: 0.8vw; 
+        border-top-width: 0.3vw;
+    }
+    .btn-cerrar-modal { font-size: 1.5vw; top: 1vw; right: 1vw; }
+    .icono-modal { font-size: 3vw; margin-bottom: 1vw; }
+    .modal-contenido h3 { font-size: 1.5vw; margin-bottom: 1vw; }
+    .modal-contenido p { font-size: 0.9vw; margin-bottom: 1.5vw; }
+    #btn-entendido { font-size: 0.9vw; padding: 0.8vw 2vw; border-radius: 2vw; }
+}

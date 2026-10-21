@@ -62,9 +62,8 @@
                     <p>Utilizamos telas de última tecnología que garantizan máxima durabilidad, respirabilidad y confort en la cancha.</p>
                     
                     <!-- BOTÓN CON EL GATILLO DE LA ANIMACIÓN -->
-                    <a href="catalogo.html" class="btn-rojo-levalier link-transicion" data-salida="izquierda">
-                        Conocé todos nuestros productos <i class="fas fa-arrow-right"></i>
-                    </a>
+                    <!-- Cambiá tu botón actual para que tenga este id -->
+                    <a href="catalogo.html" class="btn-primario" id="btn-lanzamiento">Conoce todos nuestros productos</a>
                 </div>
 
                 <div class="vista-productos-imagen">
@@ -153,6 +152,19 @@
         <a href="https://wa.me/5492613656819?text=Hola%20Levalier,%20quiero%20consultar%20por%20indumentaria%20deportiva" class="btn-social whatsapp" target="_blank"><i class="fab fa-whatsapp"></i></a>
         <a href="https://www.instagram.com/levalier_/" class="btn-social instagram" target="_blank"><i class="fab fa-instagram"></i></a>
     </div>
+
+        <!-- MODAL: CATÁLOGO EN CONSTRUCCIÓN -->
+        <div id="modal-construccion" class="modal-oculto">
+            <div class="modal-contenido">
+                <button class="btn-cerrar-modal" id="cerrar-modal">&times;</button>
+                <div class="icono-modal">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Catálogo en Construcción</h3>
+                <p>Estamos preparando la mejor línea de indumentaria deportiva para tu equipo. ¡Muy pronto vas a poder ver todos nuestros productos!</p>
+                <button class="btn-primario" id="btn-entendido">¡Entendido!</button>
+            </div>
+        </div>
 
     <!-- Script Externo -->
     <script src="js/landing.js" defer></script>
