@@ -67,6 +67,62 @@
                         <div id="patron-mitad-espalda" class="patron-mitad" style="right: 0; width: 25%;"></div>
                         <div id="patron-rayas-frente" class="patron-rayas" style="left: 0; width: 50%;"></div>
                         <div id="patron-rayas-espalda" class="patron-rayas" style="right: 0; width: 50%;"></div>
+                        <div id="patron-degradado" class="patron-degradado"></div>
+                        <svg id="patron-svg" class="patron-svg" viewBox="0 0 800 500" preserveAspectRatio="none">
+                            <defs>
+                                <linearGradient id="grad-tricolor-frente" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="35%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="50%" stop-color="#000000" stop-opacity="0.18" />
+                                    <stop offset="65%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                                </linearGradient>
+                                <linearGradient id="grad-tricolor-espalda" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="35%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="50%" stop-color="#000000" stop-opacity="0.18" />
+                                    <stop offset="65%" stop-color="#ffffff" stop-opacity="0" />
+                                    <stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+                                </linearGradient>
+                            </defs>
+                            <g id="svg-grupo-franja" style="display: none;">
+                                <rect id="svg-franja-pecho" x="0" y="215" width="800" height="85" fill="#DD3939" />
+                            </g>
+                            <g id="svg-grupo-banda" style="display: none;">
+                                <polygon id="svg-banda-frente" points="288,40 352,40 132,460 68,460" fill="#DD3939" />
+                                <polygon id="svg-banda-espalda" points="473,40 539,40 709,460 643,460" fill="#DD3939" />
+                            </g>
+                            <g id="svg-grupo-chevron" style="display: none;">
+                                <polygon id="svg-chevron-frente" points="98,120 220,280 342,120 342,195 220,355 98,195" fill="#DD3939" />
+                                <polygon id="svg-chevron-espalda" points="453,120 575,280 697,120 697,195 575,355 453,195" fill="#DD3939" />
+                            </g>
+                            <g id="svg-grupo-tricolor" style="display: none;">
+                                <!-- Bloque Inferior Esquina (Color 3) -->
+                                <polygon id="svg-tricolor-bloque-frente" points="" fill="#E32627" />
+                                <polygon id="svg-tricolor-bloque-espalda" points="" fill="#E32627" />
+
+                                <!-- Gran Banda Diagonal Central (Color 2) -->
+                                <polygon id="svg-tricolor-banda-frente" points="" fill="#FFFFFF" />
+                                <polygon id="svg-tricolor-banda-espalda" points="" fill="#FFFFFF" />
+
+                                <!-- Degradado de Sombras / Efecto Suave -->
+                                <polygon id="svg-tricolor-sombra-frente" points="" fill="url(#grad-tricolor-frente)" />
+                                <polygon id="svg-tricolor-sombra-espalda" points="" fill="url(#grad-tricolor-espalda)" />
+
+                                <!-- Líneas Finas Paralelas Frente (Pinstripes) -->
+                                <line id="svg-tricolor-linea-frente-izq-1" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-frente-izq-2" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-frente-der-1" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-frente-der-2" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+
+                                <!-- Líneas Finas Paralelas Espalda (Pinstripes) -->
+                                <line id="svg-tricolor-linea-espalda-izq-1" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-espalda-izq-2" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-espalda-der-1" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                                <line id="svg-tricolor-linea-espalda-der-2" x1="0" y1="0" x2="0" y2="0" stroke="#FFFFFF" stroke-width="3.5" />
+                            </g>
+                            <g id="svg-grupo-splash" style="display: none;"></g>
+                        </svg>
                     </div>
                     <div class="capa-absoluta capa-color" id="color-mangas"></div>
                     <canvas id="canvas-logos" width="800" height="500"></canvas>
@@ -79,18 +135,50 @@
                     <h2>Diseño Base</h2>
                     <div class="grupo-control">
                         <label>Estilo de la Prenda:</label>
-                        <div class="grilla-modelos">
-                            <div class="tarjeta-modelo activa" data-modelo="liso">
-                                <img src="imagenes/thumb_.jpg" alt="Clásico">
-                                <span>Clásico</span>
-                            </div>
-                            <div class="tarjeta-modelo" data-modelo="mitad">
-                                <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
-                                <span>Bicolor</span>
-                            </div>
-                            <div class="tarjeta-modelo" data-modelo="rayas">
-                                <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
-                                <span>A Rayas</span>
+                        <div class="selector-categorias-modelos">
+                            <button type="button" class="btn-categoria-modelo activo" data-categoria="todos">Todos</button>
+                            <button type="button" class="btn-categoria-modelo" data-categoria="basicos">Básicos</button>
+                            <button type="button" class="btn-categoria-modelo" data-categoria="deportivos">Deportivos</button>
+                            <button type="button" class="btn-categoria-modelo" data-categoria="modernos">Modernos</button>
+                        </div>
+                        <div class="contenedor-grilla-modelos">
+                            <div class="grilla-modelos">
+                                <div class="tarjeta-modelo activa" data-modelo="liso" data-categoria="basicos">
+                                    <img src="imagenes/thumb_.jpg" alt="Clásico">
+                                    <span>Clásico</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="mitad" data-categoria="basicos">
+                                    <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
+                                    <span>Bicolor</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="rayas" data-categoria="basicos">
+                                    <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
+                                    <span>A Rayas</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="degradado" data-categoria="basicos">
+                                    <img src="imagenes/thumb_degradado.jpg" alt="Degradado">
+                                    <span>Degradado</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="franja" data-categoria="deportivos">
+                                    <img src="imagenes/thumb_franja.jpg" alt="Franja Pecho">
+                                    <span>Franja Pecho</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="banda" data-categoria="deportivos">
+                                    <img src="imagenes/thumb_banda.jpg" alt="Banda Diagonal">
+                                    <span>Banda Diagonal</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="chevron" data-categoria="deportivos">
+                                    <img src="imagenes/thumb_chevron.jpg" alt="Chevron en V">
+                                    <span>Chevron en V</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="tricolor-dynamic" data-categoria="modernos">
+                                    <img src="imagenes/thumb_tricolor.jpg" alt="Tricolor Dynamic">
+                                    <span>Tricolor Dynamic</span>
+                                </div>
+                                <div class="tarjeta-modelo" data-modelo="dynamic-splash" data-categoria="modernos">
+                                    <img src="imagenes/thumb_splash.jpg" alt="Dynamic Splash">
+                                    <span>Dynamic Splash</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -105,10 +193,38 @@
                         <input type="color" id="selector-patron" value="#DD3939" class="oculto">
                         <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
                     </div>
+                    <div class="grupo-control oculto" id="contenedor-color-3">
+                        <label id="label-color-3">Tercer Color / Acento:</label>
+                        <input type="color" id="selector-color-3" value="#E32627" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-3" data-default="#E32627"></div>
+                    </div>
                     <div class="grupo-control oculto" id="contenedor-slider">
                         <label id="label-slider">Ajuste:</label>
                         <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
                         <input type="range" id="slider-rayas" class="oculto" min="1" max="20" step="1" value="10">
+                        <input type="range" id="slider-banda" class="oculto" min="40" max="100" step="2" value="65">
+                    </div>
+                    <div class="grupo-control oculto" id="controles-franja">
+                        <label for="slider-franja-pos">Posición / Altura:</label>
+                        <input type="range" id="slider-franja-pos" min="97" max="320" step="2" value="135">
+                        <label for="slider-franja-grosor">Grosor de la Franja:</label>
+                        <input type="range" id="slider-franja-grosor" min="30" max="120" step="2" value="75">
+                    </div>
+                    <div class="grupo-control oculto" id="controles-chevron">
+                        <label for="slider-chevron-pos">Posición / Altura:</label>
+                        <input type="range" id="slider-chevron-pos" min="120" max="250" step="2" value="160">
+                        <label for="slider-chevron-grosor">Grosor de la V:</label>
+                        <input type="range" id="slider-chevron-grosor" min="30" max="110" step="2" value="75">
+                        <label for="slider-chevron-angulo">Ángulo (Apertura):</label>
+                        <input type="range" id="slider-chevron-angulo" min="50" max="200" step="2" value="70">
+                    </div>
+                    <div class="grupo-control oculto" id="controles-tricolor">
+                        <label for="slider-tricolor-ancho">Ancho Banda Central:</label>
+                        <input type="range" id="slider-tricolor-ancho" min="50" max="200" step="2" value="65">
+                    </div>
+                    <div class="grupo-control oculto" id="controles-splash">
+                        <label for="slider-splash-ancho">Grosor de banda:</label>
+                        <input type="range" id="slider-splash-ancho" min="60" max="260" step="2" value="80">
                     </div>
                     <div class="grupo-control">
                         <label>Color de Mangas:</label>
