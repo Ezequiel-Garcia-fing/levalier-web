@@ -363,3 +363,200 @@ input[type="range"].oculto { display: none !important; }
     .selector-genero { gap: 1vw !important; margin-bottom: 1vw !important; }
     .menu-volver { font-size: 1vw !important; padding-left: 2vw !important; margin-top: 2vw !important; }
 }
+/* =========================================
+   8. BOTÓN DE PRESUPUESTO WHATSAPP Y MODAL
+========================================= */
+.seccion-presupuesto {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.btn-presupuesto-whatsapp {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    width: 100%;
+    padding: 13px 12px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: #ffffff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.btn-presupuesto-whatsapp:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+    background: linear-gradient(135deg, #2be671 0%, #169c8c 100%);
+}
+
+.btn-presupuesto-whatsapp:active {
+    transform: translateY(0);
+}
+
+.icono-ws-btn {
+    font-size: 26px;
+    line-height: 1;
+}
+
+.textos-ws-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.txt-ws-principal {
+    font-size: 15px;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+    letter-spacing: 0.2px;
+}
+
+.txt-ws-secundario {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.9);
+    margin-top: 2px;
+}
+
+/* Modal de Confirmación y Descarga */
+.modal-presupuesto-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(10, 15, 25, 0.75);
+    backdrop-filter: blur(6px);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    animation: fadeInModal 0.25s ease;
+}
+
+.modal-presupuesto-caja {
+    position: relative;
+    background: #ffffff;
+    width: 100%;
+    max-width: 520px;
+    border-radius: 14px;
+    padding: 24px 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    animation: slideUpModal 0.3s ease;
+    text-align: center;
+}
+
+.btn-cerrar-modal {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #888;
+    cursor: pointer;
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+.btn-cerrar-modal:hover {
+    color: #333;
+}
+
+.modal-header-ws {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.icono-ws-modal {
+    font-size: 24px;
+}
+
+.modal-header-ws h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #128C7E;
+    font-weight: 800;
+}
+
+.preview-captura-contenedor {
+    width: 100%;
+    background: #f4f6fa;
+    border: 1px solid #e1e4ea;
+    border-radius: 8px;
+    padding: 6px;
+    margin-bottom: 12px;
+    box-sizing: border-box;
+}
+
+.preview-captura-contenedor img {
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
+    border-radius: 6px;
+    display: block;
+}
+
+.modal-instruccion {
+    font-size: 13px;
+    color: #444;
+    margin-bottom: 10px;
+    line-height: 1.4;
+}
+
+.modal-pasos {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    text-align: left;
+    font-size: 12px;
+    color: #166534;
+}
+
+.btn-enviar-ws-modal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+    color: white !important;
+    text-decoration: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 800;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.btn-enviar-ws-modal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUpModal {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}

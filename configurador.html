@@ -238,6 +238,16 @@
                         <input type="file" id="subir-logo" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -283,6 +293,16 @@
                         <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -313,6 +333,16 @@
                         <label for="subir-logo-pantalon" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                    </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -353,6 +383,16 @@
                         <input type="file" id="subir-logo-medias" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -383,6 +423,16 @@
                         <label for="subir-logo-gorra" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                    </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -415,6 +465,16 @@
                         <input type="file" id="subir-logo-gorra-gabardina" accept="image/png, image/jpeg">
                         <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
                     </div>
+                    <hr>
+                    <div class="grupo-control seccion-presupuesto">
+                        <button type="button" class="btn-presupuesto-whatsapp">
+                            <span class="icono-ws-btn">💬</span>
+                            <div class="textos-ws-btn">
+                                <span class="txt-ws-principal">¡Listo! Terminé mi diseño</span>
+                                <span class="txt-ws-secundario">Quiero mi presupuesto por WhatsApp</span>
+                            </div>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -423,6 +483,36 @@
 
     <!-- Pickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
+    <!-- ========================================== -->
+    <!-- MODAL PRESUPUESTO WHATSAPP                 -->
+    <!-- ========================================== -->
+    <div id="modal-presupuesto" class="modal-presupuesto-overlay oculto">
+        <div class="modal-presupuesto-caja">
+            <button type="button" class="btn-cerrar-modal" id="btn-cerrar-modal-presupuesto">&times;</button>
+            <div class="modal-header-ws">
+                <span class="icono-ws-modal">💬</span>
+                <h3>¡Tu Diseño está Listo!</h3>
+            </div>
+            <div class="modal-body-ws">
+                <div class="preview-captura-contenedor">
+                    <img id="img-preview-captura" src="" alt="Captura del diseño">
+                </div>
+                <p class="modal-instruccion">
+                    Descargamos la imagen a tu dispositivo y <strong>la copiamos al portapapeles</strong>.
+                </p>
+                <div class="modal-pasos">
+                    <span>1️⃣ Tocá el botón verde abajo para abrir nuestro WhatsApp.</span>
+                    <span>2️⃣ Pegá la imagen con <strong>Ctrl + V</strong> (o adjuntá el archivo descargado).</span>
+                    <span>3️⃣ ¡Te enviamos tu presupuesto con descuento de fábrica al instante!</span>
+                </div>
+            </div>
+            <div class="modal-footer-ws">
+                <a id="btn-abrir-whatsapp-modal" href="#" target="_blank" class="btn-enviar-ws-modal">
+                    Abrir WhatsApp y Enviar Diseño
+                </a>
+            </div>
+        </div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>

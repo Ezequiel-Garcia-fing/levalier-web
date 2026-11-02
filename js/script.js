@@ -969,3 +969,244 @@ window.addEventListener('DOMContentLoaded', () => {
         sincronizarBotonPickr(pickrActivos[targetId], color);
     });
 });
+
+// ==========================================
+// 5. CAPTURA Y PRESUPUESTO POR WHATSAPP
+// ==========================================
+const WHATSAPP_LEVALIER = '5492613656819';
+
+function obtenerDetallesPrendaActiva() {
+    const itemActivo = document.querySelector('.menu-prendas .menu-item.activo');
+    const prenda = itemActivo ? itemActivo.innerText.replace('✓', '').trim() : 'Prenda';
+    const moduloActivo = document.querySelector('.modulo-prenda.activo');
+    let modelo = '';
+    if (moduloActivo && moduloActivo.id === 'modulo-remera') {
+        const tarjetaActiva = document.querySelector('.tarjeta-modelo.activa');
+        modelo = tarjetaActiva ? tarjetaActiva.querySelector('span').innerText.trim() : modeloActualGlobal;
+    }
+    return { prenda, modelo };
+}
+
+async function generarCapturaDisenio() {
+    const moduloActivo = document.querySelector('.modulo-prenda.activo');
+    if (!moduloActivo) return null;
+    const lienzo = moduloActivo.querySelector('.lienzo-remera');
+    if (!lienzo) return null;
+
+    const canvas = document.createElement('canvas');
+    canvas.width = 800;
+    canvas.height = 500;
+    const ctx = canvas.getContext('2d');
+
+    // 1. Fondo blanco limpio
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(0, 0, 800, 500);
+
+    const cargarImg = (src) => new Promise((resolve) => {
+        if (!src) return resolve(null);
+        const img = new Image();
+        img.crossOrigin = 'anonymous';
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
+        img.src = src;
+    });
+
+    const dibujarCapaConMascara = async (maskSrc, colorHex, svgElement = null, texturaSrc = null) => {
+        const maskImg = await cargarImg(maskSrc);
+        if (!maskImg) return;
+
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = 800;
+        tempCanvas.height = 500;
+        const tempCtx = tempCanvas.getContext('2d');
+
+        // Color base de la capa
+        tempCtx.fillStyle = colorHex || '#0C43B5';
+        tempCtx.fillRect(0, 0, 800, 500);
+
+        // Si hay patrones CSS tradicionales en Remera
+        if (moduloActivo.id === 'modulo-remera') {
+            if (patronMitadFrente && patronMitadFrente.style.display === 'block') {
+                const w = parseFloat(patronMitadFrente.style.width) || 25;
+                const col = patronMitadFrente.style.backgroundColor || '#DD3939';
+                tempCtx.fillStyle = col;
+                tempCtx.fillRect(0, 0, (w / 100) * 800, 500);
+                tempCtx.fillRect(800 - (w / 100) * 800, 0, (w / 100) * 800, 500);
+            }
+            if (patronRayasFrente && patronRayasFrente.style.display === 'block') {
+                const colSec = selectorPatron ? selectorPatron.value : '#DD3939';
+                const anchoRaya = sliderRayas ? parseFloat(sliderRayas.value) : 10;
+                tempCtx.fillStyle = colSec;
+                const step = (anchoRaya / 100) * 800;
+                for (let x = 0; x < 800; x += step * 2) {
+                    tempCtx.fillRect(x + step, 0, step, 500);
+                }
+            }
+            if (patronDegradado && patronDegradado.style.display === 'block') {
+                const colSup = selectorCuerpo ? selectorCuerpo.value : '#0C43B5';
+                const colInf = selectorPatron ? selectorPatron.value : '#DD3939';
+                const grad = tempCtx.createLinearGradient(0, 40, 0, 460);
+                grad.addColorStop(0.12, colSup);
+                grad.addColorStop(0.88, colInf);
+                tempCtx.fillStyle = grad;
+                tempCtx.fillRect(0, 0, 800, 500);
+            }
+        }
+
+        // Si hay SVG vectorial activo (Franja, Banda, Chevron, Tricolor, Splash)
+        if (svgElement && svgElement.style.display !== 'none') {
+            const svgString = new XMLSerializer().serializeToString(svgElement);
+            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
+            const svgUrl = URL.createObjectURL(svgBlob);
+            const svgImg = await cargarImg(svgUrl);
+            if (svgImg) {
+                tempCtx.drawImage(svgImg, 0, 0, 800, 500);
+            }
+            URL.revokeObjectURL(svgUrl);
+        }
+
+        // Aplicar silueta de la prenda mediante máscara destination-in
+        tempCtx.globalCompositeOperation = 'destination-in';
+        tempCtx.drawImage(maskImg, 0, 0, 800, 500);
+
+        // Estampar capa recortada en el lienzo principal
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.drawImage(tempCanvas, 0, 0, 800, 500);
+
+        // Capa de textura realista y sombras con mix-blend multiply
+        const texImg = texturaSrc ? await cargarImg(texturaSrc) : maskImg;
+        if (texImg) {
+            ctx.globalCompositeOperation = 'multiply';
+            ctx.drawImage(texImg, 0, 0, 800, 500);
+            ctx.globalCompositeOperation = 'source-over';
+        }
+    };
+
+    // Procesar cada prenda según su módulo activo
+    if (moduloActivo.id === 'modulo-remera') {
+        const colCuerpo = selectorCuerpo ? selectorCuerpo.value : '#0C43B5';
+        const colMangas = selectorMangas ? selectorMangas.value : '#7B7777';
+        await dibujarCapaConMascara('imagenes/cuerpo.png', colCuerpo, patronSvg, 'imagenes/cuerpo.png');
+        await dibujarCapaConMascara('imagenes/mangas.png', colMangas, null, 'imagenes/mangas.png');
+        const logos = document.getElementById('canvas-logos');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    } else if (moduloActivo.id === 'modulo-musculosa') {
+        const colCuerpo = document.getElementById('selector-cuerpo-musc') ? document.getElementById('selector-cuerpo-musc').value : '#0C43B5';
+        const colRibetes = document.getElementById('selector-ribetes-musc') ? document.getElementById('selector-ribetes-musc').value : '#DD3939';
+        await dibujarCapaConMascara('imagenes/musculosa_cuerpo_hombre.png', colCuerpo, null, 'imagenes/musculosa_cuerpo_hombre.png');
+        await dibujarCapaConMascara('imagenes/musculosa_ribetes_hombre.png', colRibetes, null, 'imagenes/musculosa_ribetes_hombre.png');
+        const logos = document.getElementById('canvas-logos-musc');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    } else if (moduloActivo.id === 'modulo-pantalon') {
+        const col = document.getElementById('selector-pantalon') ? document.getElementById('selector-pantalon').value : '#0C43B5';
+        await dibujarCapaConMascara('imagenes/pantalon.png', col, null, 'imagenes/pantalon.png');
+        const logos = document.getElementById('canvas-logos-pantalon');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    } else if (moduloActivo.id === 'modulo-medias') {
+        const col = '#FFFFFF';
+        await dibujarCapaConMascara('imagenes/medias.png', col, null, 'imagenes/medias.png');
+        const logos = document.getElementById('canvas-logos-medias');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    } else if (moduloActivo.id === 'modulo-gorras') {
+        const col = document.getElementById('selector-color-gorra') ? document.getElementById('selector-color-gorra').value : '#0C43B5';
+        await dibujarCapaConMascara('imagenes/gorras_red.png', col, null, 'imagenes/gorras.png');
+        const logos = document.getElementById('canvas-logos-gorras');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    } else if (moduloActivo.id === 'modulo-gorras-gabardina') {
+        const col = document.getElementById('selector-color-gorra-gabardina') ? document.getElementById('selector-color-gorra-gabardina').value : '#0C43B5';
+        await dibujarCapaConMascara('imagenes/gorras_gabardina.png', col, null, 'imagenes/gorras_gabardina.png');
+        const logos = document.getElementById('canvas-logos-gorras-gabardina');
+        if (logos) ctx.drawImage(logos, 0, 0);
+    }
+
+    // Pie de página institucional Levalier
+    ctx.fillStyle = 'rgba(26, 30, 41, 0.9)';
+    ctx.fillRect(0, 465, 800, 35);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = 'bold 13px sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('LEVALIER INDUMENTARIA DEPORTIVA | www.levalier.com.ar', 20, 487);
+
+    const { prenda, modelo } = obtenerDetallesPrendaActiva();
+    const etiqueta = modelo ? `${prenda} - ${modelo}` : prenda;
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'right';
+    ctx.fillText(etiqueta.toUpperCase(), 780, 487);
+
+    return canvas;
+}
+
+// Escuchador de los botones de presupuesto WhatsApp
+document.querySelectorAll('.btn-presupuesto-whatsapp').forEach(btn => {
+    btn.addEventListener('click', async function() {
+        const textoOriginal = btn.innerHTML;
+        btn.innerHTML = '<span class="icono-ws-btn">⏳</span><span class="txt-ws-principal" style="padding-top:4px;">Generando captura...</span>';
+        btn.style.pointerEvents = 'none';
+
+        try {
+            const canvasCaptura = await generarCapturaDisenio();
+            if (!canvasCaptura) {
+                alert('No se pudo generar la captura del diseño.');
+                return;
+            }
+
+            const dataUrl = canvasCaptura.toDataURL('image/png');
+            const { prenda, modelo } = obtenerDetallesPrendaActiva();
+            const nombreArchivo = `Disenio_Levalier_${prenda.replace(/\s+/g, '_')}.png`;
+
+            // 1. Descarga automática de la imagen
+            const enlaceDescarga = document.createElement('a');
+            enlaceDescarga.download = nombreArchivo;
+            enlaceDescarga.href = dataUrl;
+            document.body.appendChild(enlaceDescarga);
+            enlaceDescarga.click();
+            document.body.removeChild(enlaceDescarga);
+
+            // 2. Intentar copiar al portapapeles si el navegador lo permite
+            if (navigator.clipboard && window.ClipboardItem) {
+                canvasCaptura.toBlob(async (blob) => {
+                    try {
+                        if (blob) {
+                            await navigator.clipboard.write([
+                                new ClipboardItem({ 'image/png': blob })
+                            ]);
+                        }
+                    } catch (e) {
+                        console.log('Copiado automático al portapapeles no disponible sin foco directo.');
+                    }
+                });
+            }
+
+            // 3. Preparar mensaje de WhatsApp
+            const textoMensaje = `¡Hola Levalier! 👋\n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}${modelo ? '\n• Modelo: ' + modelo : ''}\n\n¡Te adjunto la imagen de mi diseño para que me envíes el presupuesto! Muchas gracias.`;
+            const urlWhatsApp = `https://wa.me/${WHATSAPP_LEVALIER}?text=${encodeURIComponent(textoMensaje)}`;
+
+            // 4. Mostrar modal con la vista previa y botón directo
+            const modal = document.getElementById('modal-presupuesto');
+            const imgPreview = document.getElementById('img-preview-captura');
+            const btnWsModal = document.getElementById('btn-abrir-whatsapp-modal');
+
+            if (imgPreview) imgPreview.src = dataUrl;
+            if (btnWsModal) btnWsModal.href = urlWhatsApp;
+            if (modal) modal.classList.remove('oculto');
+
+        } catch (error) {
+            console.error('Error al generar presupuesto:', error);
+            alert('Ocurrió un error al procesar el diseño. Por favor, reintentalo.');
+        } finally {
+            btn.innerHTML = textoOriginal;
+            btn.style.pointerEvents = 'auto';
+        }
+    });
+});
+
+// Cerrar modal
+const btnCerrarModal = document.getElementById('btn-cerrar-modal-presupuesto');
+const modalOverlay = document.getElementById('modal-presupuesto');
+
+if (btnCerrarModal && modalOverlay) {
+    btnCerrarModal.addEventListener('click', () => modalOverlay.classList.add('oculto'));
+    modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) modalOverlay.classList.add('oculto');
+    });
+}
