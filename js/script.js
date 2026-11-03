@@ -451,16 +451,18 @@ const CONFIG_MODELOS_REMERA = {
                 svgChevronEspalda.setAttribute('fill', colorSecundario);
 
                 // ========================================================
-                // PARÁMETROS DE CENTRADO Y GEOMETRÍA DEL CHEVRON EN "V"
+                // PARÁMETROS DE CENTRADO Y GEOMETRÍA DEL CHEVRON EN "V" NO TOCAR ESTOS PARAMETROS NUNCA
                 // ========================================================
-                const centroFrente = 224;   // <-- Centro Frente: reducir para mover a la IZQUIERDA, aumentar para DERECHA
-                const centroEspalda = 575;  // <-- Centro Espalda: aumentar para mover a la DERECHA, reducir para IZQUIERDA
-                const apertura = 122;       // Separación horizontal hacia los hombros
+                const centroFrente = 210;   // <-- Centro Frente (calibrado por el usuario)
+                const centroEspalda = 589;  // <-- Centro Espalda (calibrado por el usuario)
+                const apertura = 220;       // Separación horizontal prolongada para abarcar 100% el ancho de frente y espalda
 
                 // Parámetros interactivos controlados por los sliders para los clientes:
-                const y = sliderChevronPos ? parseFloat(sliderChevronPos.value) : 280;
+                const y = sliderChevronPos ? parseFloat(sliderChevronPos.value) : 160;
                 const grosor = sliderChevronGrosor ? parseFloat(sliderChevronGrosor.value) : 75;
-                const inclinacion = sliderChevronAngulo ? parseFloat(sliderChevronAngulo.value) : 160;
+                // Factor de prolongación para mantener la misma inclinación proporcional a lo ancho de la remera
+                const factorProlongacion = apertura / 122;
+                const inclinacion = (sliderChevronAngulo ? parseFloat(sliderChevronAngulo.value) : 70) * factorProlongacion;
 
                 const yTop = y - inclinacion;
                 const yTop2 = yTop + grosor;
@@ -471,8 +473,8 @@ const CONFIG_MODELOS_REMERA = {
                 const xIzqEspalda = centroEspalda - apertura;
                 const xDerEspalda = centroEspalda + apertura;
 
-                svgChevronFrente.setAttribute('points', `${xIzqFrente},${yTop} ${centroFrente},${y} ${xDerFrente},${yTop} ${xDerFrente},${yTop2} ${centroFrente},${yApex2} ${xIzqFrente},${yTop2}`);
-                svgChevronEspalda.setAttribute('points', `${xIzqEspalda},${yTop} ${centroEspalda},${y} ${xDerEspalda},${yTop} ${xDerEspalda},${yTop2} ${centroEspalda},${yApex2} ${xIzqEspalda},${yTop2}`);
+                svgChevronFrente.setAttribute('points', `${xIzqFrente.toFixed(1)},${yTop.toFixed(1)} ${centroFrente},${y} ${xDerFrente.toFixed(1)},${yTop.toFixed(1)} ${xDerFrente.toFixed(1)},${yTop2.toFixed(1)} ${centroFrente},${yApex2} ${xIzqFrente.toFixed(1)},${yTop2.toFixed(1)}`);
+                svgChevronEspalda.setAttribute('points', `${xIzqEspalda.toFixed(1)},${yTop.toFixed(1)} ${centroEspalda},${y} ${xDerEspalda.toFixed(1)},${yTop.toFixed(1)} ${xDerEspalda.toFixed(1)},${yTop2.toFixed(1)} ${centroEspalda},${yApex2} ${xIzqEspalda.toFixed(1)},${yTop2.toFixed(1)}`);
             }
         }
     },
