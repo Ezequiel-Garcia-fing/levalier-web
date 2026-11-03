@@ -118,24 +118,24 @@ body {
 .patron-rayas { position: absolute; top: 0; height: 100%; display: none; }
 .patron-degradado { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; }
 .patron-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; pointer-events: none; }
-#color-cuerpo { background-color: #0C43B5; mask-image: url('../imagenes/cuerpo.png'); -webkit-mask-image: url('../imagenes/cuerpo.png'); }
-#color-mangas { background-color: #7B7777; mask-image: url('../imagenes/mangas.png'); -webkit-mask-image: url('../imagenes/mangas.png'); }
-#textura-cuerpo { background-image: url('../imagenes/cuerpo.png'); }
-#textura-mangas { background-image: url('../imagenes/mangas.png'); }
+#color-cuerpo { background-color: #0C43B5; mask-image: url('../imagenes/cuerpo_web.png'); -webkit-mask-image: url('../imagenes/cuerpo_web.png'); }
+#color-mangas { background-color: #7B7777; mask-image: url('../imagenes/mangas_web.png'); -webkit-mask-image: url('../imagenes/mangas_web.png'); }
+#textura-cuerpo { background-image: url('../imagenes/cuerpo_web.png'); }
+#textura-mangas { background-image: url('../imagenes/mangas_web.png'); }
 
 /* Pantalón Corto */
-#color-pantalon { background-color: #0C43B5; mask-image: url('../imagenes/pantalon.png'); -webkit-mask-image: url('../imagenes/pantalon.png'); }
-#textura-pantalon { background-image: url('../imagenes/pantalon.png'); }
+#color-pantalon { background-color: #0C43B5; mask-image: url('../imagenes/pantalon_web.png'); -webkit-mask-image: url('../imagenes/pantalon_web.png'); }
+#textura-pantalon { background-image: url('../imagenes/pantalon_web.png'); }
 
 /* Musculosa */
-#color-cuerpo-musc { background-color: #0C43B5; mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); -webkit-mask-image: url('../imagenes/musculosa_cuerpo_hombre.png'); }
-#color-ribetes-musc { background-color: #DD3939; mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); -webkit-mask-image: url('../imagenes/musculosa_ribetes_hombre.png'); }
-#textura-cuerpo-musc { background-image: url('../imagenes/musculosa_cuerpo_hombre.png'); }
-#textura-ribetes-musc { background-image: url('../imagenes/musculosa_ribetes_hombre.png'); }
+#color-cuerpo-musc { background-color: #0C43B5; mask-image: url('../imagenes/musculosa_cuerpo_hombre_web.png'); -webkit-mask-image: url('../imagenes/musculosa_cuerpo_hombre_web.png'); }
+#color-ribetes-musc { background-color: #DD3939; mask-image: url('../imagenes/musculosa_ribetes_hombre_web.png'); -webkit-mask-image: url('../imagenes/musculosa_ribetes_hombre_web.png'); }
+#textura-cuerpo-musc { background-image: url('../imagenes/musculosa_cuerpo_hombre_web.png'); }
+#textura-ribetes-musc { background-image: url('../imagenes/musculosa_ribetes_hombre_web.png'); }
 
 /* Medias */
-#color-medias { background-color: #ffffff; mask-image: url('../imagenes/medias.png'); -webkit-mask-image: url('../imagenes/medias.png'); }
-#textura-medias { background-image: url('../imagenes/medias.png'); }
+#color-medias { background-color: #ffffff; mask-image: url('../imagenes/medias_web.png'); -webkit-mask-image: url('../imagenes/medias_web.png'); }
+#textura-medias { background-image: url('../imagenes/medias_web.png'); }
 
 /* Gorras */
 #color-red-gorra { background-color: #0C43B5; mask-image: url('../imagenes/gorra_red.png'); -webkit-mask-image: url('../imagenes/gorra_red.png'); }

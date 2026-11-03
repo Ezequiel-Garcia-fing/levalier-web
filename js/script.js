@@ -980,11 +980,37 @@ function obtenerDetallesPrendaActiva() {
     const prenda = itemActivo ? itemActivo.innerText.replace('✓', '').trim() : 'Prenda';
     const moduloActivo = document.querySelector('.modulo-prenda.activo');
     let modelo = '';
-    if (moduloActivo && moduloActivo.id === 'modulo-remera') {
-        const tarjetaActiva = document.querySelector('.tarjeta-modelo.activa');
-        modelo = tarjetaActiva ? tarjetaActiva.querySelector('span').innerText.trim() : modeloActualGlobal;
+    let colores = [];
+
+    if (moduloActivo) {
+        if (moduloActivo.id === 'modulo-remera') {
+            const tarjetaActiva = document.querySelector('.tarjeta-modelo.activa');
+            modelo = tarjetaActiva ? tarjetaActiva.querySelector('span').innerText.trim() : (modeloActualGlobal || 'Liso Clásico');
+            if (selectorCuerpo) colores.push(`• Color Base / Cuerpo: ${selectorCuerpo.value}`);
+            if (selectorMangas) colores.push(`• Color Mangas: ${selectorMangas.value}`);
+            if (selectorPatron && modelo !== 'Liso Clásico') colores.push(`• Color Patrón: ${selectorPatron.value}`);
+            if (selectorColor3 && (modelo.includes('Tricolor') || modelo.includes('Splash') || modeloActualGlobal === 'tricolor' || modeloActualGlobal === 'splash')) {
+                colores.push(`• Color Terciario: ${selectorColor3.value}`);
+            }
+        } else if (moduloActivo.id === 'modulo-musculosa') {
+            const cCuerpo = document.getElementById('selector-cuerpo-musc');
+            const cRibetes = document.getElementById('selector-ribetes-musc');
+            if (cCuerpo) colores.push(`• Color Cuerpo: ${cCuerpo.value}`);
+            if (cRibetes) colores.push(`• Color Ribetes: ${cRibetes.value}`);
+        } else if (moduloActivo.id === 'modulo-pantalon') {
+            const cPant = document.getElementById('selector-pantalon');
+            if (cPant) colores.push(`• Color Pantalón: ${cPant.value}`);
+        } else if (moduloActivo.id === 'modulo-medias') {
+            colores.push(`• Color Medias: Blanco institucional`);
+        } else if (moduloActivo.id === 'modulo-gorras') {
+            const cGorra = document.getElementById('selector-color-gorra');
+            if (cGorra) colores.push(`• Color Gorra Trucker: ${cGorra.value}`);
+        } else if (moduloActivo.id === 'modulo-gorras-gabardina') {
+            const cGorraGab = document.getElementById('selector-color-gorra-gabardina');
+            if (cGorraGab) colores.push(`• Color Gorra Gabardina: ${cGorraGab.value}`);
+        }
     }
-    return { prenda, modelo };
+    return { prenda, modelo, colores };
 }
 
 async function generarCapturaDisenio() {
@@ -1005,9 +1031,13 @@ async function generarCapturaDisenio() {
     const cargarImg = (src) => new Promise((resolve) => {
         if (!src) return resolve(null);
         const img = new Image();
-        img.crossOrigin = 'anonymous';
+        // NOTA: No usamos img.crossOrigin para rutas locales ni data URIs
+        // para garantizar compatibilidad total en file://, navegadores móviles y servidores locales
         img.onload = () => resolve(img);
-        img.onerror = () => resolve(null);
+        img.onerror = () => {
+            console.warn('Aviso: no se pudo cargar la imagen para captura:', src);
+            resolve(null);
+        };
         img.src = src;
     });
 
@@ -1055,14 +1085,24 @@ async function generarCapturaDisenio() {
 
         // Si hay SVG vectorial activo (Franja, Banda, Chevron, Tricolor, Splash)
         if (svgElement && svgElement.style.display !== 'none') {
-            const svgString = new XMLSerializer().serializeToString(svgElement);
-            const svgBlob = new Blob([svgString], { type: 'image/svg+xml;charset=utf-8' });
-            const svgUrl = URL.createObjectURL(svgBlob);
-            const svgImg = await cargarImg(svgUrl);
-            if (svgImg) {
-                tempCtx.drawImage(svgImg, 0, 0, 800, 500);
+            try {
+                const svgClone = svgElement.cloneNode(true);
+                svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                svgClone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+                svgClone.setAttribute('width', '800');
+                svgClone.setAttribute('height', '500');
+                svgClone.setAttribute('viewBox', '0 0 800 500');
+                svgClone.setAttribute('preserveAspectRatio', 'none');
+
+                const svgXml = new XMLSerializer().serializeToString(svgClone);
+                const svgDataUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgXml);
+                const svgImg = await cargarImg(svgDataUrl);
+                if (svgImg) {
+                    tempCtx.drawImage(svgImg, 0, 0, 800, 500);
+                }
+            } catch (errSvg) {
+                console.warn('Aviso: no se pudo superponer patrón SVG en la captura:', errSvg);
             }
-            URL.revokeObjectURL(svgUrl);
         }
 
         // Aplicar silueta de la prenda mediante máscara destination-in
@@ -1082,41 +1122,55 @@ async function generarCapturaDisenio() {
         }
     };
 
-    // Procesar cada prenda según su módulo activo
+    // Procesar cada prenda según su módulo activo con texturas web optimizadas
     if (moduloActivo.id === 'modulo-remera') {
         const colCuerpo = selectorCuerpo ? selectorCuerpo.value : '#0C43B5';
         const colMangas = selectorMangas ? selectorMangas.value : '#7B7777';
-        await dibujarCapaConMascara('imagenes/cuerpo.png', colCuerpo, patronSvg, 'imagenes/cuerpo.png');
-        await dibujarCapaConMascara('imagenes/mangas.png', colMangas, null, 'imagenes/mangas.png');
-        const logos = document.getElementById('canvas-logos');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/cuerpo_web.png', colCuerpo, patronSvg, 'imagenes/cuerpo_web.png');
+        await dibujarCapaConMascara('imagenes/mangas_web.png', colMangas, null, 'imagenes/mangas_web.png');
     } else if (moduloActivo.id === 'modulo-musculosa') {
         const colCuerpo = document.getElementById('selector-cuerpo-musc') ? document.getElementById('selector-cuerpo-musc').value : '#0C43B5';
         const colRibetes = document.getElementById('selector-ribetes-musc') ? document.getElementById('selector-ribetes-musc').value : '#DD3939';
-        await dibujarCapaConMascara('imagenes/musculosa_cuerpo_hombre.png', colCuerpo, null, 'imagenes/musculosa_cuerpo_hombre.png');
-        await dibujarCapaConMascara('imagenes/musculosa_ribetes_hombre.png', colRibetes, null, 'imagenes/musculosa_ribetes_hombre.png');
-        const logos = document.getElementById('canvas-logos-musc');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/musculosa_cuerpo_hombre_web.png', colCuerpo, null, 'imagenes/musculosa_cuerpo_hombre_web.png');
+        await dibujarCapaConMascara('imagenes/musculosa_ribetes_hombre_web.png', colRibetes, null, 'imagenes/musculosa_ribetes_hombre_web.png');
     } else if (moduloActivo.id === 'modulo-pantalon') {
         const col = document.getElementById('selector-pantalon') ? document.getElementById('selector-pantalon').value : '#0C43B5';
-        await dibujarCapaConMascara('imagenes/pantalon.png', col, null, 'imagenes/pantalon.png');
-        const logos = document.getElementById('canvas-logos-pantalon');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/pantalon_web.png', col, null, 'imagenes/pantalon_web.png');
     } else if (moduloActivo.id === 'modulo-medias') {
         const col = '#FFFFFF';
-        await dibujarCapaConMascara('imagenes/medias.png', col, null, 'imagenes/medias.png');
-        const logos = document.getElementById('canvas-logos-medias');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/medias_web.png', col, null, 'imagenes/medias_web.png');
     } else if (moduloActivo.id === 'modulo-gorras') {
         const col = document.getElementById('selector-color-gorra') ? document.getElementById('selector-color-gorra').value : '#0C43B5';
-        await dibujarCapaConMascara('imagenes/gorras_red.png', col, null, 'imagenes/gorras.png');
-        const logos = document.getElementById('canvas-logos-gorras');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/gorra_red.png', col, null, 'imagenes/gorra_completa.png');
     } else if (moduloActivo.id === 'modulo-gorras-gabardina') {
         const col = document.getElementById('selector-color-gorra-gabardina') ? document.getElementById('selector-color-gorra-gabardina').value : '#0C43B5';
-        await dibujarCapaConMascara('imagenes/gorras_gabardina.png', col, null, 'imagenes/gorras_gabardina.png');
-        const logos = document.getElementById('canvas-logos-gorras-gabardina');
-        if (logos) ctx.drawImage(logos, 0, 0);
+        await dibujarCapaConMascara('imagenes/gorra_gabardina.png', col, null, 'imagenes/gorra_gabardina.png');
+    }
+
+    // Capa de logos Fabric.js (si el usuario agregó logos)
+    const mapaLogos = {
+        'modulo-remera': 'canvas-logos',
+        'modulo-musculosa': 'canvas-logos-musc',
+        'modulo-pantalon': 'canvas-logos-pantalon',
+        'modulo-medias': 'canvas-logos-medias',
+        'modulo-gorras': 'canvas-logos-gorras',
+        'modulo-gorras-gabardina': 'canvas-logos-gorras-gabardina'
+    };
+    const idLogo = mapaLogos[moduloActivo.id];
+    if (idLogo && canvasActivos[idLogo]) {
+        try {
+            const fCanvas = canvasActivos[idLogo];
+            if (fCanvas.getObjects().length > 0) {
+                fCanvas.discardActiveObject();
+                fCanvas.renderAll();
+                const elLogos = fCanvas.getElement();
+                if (elLogos) {
+                    ctx.drawImage(elLogos, 0, 0, 800, 500);
+                }
+            }
+        } catch (eLogo) {
+            console.warn('Aviso: no se pudo estampar logos en la captura:', eLogo);
+        }
     }
 
     // Pie de página institucional Levalier
@@ -1144,55 +1198,105 @@ document.querySelectorAll('.btn-presupuesto-whatsapp').forEach(btn => {
         btn.style.pointerEvents = 'none';
 
         try {
-            const canvasCaptura = await generarCapturaDisenio();
-            if (!canvasCaptura) {
-                alert('No se pudo generar la captura del diseño.');
-                return;
+            let canvasCaptura = null;
+            let dataUrl = null;
+
+            try {
+                canvasCaptura = await generarCapturaDisenio();
+                if (canvasCaptura) {
+                    try {
+                        dataUrl = canvasCaptura.toDataURL('image/png');
+                    } catch (eTaint) {
+                        console.warn('Canvas export toDataURL restringido por el entorno:', eTaint);
+                    }
+                }
+            } catch (errGen) {
+                console.warn('Error en generador de imagen:', errGen);
             }
 
-            const dataUrl = canvasCaptura.toDataURL('image/png');
-            const { prenda, modelo } = obtenerDetallesPrendaActiva();
+            const { prenda, modelo, colores } = obtenerDetallesPrendaActiva();
             const nombreArchivo = `Disenio_Levalier_${prenda.replace(/\s+/g, '_')}.png`;
 
-            // 1. Descarga automática de la imagen
-            const enlaceDescarga = document.createElement('a');
-            enlaceDescarga.download = nombreArchivo;
-            enlaceDescarga.href = dataUrl;
-            document.body.appendChild(enlaceDescarga);
-            enlaceDescarga.click();
-            document.body.removeChild(enlaceDescarga);
+            // 1. Descarga automática si hay imagen disponible
+            if (dataUrl) {
+                try {
+                    const enlaceDescarga = document.createElement('a');
+                    enlaceDescarga.download = nombreArchivo;
+                    enlaceDescarga.href = dataUrl;
+                    document.body.appendChild(enlaceDescarga);
+                    enlaceDescarga.click();
+                    document.body.removeChild(enlaceDescarga);
+                } catch (eDescarga) {
+                    console.warn('Descarga automática rechazada por el navegador:', eDescarga);
+                }
 
-            // 2. Intentar copiar al portapapeles si el navegador lo permite
-            if (navigator.clipboard && window.ClipboardItem) {
-                canvasCaptura.toBlob(async (blob) => {
+                // 2. Intentar copiar al portapapeles si el navegador lo permite
+                if (navigator.clipboard && window.ClipboardItem && canvasCaptura) {
                     try {
-                        if (blob) {
-                            await navigator.clipboard.write([
-                                new ClipboardItem({ 'image/png': blob })
-                            ]);
-                        }
-                    } catch (e) {
-                        console.log('Copiado automático al portapapeles no disponible sin foco directo.');
+                        canvasCaptura.toBlob((blob) => {
+                            if (blob) {
+                                navigator.clipboard.write([
+                                    new ClipboardItem({ 'image/png': blob })
+                                ]).catch(() => {});
+                            }
+                        }, 'image/png');
+                    } catch (eClip) {
+                        console.log('Copiado al portapapeles no disponible sin interacción directa.');
                     }
-                });
+                }
             }
 
-            // 3. Preparar mensaje de WhatsApp
-            const textoMensaje = `¡Hola Levalier! 👋\n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}${modelo ? '\n• Modelo: ' + modelo : ''}\n\n¡Te adjunto la imagen de mi diseño para que me envíes el presupuesto! Muchas gracias.`;
+            // 3. Preparar mensaje de WhatsApp enriquecido
+            let textoMensaje = `¡Hola Levalier! 👋\n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}`;
+            if (modelo) textoMensaje += `\n• Modelo: ${modelo}`;
+            if (colores && colores.length > 0) {
+                textoMensaje += `\n` + colores.join('\n');
+            }
+            if (dataUrl) {
+                textoMensaje += `\n\n¡Te adjunto la imagen de mi diseño para que me envíes el presupuesto! Muchas gracias.`;
+            } else {
+                textoMensaje += `\n\n¡Quiero solicitar el presupuesto para esta configuración! Muchas gracias.`;
+            }
+
             const urlWhatsApp = `https://wa.me/${WHATSAPP_LEVALIER}?text=${encodeURIComponent(textoMensaje)}`;
 
-            // 4. Mostrar modal con la vista previa y botón directo
+            // 4. Mostrar modal con la vista previa y botón directo a WhatsApp
             const modal = document.getElementById('modal-presupuesto');
             const imgPreview = document.getElementById('img-preview-captura');
             const btnWsModal = document.getElementById('btn-abrir-whatsapp-modal');
+            const instruccionModal = modal ? modal.querySelector('.modal-instruccion') : null;
 
-            if (imgPreview) imgPreview.src = dataUrl;
-            if (btnWsModal) btnWsModal.href = urlWhatsApp;
-            if (modal) modal.classList.remove('oculto');
+            if (imgPreview) {
+                if (dataUrl) {
+                    imgPreview.src = dataUrl;
+                    imgPreview.style.display = 'block';
+                } else {
+                    imgPreview.style.display = 'none';
+                }
+            }
+
+            if (instruccionModal) {
+                if (dataUrl) {
+                    instruccionModal.innerHTML = 'Descargamos la imagen a tu dispositivo y <strong>la copiamos al portapapeles</strong>.';
+                } else {
+                    instruccionModal.innerHTML = 'Preparamos el detalle técnico de tu diseño con colores y modelo listos para cotizar.';
+                }
+            }
+
+            if (btnWsModal) {
+                btnWsModal.href = urlWhatsApp;
+            }
+
+            if (modal) {
+                modal.classList.remove('oculto');
+            }
 
         } catch (error) {
-            console.error('Error al generar presupuesto:', error);
-            alert('Ocurrió un error al procesar el diseño. Por favor, reintentalo.');
+            console.error('Error imprevisto en presupuesto:', error);
+            // Redirigir a WhatsApp en caso de cualquier excepción inesperada, garantizando que nunca se bloquee
+            const { prenda, modelo } = obtenerDetallesPrendaActiva();
+            const fallbackTxt = `¡Hola Levalier! 👋\n\nTerminé mi diseño de ${prenda}${modelo ? ' (' + modelo + ')' : ''} en el diseñador 3D. ¡Quisiera recibir presupuesto!`;
+            window.open(`https://wa.me/${WHATSAPP_LEVALIER}?text=${encodeURIComponent(fallbackTxt)}`, '_blank');
         } finally {
             btn.innerHTML = textoOriginal;
             btn.style.pointerEvents = 'auto';
