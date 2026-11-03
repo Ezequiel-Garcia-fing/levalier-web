@@ -366,12 +366,78 @@ input[type="range"].oculto { display: none !important; }
 /* =========================================
    8. BOTÓN DE PRESUPUESTO WHATSAPP Y MODAL
 ========================================= */
+/* =========================================
+   8. SECCIÓN PRESUPUESTO CON INSTRUCTIVO Y BOTONES
+========================================= */
 .seccion-presupuesto {
     display: flex;
     flex-direction: column;
     gap: 10px;
     margin-top: 18px;
     margin-bottom: 5px;
+}
+
+/* Tarjeta Instructiva de Pasos */
+.caja-instructivo-presupuesto {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-left: 4px solid var(--azul-levalier);
+    border-radius: 9px;
+    padding: 12px 14px;
+    margin-bottom: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    box-sizing: border-box;
+}
+
+.titulo-instructivo {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 9px;
+    letter-spacing: 0.2px;
+}
+
+.icono-instructivo {
+    font-size: 15px;
+    line-height: 1;
+}
+
+.pasos-instructivo {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.paso-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: #334155;
+}
+
+.numero-paso {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 19px;
+    height: 19px;
+    background: var(--azul-levalier);
+    color: #ffffff;
+    font-size: 11px;
+    font-weight: 800;
+    border-radius: 50%;
+    margin-top: 1px;
+    flex-shrink: 0;
+}
+
+.paso-item strong {
+    color: #0f172a;
+    font-weight: 700;
 }
 
 .btn-guardar-foto {
@@ -467,6 +533,20 @@ input[type="range"].oculto { display: none !important; }
     color: rgba(255, 255, 255, 0.9);
     margin-top: 2px;
 }
+
+/* Animación de atención cuando se guarda la foto para guiar al Paso 2 */
+@keyframes pulsoPaso2 {
+    0% { transform: scale(1); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+    50% { transform: scale(1.025); box-shadow: 0 0 22px rgba(37, 211, 102, 0.85); border-color: #ffffff; }
+    100% { transform: scale(1); box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
+}
+
+.btn-presupuesto-whatsapp.atencion-paso-2 {
+    animation: pulsoPaso2 1.2s ease-in-out infinite;
+    outline: 2px solid #25D366;
+    outline-offset: 2px;
+}
+
 
 /* Modal de Confirmación y Descarga */
 .modal-presupuesto-overlay {

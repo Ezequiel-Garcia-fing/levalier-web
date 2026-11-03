@@ -1082,11 +1082,11 @@ function construirUrlWhatsApp() {
     const { prenda, modelo, colores } = obtenerDetallesPrendaActiva();
     const linkMagico = generarLinkMagico();
 
-    let texto = `¡Hola Levalier! 👋\n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}`;
+    let texto = `¡Hola Levalier! \n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}`;
     if (modelo) texto += `\n• Modelo: ${modelo}`;
 
     if (colores && colores.length > 0) {
-        texto += `\n\n🎨 Detalle de colores seleccionados:\n` + colores.join('\n');
+        texto += `\n\n Detalle de colores seleccionados:\n` + colores.join('\n');
     }
 
     texto += `\n\n🔗 Link para ver mi diseño interactivo 3D:\n${linkMagico}`;
@@ -1297,7 +1297,7 @@ async function generarCapturaDisenio() {
     return canvas;
 }
 
-// Botón secundario: Guardar Foto del diseño en el dispositivo
+// Botón Paso 1: Guardar Foto del diseño en el dispositivo
 document.querySelectorAll('.btn-guardar-foto').forEach(btn => {
     btn.addEventListener('click', async function(e) {
         e.preventDefault();
@@ -1319,11 +1319,20 @@ document.querySelectorAll('.btn-guardar-foto').forEach(btn => {
                 enlace.click();
                 document.body.removeChild(enlace);
 
-                btn.innerHTML = '<span class="icono-foto-btn">✅</span><span class="txt-foto-btn">¡Foto guardada!</span>';
+                // Feedback visual dinámico guiando hacia el Paso 2
+                btn.innerHTML = '<span class="icono-foto-btn">✅</span><span class="txt-foto-btn">¡Foto guardada! Ahora tocá el Paso 2 👇</span>';
+
+                // Resaltar con animación el botón de WhatsApp del mismo bloque
+                const seccion = btn.closest('.seccion-presupuesto');
+                const btnWs = seccion ? seccion.querySelector('.btn-presupuesto-whatsapp') : null;
+                if (btnWs) {
+                    btnWs.classList.add('atencion-paso-2');
+                }
+
                 setTimeout(() => {
                     btn.innerHTML = textoOriginal;
                     btn.style.pointerEvents = 'auto';
-                }, 2200);
+                }, 3500);
                 return;
             }
         } catch (err) {
@@ -1335,6 +1344,24 @@ document.querySelectorAll('.btn-guardar-foto').forEach(btn => {
 
         btn.innerHTML = textoOriginal;
         btn.style.pointerEvents = 'auto';
+    });
+});
+
+// Botón Paso 2: enlace directo de WhatsApp
+document.querySelectorAll('.btn-presupuesto-whatsapp').forEach(btn => {
+    btn.addEventListener('mouseenter', actualizarEnlacesWhatsApp);
+    btn.addEventListener('touchstart', actualizarEnlacesWhatsApp, { passive: true });
+    btn.addEventListener('click', function(e) {
+        btn.classList.remove('atencion-paso-2');
+        actualizarEnlacesWhatsApp();
+        const urlWs = btn.getAttribute('href');
+        // Si el enlace aún tuviera '#' por cualquier motivo, prevenimos la recarga y abrimos WhatsApp
+        if (!urlWs || urlWs === '#' || urlWs.startsWith('#')) {
+            e.preventDefault();
+            const nuevaUrl = construirUrlWhatsApp();
+            btn.setAttribute('href', nuevaUrl);
+            window.open(nuevaUrl, '_blank');
+        }
     });
 });
 
