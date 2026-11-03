@@ -148,19 +148,34 @@ function inicializarCanvas(idCanvas, idInputFile, idBtnEliminar, tamañoMaximo =
         e.target.value = ''; 
     });
 
-    // Control de visibilidad del botón eliminar
+    // Control de visibilidad persistente y acción del botón eliminar logo
     if (btnEliminar) {
-        canvas.on('selection:created', () => btnEliminar.classList.remove('oculto'));
-        canvas.on('selection:updated', () => btnEliminar.classList.remove('oculto'));
-        canvas.on('selection:cleared', () => btnEliminar.classList.add('oculto'));
+        const actualizarVisibilidadEliminar = () => {
+            if (canvas.getObjects().length > 0) {
+                btnEliminar.classList.remove('oculto');
+            } else {
+                btnEliminar.classList.add('oculto');
+            }
+        };
+
+        canvas.on('object:added', actualizarVisibilidadEliminar);
+        canvas.on('object:removed', actualizarVisibilidadEliminar);
+        canvas.on('selection:created', actualizarVisibilidadEliminar);
+        canvas.on('selection:updated', actualizarVisibilidadEliminar);
+        canvas.on('selection:cleared', actualizarVisibilidadEliminar);
 
         btnEliminar.addEventListener('click', function() {
-            const logoActivo = canvas.getActiveObject();
+            let logoActivo = canvas.getActiveObject();
+            if (!logoActivo && canvas.getObjects().length > 0) {
+                const objs = canvas.getObjects();
+                logoActivo = objs[objs.length - 1];
+            }
             if (logoActivo) {
                 canvas.remove(logoActivo);
                 canvas.discardActiveObject();
                 canvas.requestRenderAll();
             }
+            actualizarVisibilidadEliminar();
         });
     }
     return canvas;
@@ -1456,3 +1471,42 @@ window.addEventListener('DOMContentLoaded', () => {
     actualizarEnlacesWhatsApp();
 });
 actualizarEnlacesWhatsApp();
+
+// ==========================================
+// 6. MODAL INSTRUCTIVO / ONBOARDING INICIAL
+// ==========================================
+const modalOnboarding = document.getElementById('modal-instructivo-inicial');
+const btnCerrarOnboarding = document.getElementById('btn-cerrar-onboarding');
+const btnEmpezarDisenio = document.getElementById('btn-empezar-disenio');
+const btnAyudaInstructivo = document.getElementById('btn-ayuda-instructivo');
+
+function abrirOnboarding() {
+    if (modalOnboarding) {
+        modalOnboarding.classList.remove('oculto');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function cerrarOnboarding() {
+    if (modalOnboarding) {
+        modalOnboarding.classList.add('oculto');
+        document.body.style.overflow = '';
+        localStorage.setItem('levalier_onboarding_visto', 'true');
+    }
+}
+
+if (btnCerrarOnboarding) btnCerrarOnboarding.addEventListener('click', cerrarOnboarding);
+if (btnEmpezarDisenio) btnEmpezarDisenio.addEventListener('click', cerrarOnboarding);
+if (btnAyudaInstructivo) btnAyudaInstructivo.addEventListener('click', abrirOnboarding);
+if (modalOnboarding) {
+    modalOnboarding.addEventListener('click', (e) => {
+        if (e.target === modalOnboarding) cerrarOnboarding();
+    });
+}
+
+// Abrir automáticamente la primera vez que entra al diseñador
+window.addEventListener('DOMContentLoaded', () => {
+    if (!localStorage.getItem('levalier_onboarding_visto')) {
+        setTimeout(abrirOnboarding, 450);
+    }
+});

@@ -30,7 +30,13 @@
         <a href="index.html" id="logo-inicio" class="logo-config">
             <img src="imagenes/logo_levalier.jpeg" alt="Logo Levalier">
         </a>
-        <button id="btn-menu" class="btn-hamburguesa">☰ Prendas</button>
+        <div class="topbar-acciones">
+            <button type="button" id="btn-ayuda-instructivo" class="btn-ayuda-topbar" title="¿Cómo funciona el diseñador?">
+                <span class="icono-ayuda-btn">❓</span>
+                <span class="txt-ayuda-btn">¿Cómo funciona?</span>
+            </button>
+            <button id="btn-menu" class="btn-hamburguesa">☰ Prendas</button>
+        </div>
     </header>
 
     <!-- ========================================== -->
@@ -183,21 +189,6 @@
                         </div>
                     </div>
 
-                    <div class="grupo-control">
-                        <label id="label-color-1">Color Principal:</label>
-                        <input type="color" id="selector-cuerpo" value="#0C43B5" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#0C43B5"></div>
-                    </div>
-                    <div class="grupo-control oculto" id="contenedor-color-2">
-                        <label id="label-color-2">Color Secundario:</label>
-                        <input type="color" id="selector-patron" value="#DD3939" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
-                    </div>
-                    <div class="grupo-control oculto" id="contenedor-color-3">
-                        <label id="label-color-3">Tercer Color / Acento:</label>
-                        <input type="color" id="selector-color-3" value="#E32627" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-color-3" data-default="#E32627"></div>
-                    </div>
                     <div class="grupo-control oculto" id="contenedor-slider">
                         <label id="label-slider">Ajuste:</label>
                         <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
@@ -226,6 +217,23 @@
                         <label for="slider-splash-ancho">Grosor de banda:</label>
                         <input type="range" id="slider-splash-ancho" min="60" max="260" step="2" value="80">
                     </div>
+
+                    <div class="grupo-control">
+                        <label id="label-color-1">Color Principal:</label>
+                        <input type="color" id="selector-cuerpo" value="#0C43B5" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#0C43B5"></div>
+                    </div>
+                    <div class="grupo-control oculto" id="contenedor-color-2">
+                        <label id="label-color-2">Color Secundario:</label>
+                        <input type="color" id="selector-patron" value="#DD3939" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
+                    </div>
+                    <div class="grupo-control oculto" id="contenedor-color-3">
+                        <label id="label-color-3">Tercer Color / Acento:</label>
+                        <input type="color" id="selector-color-3" value="#E32627" class="oculto">
+                        <div class="pickr-contenedor" data-target="selector-color-3" data-default="#E32627"></div>
+                    </div>
+
                     <div class="grupo-control">
                         <label>Color de Mangas:</label>
                         <input type="color" id="selector-mangas" value="#7B7777" class="oculto">
@@ -236,39 +244,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -312,39 +290,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-musc" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -374,39 +322,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-pantalon" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-pantalon" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-pantalon" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -444,39 +362,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-medias" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-medias" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-medias" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -506,39 +394,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-gorra" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-gorras" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -568,39 +426,9 @@
                     <div class="grupo-control">
                         <label for="subir-logo-gorra-gabardina" class="btn-subir">Subir Logo (.PNG)</label>
                         <input type="file" id="subir-logo-gorra-gabardina" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">Eliminar Logo Seleccionado</button>
+                        <button id="btn-eliminar-logo-gorras-gab" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
                     </div>
-                    <hr>
-                    <div class="grupo-control seccion-presupuesto">
-                        <div class="caja-instructivo-presupuesto">
-                            <div class="titulo-instructivo">
-                                <span class="icono-instructivo">📋</span>
-                                <span>¿Cómo pedir tu presupuesto?</span>
-                            </div>
-                            <div class="pasos-instructivo">
-                                <div class="paso-item">
-                                    <span class="numero-paso">1</span>
-                                    <span>Tocá <strong>Guardar Foto</strong> para descargar el diseño a tu dispositivo.</span>
-                                </div>
-                                <div class="paso-item">
-                                    <span class="numero-paso">2</span>
-                                    <span>Tocá <strong>Pedir por WhatsApp</strong> y adjuntanos la foto (y tus logos si agregaste alguno).</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
-                            <span class="icono-foto-btn">📸</span>
-                            <span class="txt-foto-btn">Paso 1: Guardar Foto de mi Diseño</span>
-                        </button>
-                        <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
-                            <span class="icono-ws-btn">💬</span>
-                            <div class="textos-ws-btn">
-                                <span class="txt-ws-principal">Paso 2: Pedir Presupuesto por WhatsApp</span>
-                                <span class="txt-ws-secundario">Envíanos la foto descargada y tus logos</span>
-                            </div>
-                        </a>
-                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -610,6 +438,68 @@
     <!-- Pickr JS -->
     <script src="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/pickr.min.js"></script>
     
-    <script src="js/script.js?v=3.2"></script>
+
+    <!-- ========================================== -->
+    <!-- BARRA FIJA DE ACCIÓN INFERIOR              -->
+    <!-- ========================================== -->
+    <div id="barra-accion-fija" class="barra-accion-fija">
+        <div class="barra-accion-contenedor">
+            <button type="button" class="btn-guardar-foto" title="Paso 1: Descargar foto en tu dispositivo">
+                <span class="icono-foto-btn">📸</span>
+                <span class="txt-foto-btn"><strong>Paso 1:</strong> Guardar Foto</span>
+            </button>
+            <a href="#" target="_blank" class="btn-presupuesto-whatsapp" title="Paso 2: Pedir presupuesto por WhatsApp">
+                <span class="icono-ws-btn">💬</span>
+                <div class="textos-ws-btn">
+                    <span class="txt-ws-principal">Paso 2: Pedir Presupuesto</span>
+                    <span class="txt-ws-secundario">WhatsApp directo con tu diseño</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- MODAL DE BIENVENIDA / INSTRUCTIVO          -->
+    <!-- ========================================== -->
+    <div id="modal-instructivo-inicial" class="modal-onboarding-overlay oculto">
+        <div class="modal-onboarding-caja">
+            <button type="button" class="btn-cerrar-onboarding" id="btn-cerrar-onboarding" aria-label="Cerrar">&times;</button>
+            <div class="onboarding-header">
+                <img src="imagenes/logo_levalier.jpeg" alt="Logo Levalier" class="onboarding-logo">
+                <h3>¡Bienvenido al Diseñador 3D!</h3>
+                <p class="onboarding-sub">Personalizá tu indumentaria deportiva en 3 simples pasos:</p>
+            </div>
+            <div class="onboarding-pasos">
+                <div class="onboarding-paso">
+                    <span class="onboarding-icono">🎨</span>
+                    <div class="onboarding-paso-info">
+                        <strong>1. Personalizá tu prenda</strong>
+                        <p>Elegí tu modelo, combiná los colores y subí tu logo para verlo en vivo.</p>
+                    </div>
+                </div>
+                <div class="onboarding-paso">
+                    <span class="onboarding-icono">📸</span>
+                    <div class="onboarding-paso-info">
+                        <strong>2. Guardá la foto de tu diseño</strong>
+                        <p>Tocá <strong>"Paso 1: Guardar Foto"</strong> en la barra inferior para descargar la imagen en alta calidad a tu celular o PC.</p>
+                    </div>
+                </div>
+                <div class="onboarding-paso">
+                    <span class="onboarding-icono">💬</span>
+                    <div class="onboarding-paso-info">
+                        <strong>3. Pedí tu cotización de fábrica</strong>
+                        <p>Tocá <strong>"Paso 2: Pedir Presupuesto"</strong> para abrir WhatsApp. Adjuntanos la foto descargada y tus logos para tu cotización con descuento.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="onboarding-footer">
+                <button type="button" class="btn-empezar-disenio" id="btn-empezar-disenio">
+                    ¡Empezar a Diseñar! 🚀
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/script.js?v=3.3"></script>
 </body>
 </html>
