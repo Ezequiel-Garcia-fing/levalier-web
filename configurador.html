@@ -10,7 +10,11 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@simonwep/pickr/dist/themes/classic.min.css"/>
     <link rel="stylesheet" href="css/configurador.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
-</head>
+    <!-- Google Fonts para Dorsales y Nombres Deportivos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    </head>
 <body>
 
     <!-- ========================================== -->
@@ -136,117 +140,227 @@
                     <div class="capa-absoluta capa-textura" id="textura-mangas"></div>
                 </div>
 
-                <!-- Controles -->
+                <!-- Controles en Pestañas Compactas -->
                 <div class="panel-herramientas">
-                    <h2>Diseño Base</h2>
-                    <div class="grupo-control">
-                        <label>Estilo de la Prenda:</label>
-                        <div class="selector-categorias-modelos">
-                            <button type="button" class="btn-categoria-modelo activo" data-categoria="todos">Todos</button>
-                            <button type="button" class="btn-categoria-modelo" data-categoria="basicos">Básicos</button>
-                            <button type="button" class="btn-categoria-modelo" data-categoria="deportivos">Deportivos</button>
-                            <button type="button" class="btn-categoria-modelo" data-categoria="modernos">Modernos</button>
-                        </div>
-                        <div class="contenedor-grilla-modelos">
-                            <div class="grilla-modelos">
-                                <div class="tarjeta-modelo activa" data-modelo="liso" data-categoria="basicos">
-                                    <img src="imagenes/thumb_.jpg" alt="Clásico">
-                                    <span>Clásico</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="mitad" data-categoria="basicos">
-                                    <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
-                                    <span>Bicolor</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="rayas" data-categoria="basicos">
-                                    <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
-                                    <span>A Rayas</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="degradado" data-categoria="basicos">
-                                    <img src="imagenes/thumb_degradado.jpg" alt="Degradado">
-                                    <span>Degradado</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="franja" data-categoria="deportivos">
-                                    <img src="imagenes/thumb_franja.jpg" alt="Franja Pecho">
-                                    <span>Franja Pecho</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="banda" data-categoria="deportivos">
-                                    <img src="imagenes/thumb_banda.jpg" alt="Banda Diagonal">
-                                    <span>Banda Diagonal</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="chevron" data-categoria="deportivos">
-                                    <img src="imagenes/thumb_chevron.jpg" alt="Chevron en V">
-                                    <span>Chevron en V</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="tricolor-dynamic" data-categoria="modernos">
-                                    <img src="imagenes/thumb_tricolor.jpg" alt="Tricolor Dynamic">
-                                    <span>Tricolor Dynamic</span>
-                                </div>
-                                <div class="tarjeta-modelo" data-modelo="dynamic-splash" data-categoria="modernos">
-                                    <img src="imagenes/thumb_splash.jpg" alt="Dynamic Splash">
-                                    <span>Dynamic Splash</span>
+                    <!-- Selector de Pestañas Superiores -->
+                    <div class="tabs-panel-herramientas">
+                        <button type="button" class="tab-btn-herramientas activo" data-tab="tab-disenio-remera">
+                            <span class="icono-tab">🎨</span>
+                            <span>Prenda & Colores</span>
+                        </button>
+                        <button type="button" class="tab-btn-herramientas" data-tab="tab-estampados-remera">
+                            <span class="icono-tab">🔢</span>
+                            <span>Estampados & Logos</span>
+                        </button>
+                    </div>
+
+                    <!-- Pestaña 1: Diseño y Colores -->
+                    <div class="tab-contenido-herramientas activo" id="tab-disenio-remera">
+                        <!-- Selector Desplegable de Estilo (Compacto con miniatura) -->
+                        <div class="grupo-control grupo-control-estilo">
+                            <label>Estilo del Diseño:</label>
+                            <div class="dropdown-estilo-wrapper">
+                                <button type="button" class="btn-dropdown-estilo" id="btn-dropdown-estilo-remera" aria-expanded="false" title="Toca para cambiar el diseño">
+                                    <div class="info-estilo-seleccionado">
+                                        <img src="imagenes/thumb_.jpg" alt="Clásico" class="thumb-estilo-actual">
+                                        <span class="nombre-estilo-actual">Clásico</span>
+                                    </div>
+                                    <span class="flecha-dropdown">▼</span>
+                                </button>
+
+                                <!-- Menú flotante desplegable con todas las opciones -->
+                                <div class="menu-desplegable-estilos oculto" id="menu-desplegable-remera">
+                                    <div class="selector-categorias-modelos">
+                                        <button type="button" class="btn-categoria-modelo activo" data-categoria="todos">Todos</button>
+                                        <button type="button" class="btn-categoria-modelo" data-categoria="basicos">Básicos</button>
+                                        <button type="button" class="btn-categoria-modelo" data-categoria="deportivos">Deportivos</button>
+                                        <button type="button" class="btn-categoria-modelo" data-categoria="modernos">Modernos</button>
+                                    </div>
+                                    <div class="contenedor-grilla-modelos">
+                                        <div class="grilla-modelos">
+                                            <div class="tarjeta-modelo activa" data-modelo="liso" data-categoria="basicos">
+                                                <img src="imagenes/thumb_.jpg" alt="Clásico">
+                                                <span>Clásico</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="mitad" data-categoria="basicos">
+                                                <img src="imagenes/thumb_bicolor.jpg" alt="Bicolor">
+                                                <span>Bicolor</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="rayas" data-categoria="basicos">
+                                                <img src="imagenes/thumb_bastones.jpg" alt="Bastones">
+                                                <span>A Rayas</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="degradado" data-categoria="basicos">
+                                                <img src="imagenes/thumb_degradado.jpg" alt="Degradado">
+                                                <span>Degradado</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="franja" data-categoria="deportivos">
+                                                <img src="imagenes/thumb_franja.jpg" alt="Franja Pecho">
+                                                <span>Franja Pecho</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="banda" data-categoria="deportivos">
+                                                <img src="imagenes/thumb_banda.jpg" alt="Banda Diagonal">
+                                                <span>Banda Diagonal</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="chevron" data-categoria="deportivos">
+                                                <img src="imagenes/thumb_chevron.jpg" alt="Chevron en V">
+                                                <span>Chevron en V</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="tricolor-dynamic" data-categoria="modernos">
+                                                <img src="imagenes/thumb_tricolor.jpg" alt="Tricolor Dynamic">
+                                                <span>Tricolor Dynamic</span>
+                                            </div>
+                                            <div class="tarjeta-modelo" data-modelo="dynamic-splash" data-categoria="modernos">
+                                                <img src="imagenes/thumb_splash.jpg" alt="Dynamic Splash">
+                                                <span>Dynamic Splash</span>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Sliders de Ajuste Geométrico (inmediatamente debajo del estilo) -->
+                        <div class="grupo-control oculto" id="contenedor-slider">
+                            <label id="label-slider">Ajuste:</label>
+                            <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
+                            <input type="range" id="slider-rayas" class="oculto" min="1" max="20" step="1" value="10">
+                            <input type="range" id="slider-banda" class="oculto" min="40" max="100" step="2" value="65">
+                        </div>
+                        <div class="grupo-control oculto" id="controles-franja">
+                            <label for="slider-franja-pos">Posición / Altura:</label>
+                            <input type="range" id="slider-franja-pos" min="97" max="320" step="2" value="135">
+                            <label for="slider-franja-grosor">Grosor de la Franja:</label>
+                            <input type="range" id="slider-franja-grosor" min="30" max="120" step="2" value="75">
+                        </div>
+                        <div class="grupo-control oculto" id="controles-chevron">
+                            <label for="slider-chevron-pos">Posición / Altura:</label>
+                            <input type="range" id="slider-chevron-pos" min="120" max="250" step="2" value="160">
+                            <label for="slider-chevron-grosor">Grosor de la V:</label>
+                            <input type="range" id="slider-chevron-grosor" min="30" max="110" step="2" value="75">
+                            <label for="slider-chevron-angulo">Ángulo (Apertura):</label>
+                            <input type="range" id="slider-chevron-angulo" min="50" max="200" step="2" value="70">
+                        </div>
+                        <div class="grupo-control oculto" id="controles-tricolor">
+                            <label for="slider-tricolor-ancho">Ancho Banda Central:</label>
+                            <input type="range" id="slider-tricolor-ancho" min="50" max="200" step="2" value="65">
+                        </div>
+                        <div class="grupo-control oculto" id="controles-splash">
+                            <label for="slider-splash-ancho">Grosor de banda:</label>
+                            <input type="range" id="slider-splash-ancho" min="60" max="260" step="2" value="80">
+                        </div>
+
+                        <!-- Colores de la Prenda -->
+                        <div class="grupo-control">
+                            <label id="label-color-1">Color Principal:</label>
+                            <input type="color" id="selector-cuerpo" value="#0C43B5" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#0C43B5"></div>
+                        </div>
+                        <div class="grupo-control oculto" id="contenedor-color-2">
+                            <label id="label-color-2">Color Secundario:</label>
+                            <input type="color" id="selector-patron" value="#DD3939" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
+                        </div>
+                        <div class="grupo-control oculto" id="contenedor-color-3">
+                            <label id="label-color-3">Tercer Color / Acento:</label>
+                            <input type="color" id="selector-color-3" value="#E32627" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-color-3" data-default="#E32627"></div>
+                        </div>
+
+                        <div class="grupo-control">
+                            <label>Color de Mangas:</label>
+                            <input type="color" id="selector-mangas" value="#7B7777" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-mangas" data-default="#7B7777"></div>
+                        </div>
                     </div>
 
-                    <div class="grupo-control oculto" id="contenedor-slider">
-                        <label id="label-slider">Ajuste:</label>
-                        <input type="range" id="slider-mitad" class="oculto" min="11" max="43" step="0.5" value="27">
-                        <input type="range" id="slider-rayas" class="oculto" min="1" max="20" step="1" value="10">
-                        <input type="range" id="slider-banda" class="oculto" min="40" max="100" step="2" value="65">
-                    </div>
-                    <div class="grupo-control oculto" id="controles-franja">
-                        <label for="slider-franja-pos">Posición / Altura:</label>
-                        <input type="range" id="slider-franja-pos" min="97" max="320" step="2" value="135">
-                        <label for="slider-franja-grosor">Grosor de la Franja:</label>
-                        <input type="range" id="slider-franja-grosor" min="30" max="120" step="2" value="75">
-                    </div>
-                    <div class="grupo-control oculto" id="controles-chevron">
-                        <label for="slider-chevron-pos">Posición / Altura:</label>
-                        <input type="range" id="slider-chevron-pos" min="120" max="250" step="2" value="160">
-                        <label for="slider-chevron-grosor">Grosor de la V:</label>
-                        <input type="range" id="slider-chevron-grosor" min="30" max="110" step="2" value="75">
-                        <label for="slider-chevron-angulo">Ángulo (Apertura):</label>
-                        <input type="range" id="slider-chevron-angulo" min="50" max="200" step="2" value="70">
-                    </div>
-                    <div class="grupo-control oculto" id="controles-tricolor">
-                        <label for="slider-tricolor-ancho">Ancho Banda Central:</label>
-                        <input type="range" id="slider-tricolor-ancho" min="50" max="200" step="2" value="65">
-                    </div>
-                    <div class="grupo-control oculto" id="controles-splash">
-                        <label for="slider-splash-ancho">Grosor de banda:</label>
-                        <input type="range" id="slider-splash-ancho" min="60" max="260" step="2" value="80">
-                    </div>
+                    <!-- Pestaña 2: Estampados y Logos -->
+                    <div class="tab-contenido-herramientas" id="tab-estampados-remera">
+                        <!-- 1. Paleta de Color para los Estampados -->
+                        <div class="grupo-control">
+                            <label>Color del Estampado / Dorsal:</label>
+                            <div class="paleta-estampados">
+                                <button type="button" class="btn-swatch-estampado activa" data-color="#FFFFFF" style="background: #FFFFFF;" title="Blanco"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#111827" style="background: #111827;" title="Negro"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#FACC15" style="background: #FACC15;" title="Amarillo"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#E32627" style="background: #E32627;" title="Rojo"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#0C43B5" style="background: #0C43B5;" title="Azul Levalier"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#D4AF37" style="background: #D4AF37;" title="Dorado"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#10B981" style="background: #10B981;" title="Verde"></button>
+                                <label class="selector-color-personalizado-wrapper" title="Elegir otro color">
+                                    <input type="color" class="input-color-estampado-picker" value="#FFFFFF">
+                                    <span class="icono-color-custom">🎨</span>
+                                </label>
+                            </div>
+                        </div>
 
-                    <div class="grupo-control">
-                        <label id="label-color-1">Color Principal:</label>
-                        <input type="color" id="selector-cuerpo" value="#0C43B5" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-cuerpo" data-default="#0C43B5"></div>
-                    </div>
-                    <div class="grupo-control oculto" id="contenedor-color-2">
-                        <label id="label-color-2">Color Secundario:</label>
-                        <input type="color" id="selector-patron" value="#DD3939" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-patron" data-default="#DD3939"></div>
-                    </div>
-                    <div class="grupo-control oculto" id="contenedor-color-3">
-                        <label id="label-color-3">Tercer Color / Acento:</label>
-                        <input type="color" id="selector-color-3" value="#E32627" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-color-3" data-default="#E32627"></div>
-                    </div>
+                        <!-- 2. Cajón de Dorsales y Números -->
+                        <div class="grupo-control">
+                            <label>Dorsal / Número Oficial:</label>
+                            <div class="grilla-digitos-rapidos">
+                                <button type="button" class="btn-digito-cajon" data-num="0">0</button>
+                                <button type="button" class="btn-digito-cajon" data-num="1">1</button>
+                                <button type="button" class="btn-digito-cajon" data-num="2">2</button>
+                                <button type="button" class="btn-digito-cajon" data-num="3">3</button>
+                                <button type="button" class="btn-digito-cajon" data-num="4">4</button>
+                                <button type="button" class="btn-digito-cajon" data-num="5">5</button>
+                                <button type="button" class="btn-digito-cajon" data-num="6">6</button>
+                                <button type="button" class="btn-digito-cajon" data-num="7">7</button>
+                                <button type="button" class="btn-digito-cajon" data-num="8">8</button>
+                                <button type="button" class="btn-digito-cajon" data-num="9">9</button>
+                                <button type="button" class="btn-digito-cajon" data-num="10">10</button>
+                            </div>
+                            <div class="fila-input-agregar">
+                                <input type="number" class="input-numero-custom input-texto-estampado input-corto" placeholder="Ej: 23" min="0" max="999">
+                                <button type="button" class="btn-agregar-numero-custom btn-accion-estampado">
+                                    + Agregar Número
+                                </button>
+                            </div>
+                        </div>
 
-                    <div class="grupo-control">
-                        <label>Color de Mangas:</label>
-                        <input type="color" id="selector-mangas" value="#7B7777" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-mangas" data-default="#7B7777"></div>
+                        <!-- 3. Nombre en la espalda / Texto -->
+                        <div class="grupo-control">
+                            <label>Nombre o Texto:</label>
+                            <div class="fila-input-agregar">
+                                <input type="text" class="input-nombre-custom input-texto-estampado" placeholder="Ej: GARCÍA" maxlength="15">
+                                <button type="button" class="btn-agregar-nombre-custom btn-accion-estampado">
+                                    + Agregar Nombre
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Placeholders de Marca, Escudo y Sponsor -->
+                        <div class="grupo-control">
+                            <label>Gráficos y Placeholders:</label>
+                            <div class="grilla-placeholders">
+                                <button type="button" class="btn-item-placeholder" data-tipo="escudo" title="Colocar silueta de escudo para tu logo">
+                                    <span class="icono-ph">🛡️</span>
+                                    <span>Tu Logo / Escudo</span>
+                                </button>
+                                <button type="button" class="btn-item-placeholder" data-tipo="sponsor" title="Colocar espacio para publicidad central">
+                                    <span class="icono-ph">⭐</span>
+                                    <span>Sponsor Central</span>
+                                </button>
+                                <button type="button" class="btn-item-placeholder" data-tipo="levalier" title="Estampar logo oficial Levalier">
+                                    <span class="icono-ph">🏷️</span>
+                                    <span>Marca Levalier</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 5. Subir logo propio desde galería/dispositivo -->
+                        <div class="grupo-control">
+                            <label>Subir tu propio archivo:</label>
+                            <label for="subir-logo" class="btn-subir">📁 Subir Logo desde tu equipo (.PNG)</label>
+                            <input type="file" id="subir-logo" accept="image/png, image/jpeg">
+                            <button type="button" id="btn-eliminar-logo-remera" class="btn-eliminar oculto">
+                                🗑️ Eliminar Elemento Seleccionado
+                            </button>
+                            <small class="ayuda-interactiva-canvas">
+                                💡 Tocá cualquier número, texto o logo en la prenda para moverlo, rotarlo, agrandarlo o cambiarle el color.
+                            </small>
+                        </div>
                     </div>
-                    <hr>
-                    <h2>Logos</h2>
-                    <div class="grupo-control">
-                        <label for="subir-logo" class="btn-subir">Subir Logo (.PNG)</label>
-                        <input type="file" id="subir-logo" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-remera" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -265,34 +379,128 @@
                     <div class="capa-absoluta capa-textura" id="textura-ribetes-musc"></div>
                 </div>
 
-                <!-- Controles -->
+                <!-- Controles en Pestañas Compactas -->
                 <div class="panel-herramientas">
-                    <h2>Diseño Pecheras</h2>
-                    <div class="grupo-control">
-                        <label>Corte de la Prenda:</label>
-                        <div class="selector-genero">
-                            <button class="btn-genero activa" data-genero="hombre">Hombre</button>
-                            <button class="btn-genero" data-genero="mujer">Mujer</button>
+                    <!-- Selector de Pestañas Superiores -->
+                    <div class="tabs-panel-herramientas">
+                        <button type="button" class="tab-btn-herramientas activo" data-tab="tab-disenio-musculosa">
+                            <span class="icono-tab">🎨</span>
+                            <span>Prenda & Colores</span>
+                        </button>
+                        <button type="button" class="tab-btn-herramientas" data-tab="tab-estampados-musculosa">
+                            <span class="icono-tab">🔢</span>
+                            <span>Estampados & Logos</span>
+                        </button>
+                    </div>
+
+                    <!-- Pestaña 1: Diseño y Colores -->
+                    <div class="tab-contenido-herramientas activo" id="tab-disenio-musculosa">
+                        <div class="grupo-control">
+                            <label>Corte de la Prenda:</label>
+                            <div class="selector-genero">
+                                <button class="btn-genero activa" data-genero="hombre">Hombre</button>
+                                <button class="btn-genero" data-genero="mujer">Mujer</button>
+                            </div>
+                        </div>
+                        <div class="grupo-control">
+                            <label>Color Principal:</label>
+                            <input type="color" id="selector-cuerpo-musc" value="#0C43B5" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-cuerpo-musc" data-default="#0C43B5"></div>    
+                        </div>
+                        <div class="grupo-control">
+                            <label>Color Ribetes/Cuello:</label>
+                            <input type="color" id="selector-ribetes-musc" value="#DD3939" class="oculto">
+                            <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#DD3939"></div>
                         </div>
                     </div>
-                    <div class="grupo-control">
-                        <label>Color Principal:</label>
-                        <input type="color" id="selector-cuerpo-musc" value="#0C43B5" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-cuerpo-musc" data-default="#0C43B5"></div>    
+
+                    <!-- Pestaña 2: Estampados y Logos -->
+                    <div class="tab-contenido-herramientas" id="tab-estampados-musculosa">
+                        <!-- 1. Paleta de Color para los Estampados -->
+                        <div class="grupo-control">
+                            <label>Color del Estampado / Dorsal:</label>
+                            <div class="paleta-estampados">
+                                <button type="button" class="btn-swatch-estampado activa" data-color="#FFFFFF" style="background: #FFFFFF;" title="Blanco"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#111827" style="background: #111827;" title="Negro"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#FACC15" style="background: #FACC15;" title="Amarillo"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#E32627" style="background: #E32627;" title="Rojo"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#0C43B5" style="background: #0C43B5;" title="Azul Levalier"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#D4AF37" style="background: #D4AF37;" title="Dorado"></button>
+                                <button type="button" class="btn-swatch-estampado" data-color="#10B981" style="background: #10B981;" title="Verde"></button>
+                                <label class="selector-color-personalizado-wrapper" title="Elegir otro color">
+                                    <input type="color" class="input-color-estampado-picker" value="#FFFFFF">
+                                    <span class="icono-color-custom">🎨</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- 2. Cajón de Dorsales y Números -->
+                        <div class="grupo-control">
+                            <label>Dorsal / Número Oficial:</label>
+                            <div class="grilla-digitos-rapidos">
+                                <button type="button" class="btn-digito-cajon" data-num="0">0</button>
+                                <button type="button" class="btn-digito-cajon" data-num="1">1</button>
+                                <button type="button" class="btn-digito-cajon" data-num="2">2</button>
+                                <button type="button" class="btn-digito-cajon" data-num="3">3</button>
+                                <button type="button" class="btn-digito-cajon" data-num="4">4</button>
+                                <button type="button" class="btn-digito-cajon" data-num="5">5</button>
+                                <button type="button" class="btn-digito-cajon" data-num="6">6</button>
+                                <button type="button" class="btn-digito-cajon" data-num="7">7</button>
+                                <button type="button" class="btn-digito-cajon" data-num="8">8</button>
+                                <button type="button" class="btn-digito-cajon" data-num="9">9</button>
+                                <button type="button" class="btn-digito-cajon" data-num="10">10</button>
+                            </div>
+                            <div class="fila-input-agregar">
+                                <input type="number" class="input-numero-custom input-texto-estampado input-corto" placeholder="Ej: 23" min="0" max="999">
+                                <button type="button" class="btn-agregar-numero-custom btn-accion-estampado">
+                                    + Agregar Número
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 3. Nombre en la espalda / Texto -->
+                        <div class="grupo-control">
+                            <label>Nombre o Texto:</label>
+                            <div class="fila-input-agregar">
+                                <input type="text" class="input-nombre-custom input-texto-estampado" placeholder="Ej: GARCÍA" maxlength="15">
+                                <button type="button" class="btn-agregar-nombre-custom btn-accion-estampado">
+                                    + Agregar Nombre
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 4. Placeholders de Marca, Escudo y Sponsor -->
+                        <div class="grupo-control">
+                            <label>Gráficos y Placeholders:</label>
+                            <div class="grilla-placeholders">
+                                <button type="button" class="btn-item-placeholder" data-tipo="escudo" title="Colocar silueta de escudo para tu logo">
+                                    <span class="icono-ph">🛡️</span>
+                                    <span>Tu Logo / Escudo</span>
+                                </button>
+                                <button type="button" class="btn-item-placeholder" data-tipo="sponsor" title="Colocar espacio para publicidad central">
+                                    <span class="icono-ph">⭐</span>
+                                    <span>Sponsor Central</span>
+                                </button>
+                                <button type="button" class="btn-item-placeholder" data-tipo="levalier" title="Estampar logo oficial Levalier">
+                                    <span class="icono-ph">🏷️</span>
+                                    <span>Marca Levalier</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 5. Subir logo propio desde galería/dispositivo -->
+                        <div class="grupo-control">
+                            <label>Subir tu propio archivo:</label>
+                            <label for="subir-logo-musc" class="btn-subir">📁 Subir Logo desde tu equipo (.PNG)</label>
+                            <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
+                            <button type="button" id="btn-eliminar-logo-musc" class="btn-eliminar oculto">
+                                🗑️ Eliminar Elemento Seleccionado
+                            </button>
+                            <small class="ayuda-interactiva-canvas">
+                                💡 Tocá cualquier número, texto o logo en la prenda para moverlo, rotarlo, agrandarlo o cambiarle el color.
+                            </small>
+                        </div>
                     </div>
-                    <div class="grupo-control">
-                        <label>Color Ribetes/Cuello:</label>
-                        <input type="color" id="selector-ribetes-musc" value="#DD3939" class="oculto">
-                        <div class="pickr-contenedor" data-target="selector-ribetes-musc" data-default="#DD3939"></div>
-                    </div>
-                    <hr>
-                    <h2>Logos</h2>
-                    <div class="grupo-control">
-                        <label for="subir-logo-musc" class="btn-subir">Subir Logo (.PNG)</label>
-                        <input type="file" id="subir-logo-musc" accept="image/png, image/jpeg">
-                        <button id="btn-eliminar-logo-musc" class="btn-eliminar oculto">🗑️ Eliminar Logo</button>
-                    </div>
-                    
                 </div>
             </div>
         </div>
@@ -500,6 +708,6 @@
         </div>
     </div>
 
-    <script src="js/script.js?v=3.4"></script>
+    <script src="js/script.js?v=4.0"></script>
 </body>
 </html>

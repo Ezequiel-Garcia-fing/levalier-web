@@ -158,8 +158,16 @@ function inicializarCanvas(idCanvas, idInputFile, idBtnEliminar, tamañoMaximo =
             }
         };
 
-        canvas.on('object:added', actualizarVisibilidadEliminar);
-        canvas.on('object:removed', actualizarVisibilidadEliminar);
+        const actualizarEstadoLienzo = () => {
+            actualizarVisibilidadEliminar();
+            if (typeof actualizarEnlacesWhatsApp === 'function') {
+                actualizarEnlacesWhatsApp();
+            }
+        };
+
+        canvas.on('object:added', actualizarEstadoLienzo);
+        canvas.on('object:removed', actualizarEstadoLienzo);
+        canvas.on('object:modified', actualizarEstadoLienzo);
         canvas.on('selection:created', actualizarVisibilidadEliminar);
         canvas.on('selection:updated', actualizarVisibilidadEliminar);
         canvas.on('selection:cleared', actualizarVisibilidadEliminar);
@@ -175,7 +183,7 @@ function inicializarCanvas(idCanvas, idInputFile, idBtnEliminar, tamañoMaximo =
                 canvas.discardActiveObject();
                 canvas.requestRenderAll();
             }
-            actualizarVisibilidadEliminar();
+            actualizarEstadoLienzo();
         });
     }
     return canvas;
@@ -880,6 +888,25 @@ function seleccionarModelo(modeloId) {
     // 6. Activar modelo y refrescar
     if (config.activar) config.activar();
     actualizarPatrones();
+    actualizarBotonDropdownEstilo(modeloId);
+}
+
+// Actualiza el botón compacto del dropdown de estilos
+function actualizarBotonDropdownEstilo(modeloId) {
+    const tarjeta = document.querySelector(`.tarjeta-modelo[data-modelo="${modeloId}"]`);
+    if (!tarjeta) return;
+    const img = tarjeta.querySelector('img');
+    const span = tarjeta.querySelector('span');
+    const btnDropdown = document.getElementById('btn-dropdown-estilo-remera');
+    if (btnDropdown) {
+        const thumb = btnDropdown.querySelector('.thumb-estilo-actual');
+        const nombre = btnDropdown.querySelector('.nombre-estilo-actual');
+        if (thumb && img) thumb.src = img.src;
+        if (nombre && span) nombre.textContent = span.textContent;
+    }
+    // Cerrar el menú flotante
+    document.querySelectorAll('.menu-desplegable-estilos').forEach(m => m.classList.add('oculto'));
+    document.querySelectorAll('.btn-dropdown-estilo').forEach(b => b.classList.remove('abierto'));
 }
 
 // Eventos de selección de tarjetas
@@ -889,6 +916,46 @@ tarjetasModelo.forEach(tarjeta => {
         tarjeta.classList.add('activa');
         const modelo = tarjeta.getAttribute('data-modelo');
         seleccionarModelo(modelo);
+    });
+});
+
+// Manejador del botón desplegable de estilos
+document.querySelectorAll('.btn-dropdown-estilo').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wrapper = btn.closest('.dropdown-estilo-wrapper');
+        const menu = wrapper ? wrapper.querySelector('.menu-desplegable-estilos') : null;
+        if (menu) {
+            const estaAbierto = !menu.classList.contains('oculto');
+            document.querySelectorAll('.menu-desplegable-estilos').forEach(m => m.classList.add('oculto'));
+            document.querySelectorAll('.btn-dropdown-estilo').forEach(b => b.classList.remove('abierto'));
+            if (!estaAbierto) {
+                menu.classList.remove('oculto');
+                btn.classList.add('abierto');
+            }
+        }
+    });
+});
+
+// Cerrar el dropdown al hacer clic fuera de él
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.dropdown-estilo-wrapper')) {
+        document.querySelectorAll('.menu-desplegable-estilos').forEach(m => m.classList.add('oculto'));
+        document.querySelectorAll('.btn-dropdown-estilo').forEach(b => b.classList.remove('abierto'));
+    }
+});
+
+// Manejador de pestañas del panel de herramientas (Prenda & Colores / Estampados & Logos)
+document.querySelectorAll('.tab-btn-herramientas').forEach(btn => {
+    btn.addEventListener('click', () => {
+        const targetId = btn.getAttribute('data-tab');
+        const panel = btn.closest('.panel-herramientas');
+        if (!panel) return;
+        panel.querySelectorAll('.tab-btn-herramientas').forEach(b => b.classList.remove('activo'));
+        panel.querySelectorAll('.tab-contenido-herramientas').forEach(c => c.classList.remove('activo'));
+        btn.classList.add('activo');
+        const targetContent = panel.querySelector('#' + targetId);
+        if (targetContent) targetContent.classList.add('activo');
     });
 });
 
@@ -1099,15 +1166,44 @@ function construirUrlWhatsApp() {
     const { prenda, modelo, colores } = obtenerDetallesPrendaActiva();
     const linkMagico = generarLinkMagico();
 
-    let texto = `¡Hola Levalier! \n\nYa terminé de personalizar mi prenda en el diseñador 3D:\n• Prenda: ${prenda}`;
+    let texto = `¡Hola Levalier! 👋\n\nQuiero pedir presupuesto para mi diseño:\n• Prenda: ${prenda}`;
     if (modelo) texto += `\n• Modelo: ${modelo}`;
 
     if (colores && colores.length > 0) {
-        texto += `\n\n Detalle de colores seleccionados:\n` + colores.join('\n');
+        texto += `\n\n🎨 Detalle de colores seleccionados:\n` + colores.join('\n');
     }
 
-    texto += `\n\n🔗 Link para ver mi diseño interactivo 3D:\n${linkMagico}`;
-    texto += `\n\n¡Quiero solicitar el presupuesto de fabricación! Muchas gracias.`;
+    // Detectar si hay dorsales, nombres o logos en el lienzo
+    try {
+        const canvas = typeof obtenerCanvasActivo === 'function' ? obtenerCanvasActivo() : null;
+        if (canvas && canvas.getObjects().length > 0) {
+            const detallesEstampados = [];
+            canvas.getObjects().forEach(obj => {
+                if (obj.dorsalNumero) {
+                    detallesEstampados.push(`Dorsal #${obj.dorsalNumero}`);
+                } else if (obj.nombreEstampado) {
+                    detallesEstampados.push(`Nombre "${obj.nombreEstampado}"`);
+                } else if (obj.tipoPlaceholder) {
+                    detallesEstampados.push(`Estampado: ${obj.tipoPlaceholder.toUpperCase()}`);
+                } else if (obj.text) {
+                    if (/^\d+$/.test(obj.text.trim())) {
+                        detallesEstampados.push(`Dorsal #${obj.text.trim()}`);
+                    } else {
+                        detallesEstampados.push(`Nombre "${obj.text.trim()}"`);
+                    }
+                }
+            });
+            if (detallesEstampados.length > 0) {
+                texto += `\n\n🔢 Estampados incluidos: ` + detallesEstampados.join(', ');
+            } else {
+                texto += `\n\n🛡️ Estampados incluidos: Logos / Placeholders posicionados en la prenda`;
+            }
+        }
+    } catch (eEst) {}
+
+    texto += `\n\n🔗 Link interactivo 3D:\n${linkMagico}`;
+    texto += `\n\n📸 Ya guardé la foto del diseño y te la adjunto a continuación (también te envío los archivos de mis logos para la confección).`;
+    texto += `\n\n¡Quiero solicitar la cotización de confección! Muchas gracias.`;
 
     return `https://wa.me/${WHATSAPP_LEVALIER}?text=${encodeURIComponent(texto)}`;
 }
@@ -1510,5 +1606,532 @@ if (modalOnboarding) {
 window.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('levalier_onboarding_visto')) {
         setTimeout(abrirOnboarding, 450);
+    }
+});
+
+// ==========================================
+// 7. SISTEMA DE ESTAMPADOS, DORSALES Y LOGOS (CAJÓN DE RECURSOS)
+// ==========================================
+let colorEstampadoActual = '#FFFFFF';
+
+// Plantillas SVG vectoriales para los Placeholders de Marca, Escudo y Sponsor
+const PLANTILLAS_SVG_ESTAMPADOS = {
+    escudo: (color) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 360" width="300" height="360">
+  <!-- Silueta externa del escudo en alta definición -->
+  <path d="M150 15 L255 60 L255 195 C255 285 150 345 150 345 C150 345 45 285 45 195 L45 60 Z" fill="none" stroke="${color}" stroke-width="14" stroke-linejoin="round" />
+  <!-- Borde interior elegante -->
+  <path d="M150 42 L234 78 L234 189 C234 264 150 312 150 312 C150 312 66 264 66 189 L66 78 Z" fill="none" stroke="${color}" stroke-width="4" stroke-opacity="0.8" />
+  <!-- Estrella deportiva central -->
+  <polygon points="150,84 162,120 201,120 168,144 180,180 150,156 120,180 132,144 99,120 138,120" fill="${color}" />
+  <!-- Tipografía nítida centrada -->
+  <text x="150" y="246" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="46" font-weight="900" fill="${color}" text-anchor="middle" letter-spacing="3">TU ESCUDO</text>
+  <text x="150" y="278" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="20" font-weight="700" fill="${color}" text-anchor="middle" letter-spacing="4" opacity="0.85">O LOGO AQUÍ</text>
+</svg>`,
+
+    sponsor: (color) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 160" width="600" height="160">
+  <!-- Marco contenedor de sponsor deportivo de alta resolución (sin trazos punteados borrosos) -->
+  <rect x="8" y="8" width="584" height="144" rx="16" fill="none" stroke="${color}" stroke-width="8" />
+  <rect x="22" y="22" width="556" height="116" rx="10" fill="none" stroke="${color}" stroke-width="2" stroke-opacity="0.65" />
+  <!-- Texto principal y subtítulo en ultra nitidez -->
+  <text x="300" y="96" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="74" font-weight="900" fill="${color}" text-anchor="middle" letter-spacing="8">SPONSOR</text>
+  <text x="300" y="126" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="18" font-weight="700" fill="${color}" text-anchor="middle" letter-spacing="5" opacity="0.85">ESPACIO PUBLICITARIO</text>
+</svg>`,
+
+    levalier: (color) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" width="500" height="160">
+  <text x="250" y="95" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="82" font-weight="900" fill="${color}" text-anchor="middle" letter-spacing="6">LEVALIER</text>
+  <path d="M 80 120 Q 250 148 420 120" fill="none" stroke="${color}" stroke-width="10" stroke-linecap="round" />
+  <text x="250" y="148" font-family="'Bebas Neue', 'Oswald', sans-serif" font-size="16" font-weight="700" fill="${color}" text-anchor="middle" letter-spacing="5" opacity="0.85">INDUMENTARIA DEPORTIVA</text>
+</svg>`
+};
+
+// Retorna el lienzo de Fabric.js correspondiente a la prenda activa
+function obtenerCanvasActivo() {
+    const moduloActivo = document.querySelector('.modulo-prenda.activo');
+    const moduloId = moduloActivo ? moduloActivo.id : 'modulo-remera';
+    const mapa = {
+        'modulo-remera': 'canvas-logos',
+        'modulo-musculosa': 'canvas-logos-musc',
+        'modulo-pantalon': 'canvas-logos-pantalon',
+        'modulo-medias': 'canvas-logos-medias',
+        'modulo-gorras': 'canvas-logos-gorras',
+        'modulo-gorras-gabardina': 'canvas-logos-gorras-gabardina'
+    };
+    const id = mapa[moduloId] || 'canvas-logos';
+    return canvasActivos[id];
+}
+
+// Actualiza el botón de eliminar del módulo activo
+function refrescarBotonEliminarActivo() {
+    const canvas = obtenerCanvasActivo();
+    if (!canvas) return;
+    const moduloActivo = document.querySelector('.modulo-prenda.activo');
+    if (!moduloActivo) return;
+    const btnEliminar = moduloActivo.querySelector('.btn-eliminar');
+    if (btnEliminar) {
+        if (canvas.getObjects().length > 0) {
+            btnEliminar.classList.remove('oculto');
+        } else {
+            btnEliminar.classList.add('oculto');
+        }
+    }
+}
+
+// Actualiza la visualización de la paleta de colores de estampados
+function actualizarVisualPaleta(colorHex) {
+    if (!colorHex) return;
+    colorEstampadoActual = colorHex;
+    document.querySelectorAll('.btn-swatch-estampado').forEach(btn => {
+        if (btn.getAttribute('data-color').toLowerCase() === colorHex.toLowerCase()) {
+            btn.classList.add('activa');
+        } else {
+            btn.classList.remove('activa');
+        }
+    });
+    document.querySelectorAll('.input-color-estampado-picker').forEach(inp => inp.value = colorHex);
+}
+
+// Cambia el color activo para los estampados y recolorea el objeto seleccionado en tiempo real
+function cambiarColorEstampado(colorHex) {
+    if (!colorHex) return;
+    actualizarVisualPaleta(colorHex);
+
+    const canvas = obtenerCanvasActivo();
+    if (!canvas) return;
+    const objActivo = canvas.getActiveObject();
+    if (objActivo) {
+        recolorearObjetoFabric(objActivo, colorHex);
+        canvas.requestRenderAll();
+    } else {
+        // Si no hay ningún objeto seleccionado pero hay un único estampado en el lienzo, recolorearlo directamente
+        const objs = canvas.getObjects();
+        if (objs.length === 1) {
+            recolorearObjetoFabric(objs[0], colorHex);
+            canvas.requestRenderAll();
+        }
+    }
+}
+
+// Carga una imagen de forma asíncrona devolviendo Promise<HTMLImageElement | null>
+function cargarElementoImgAsync(src) {
+    return new Promise((resolve) => {
+        if (!src) return resolve(null);
+        const img = new Image();
+        if (window.location.protocol !== 'file:') {
+            img.crossOrigin = 'anonymous';
+        }
+        let terminado = false;
+        const terminar = (resultado) => {
+            if (!terminado) {
+                terminado = true;
+                resolve(resultado);
+            }
+        };
+        img.onload = () => terminar(img);
+        img.onerror = () => terminar(null);
+        img.src = src;
+        if (img.complete && img.naturalWidth > 0) {
+            terminar(img);
+        }
+    });
+}
+
+// Crea un canvas fuera de pantalla con una o varias imágenes de dígitos Levalier combinadas y tintadas al color deseado
+function crearCanvasNumeroLevalier(listaImgs, colorHex) {
+    if (!listaImgs || listaImgs.length === 0) return null;
+
+    // Altura de referencia normalizada para igualar dimensiones de dígitos oficiales
+    const alturaRef = 1150;
+    
+    // Normalizar anchos según la altura de referencia
+    const items = listaImgs.map(img => {
+        const h = img.naturalHeight || img.height || alturaRef;
+        const w = img.naturalWidth || img.width || 800;
+        const ratio = alturaRef / h;
+        return { img, ancho: Math.round(w * ratio) };
+    });
+
+    // Espaciado sutil entre dígitos proporcionales
+    const espaciado = listaImgs.length > 1 ? 30 : 0;
+    const anchoTotal = items.reduce((acc, it) => acc + it.ancho, 0) + (espaciado * (listaImgs.length - 1));
+
+    const offCanvas = document.createElement('canvas');
+    offCanvas.width = Math.max(1, Math.round(anchoTotal));
+    offCanvas.height = alturaRef;
+    const ctx = offCanvas.getContext('2d');
+
+    // 1. Dibujar los dígitos originales (silueta con canal alfa)
+    let curX = 0;
+    items.forEach(it => {
+        ctx.drawImage(it.img, curX, 0, it.ancho, alturaRef);
+        curX += it.ancho + espaciado;
+    });
+
+    // 2. Tintar al color seleccionado manteniendo los bordes antialiasing
+    ctx.globalCompositeOperation = 'source-in';
+    ctx.fillStyle = colorHex || '#FFFFFF';
+    ctx.fillRect(0, 0, offCanvas.width, offCanvas.height);
+
+    return offCanvas;
+}
+
+// Función auxiliar para cambiar el color de un objeto o grupo de Fabric
+function recolorearObjetoFabric(obj, colorHex) {
+    if (!obj) return;
+    if (obj.esNumeroOficialLevalier && obj.listaImagenesOriginales) {
+        const nuevoCanvas = crearCanvasNumeroLevalier(obj.listaImagenesOriginales, colorHex);
+        if (nuevoCanvas) {
+            obj.setElement(nuevoCanvas);
+            obj.colorEstampado = colorHex;
+        }
+    } else if (obj.esLogoOficialMarca && obj.originalImgElement) {
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = obj.originalImgElement.naturalWidth || obj.originalImgElement.width;
+        offCanvas.height = obj.originalImgElement.naturalHeight || obj.originalImgElement.height;
+        const ctx = offCanvas.getContext('2d');
+        ctx.drawImage(obj.originalImgElement, 0, 0);
+        ctx.globalCompositeOperation = 'source-in';
+        ctx.fillStyle = colorHex;
+        ctx.fillRect(0, 0, offCanvas.width, offCanvas.height);
+        obj.setElement(offCanvas);
+        obj.colorEstampado = colorHex;
+    } else if (obj.type === 'text' || obj.type === 'i-text') {
+        obj.set('fill', colorHex);
+        obj.colorEstampado = colorHex;
+    } else if (obj.type === 'group' && obj.getObjects) {
+        obj.colorEstampado = colorHex;
+        obj.getObjects().forEach(hijo => recolorearObjetoFabric(hijo, colorHex));
+    } else if (obj.type === 'path' || obj.type === 'polygon' || obj.type === 'rect') {
+        if (obj.fill && obj.fill !== 'none') obj.set('fill', colorHex);
+        if (obj.stroke && obj.stroke !== 'none') obj.set('stroke', colorHex);
+    }
+}
+
+// Agrega un dorsal / número al lienzo activo (prioriza los PNGs oficiales de Levalier en imagenes/numeros/)
+async function agregarNumeroAlCanvas(numeroStr) {
+    const canvas = obtenerCanvasActivo();
+    if (!canvas) return;
+
+    const textoNum = String(numeroStr).trim();
+    if (!textoNum) return;
+
+    // 1. Intentar cargar el archivo directo (ej: imagenes/numeros/2.png o imagenes/numeros/10.png)
+    let imgsCargadas = [];
+    const imgDirecta = await cargarElementoImgAsync(`imagenes/numeros/${textoNum}.png`);
+    
+    if (imgDirecta) {
+        imgsCargadas = [imgDirecta];
+    } else if (textoNum.length > 1) {
+        // 2. Si es de varios dígitos (ej: "23", "24", "10") y no hay archivo compuesto directo,
+        // intentar cargar cada dígito por separado
+        const digitos = textoNum.split('');
+        const promesas = digitos.map(d => cargarElementoImgAsync(`imagenes/numeros/${d}.png`));
+        const resultados = await Promise.all(promesas);
+        if (resultados.every(img => img !== null)) {
+            imgsCargadas = resultados;
+        }
+    }
+
+    // Si había un número previamente seleccionado en el lienzo, lo quitamos para reemplazarlo limpiamente
+    const objActivo = canvas.getActiveObject();
+    if (objActivo && (objActivo.esNumeroOficialLevalier || (objActivo.text && /^\d+$/.test(objActivo.text.trim())))) {
+        canvas.remove(objActivo);
+    }
+
+    // 3. Si se encontraron las imágenes oficiales Levalier:
+    if (imgsCargadas.length > 0) {
+        const offCanvas = crearCanvasNumeroLevalier(imgsCargadas, colorEstampadoActual);
+        if (offCanvas) {
+            const fabricImg = new fabric.Image(offCanvas);
+
+            // Escalar para que calce estéticamente en la remera (altura aprox. 135px en el lienzo de 500px)
+            const alturaObjetivo = textoNum.length >= 3 ? 115 : (textoNum.length === 2 ? 130 : 140);
+            fabricImg.scaleToHeight(alturaObjetivo);
+
+            const anchoEscalado = fabricImg.getScaledWidth();
+
+            fabricImg.set({
+                left: 213 - (anchoEscalado / 2), // 213 es el centro del frente
+                top: 165,
+                cornerColor: '#0055ff',
+                cornerStrokeColor: '#ffffff',
+                cornerSize: 12,
+                transparentCorners: false
+            });
+
+            // Guardar metadatos para recolorear dinámicamente y presupuestar en WhatsApp
+            fabricImg.esNumeroOficialLevalier = true;
+            fabricImg.dorsalNumero = textoNum;
+            fabricImg.listaImagenesOriginales = imgsCargadas;
+            fabricImg.colorEstampado = colorEstampadoActual;
+
+            canvas.add(fabricImg);
+            canvas.setActiveObject(fabricImg);
+            canvas.requestRenderAll();
+            refrescarBotonEliminarActivo();
+            if (typeof actualizarEnlacesWhatsApp === 'function') actualizarEnlacesWhatsApp();
+            return;
+        }
+    }
+
+    // 4. Fallback si el número o algún dígito aún no tiene PNG en imagenes/numeros/
+    // (permite que la web siga 100% operativa con tipografía deportiva hasta que carguen los demás PNGs)
+    const tamañoFuente = textoNum.length >= 3 ? 65 : (textoNum.length === 2 ? 80 : 95);
+    const numObj = new fabric.Text(textoNum, {
+        left: canvas.width / 4 - 30,
+        top: 175,
+        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
+        fontSize: tamañoFuente,
+        fill: colorEstampadoActual,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        cornerColor: '#0055ff',
+        cornerStrokeColor: '#ffffff',
+        cornerSize: 12,
+        transparentCorners: false
+    });
+    numObj.dorsalNumero = textoNum;
+    numObj.colorEstampado = colorEstampadoActual;
+
+    canvas.add(numObj);
+    canvas.setActiveObject(numObj);
+    canvas.requestRenderAll();
+    refrescarBotonEliminarActivo();
+    if (typeof actualizarEnlacesWhatsApp === 'function') actualizarEnlacesWhatsApp();
+}
+
+// Agrega un nombre o texto personalizado al lienzo activo
+function agregarTextoAlCanvas(textoStr) {
+    const canvas = obtenerCanvasActivo();
+    if (!canvas) return;
+
+    const textoLimpio = String(textoStr).trim().toUpperCase();
+    if (!textoLimpio) return;
+
+    // Si había un nombre seleccionado previamente, reemplazarlo
+    const objActivo = canvas.getActiveObject();
+    if (objActivo && (objActivo.nombreEstampado || (objActivo.text && !/^\d+$/.test(objActivo.text.trim())))) {
+        canvas.remove(objActivo);
+    }
+
+    const tamañoFuente = textoLimpio.length > 10 ? 28 : 36;
+
+    const textoObj = new fabric.Text(textoLimpio, {
+        left: 213 - (textoLimpio.length * (tamañoFuente * 0.35)),
+        top: 115,
+        fontFamily: "'Bebas Neue', 'Oswald', sans-serif",
+        fontSize: tamañoFuente,
+        fill: colorEstampadoActual,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        cornerColor: '#0055ff',
+        cornerStrokeColor: '#ffffff',
+        cornerSize: 12,
+        transparentCorners: false
+    });
+
+    textoObj.nombreEstampado = textoLimpio;
+    textoObj.colorEstampado = colorEstampadoActual;
+
+    canvas.add(textoObj);
+    canvas.setActiveObject(textoObj);
+    canvas.requestRenderAll();
+    refrescarBotonEliminarActivo();
+    if (typeof actualizarEnlacesWhatsApp === 'function') actualizarEnlacesWhatsApp();
+}
+
+// Agrega un placeholder gráfico (escudo, sponsor o marca Levalier) al lienzo activo
+async function agregarPlaceholderAlCanvas(tipo) {
+    const canvas = obtenerCanvasActivo();
+    if (!canvas) return;
+
+    // 1. Si se solicita la marca Levalier, verificar si existe un PNG oficial transparente en imagenes/logo_marca.png
+    if (tipo === 'levalier') {
+        const imgOficial = await cargarElementoImgAsync('imagenes/logo_marca.png');
+        if (imgOficial) {
+            const offCanvas = document.createElement('canvas');
+            offCanvas.width = imgOficial.naturalWidth || imgOficial.width;
+            offCanvas.height = imgOficial.naturalHeight || imgOficial.height;
+            const ctx = offCanvas.getContext('2d');
+            ctx.drawImage(imgOficial, 0, 0);
+            ctx.globalCompositeOperation = 'source-in';
+            ctx.fillStyle = colorEstampadoActual;
+            ctx.fillRect(0, 0, offCanvas.width, offCanvas.height);
+
+            const fabricImg = new fabric.Image(offCanvas);
+            fabricImg.scaleToWidth(130);
+            fabricImg.set({
+                left: 213 - (fabricImg.getScaledWidth() / 2),
+                top: 135,
+                cornerColor: '#0055ff',
+                cornerStrokeColor: '#ffffff',
+                cornerSize: 12,
+                transparentCorners: false
+            });
+            fabricImg.esLogoOficialMarca = true;
+            fabricImg.originalImgElement = imgOficial;
+            fabricImg.colorEstampado = colorEstampadoActual;
+            fabricImg.tipoPlaceholder = 'marca_levalier';
+
+            canvas.add(fabricImg);
+            canvas.setActiveObject(fabricImg);
+            canvas.requestRenderAll();
+            refrescarBotonEliminarActivo();
+            if (typeof actualizarEnlacesWhatsApp === 'function') actualizarEnlacesWhatsApp();
+            return;
+        }
+    }
+
+    // 2. Si no hay archivo PNG oficial o para escudo y sponsor, renderizar plantilla vectorial SVG de alta definición
+    const generadorSvg = PLANTILLAS_SVG_ESTAMPADOS[tipo];
+    if (!generadorSvg) return;
+
+    const svgXml = generadorSvg(colorEstampadoActual);
+
+    fabric.loadSVGFromString(svgXml, function(objects, options) {
+        if (!objects || objects.length === 0) return;
+        const svgGrupo = fabric.util.groupSVGElements(objects, options);
+
+        let escala = 1;
+        let posTop = 140;
+
+        if (tipo === 'sponsor') {
+            // Escalar desde 600px a ~264px para ultra nitidez en el pecho
+            escala = 0.44;
+            posTop = 220;
+        } else if (tipo === 'escudo') {
+            // Escalar desde 300px a ~84px de ancho para tamaño deportivo perfecto
+            escala = 0.28;
+            posTop = 135;
+        } else if (tipo === 'levalier') {
+            // Escalar desde 500px a ~140px
+            escala = 0.28;
+            posTop = 130;
+        }
+
+        svgGrupo.set({
+            scaleX: escala,
+            scaleY: escala,
+            left: 213 - (svgGrupo.width * escala) / 2,
+            top: posTop,
+            cornerColor: '#0055ff',
+            cornerStrokeColor: '#ffffff',
+            cornerSize: 12,
+            transparentCorners: false
+        });
+
+        svgGrupo.tipoPlaceholder = tipo;
+        svgGrupo.colorEstampado = colorEstampadoActual;
+
+        canvas.add(svgGrupo);
+        canvas.setActiveObject(svgGrupo);
+        canvas.requestRenderAll();
+        refrescarBotonEliminarActivo();
+        if (typeof actualizarEnlacesWhatsApp === 'function') actualizarEnlacesWhatsApp();
+    });
+}
+
+// Inicialización de eventos del Cajón de Estampados al cargar el DOM
+window.addEventListener('DOMContentLoaded', () => {
+    // 1. Swatches de color
+    document.querySelectorAll('.btn-swatch-estampado').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const color = btn.getAttribute('data-color');
+            cambiarColorEstampado(color);
+        });
+    });
+
+    // 2. Input color picker personalizado
+    document.querySelectorAll('.input-color-estampado-picker').forEach(picker => {
+        picker.addEventListener('input', (e) => {
+            cambiarColorEstampado(e.target.value);
+        });
+    });
+
+    // 3. Dígitos rápidos (0 al 10)
+    document.querySelectorAll('.btn-digito-cajon').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const num = btn.getAttribute('data-num');
+            agregarNumeroAlCanvas(num);
+        });
+    });
+
+    // 4. Agregar número personalizado por input
+    document.querySelectorAll('.btn-agregar-numero-custom').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const contenedor = e.target.closest('.grupo-control');
+            const input = contenedor ? contenedor.querySelector('.input-numero-custom') : null;
+            if (input && input.value !== '') {
+                agregarNumeroAlCanvas(input.value);
+                input.value = '';
+            }
+        });
+    });
+
+    document.querySelectorAll('.input-numero-custom').forEach(input => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (input.value !== '') {
+                    agregarNumeroAlCanvas(input.value);
+                    input.value = '';
+                }
+            }
+        });
+    });
+
+    // 5. Agregar nombre o texto personalizado
+    document.querySelectorAll('.btn-agregar-nombre-custom').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            const contenedor = e.target.closest('.grupo-control');
+            const input = contenedor ? contenedor.querySelector('.input-nombre-custom') : null;
+            if (input && input.value.trim() !== '') {
+                agregarTextoAlCanvas(input.value);
+                input.value = '';
+            }
+        });
+    });
+
+    document.querySelectorAll('.input-nombre-custom').forEach(input => {
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                if (input.value.trim() !== '') {
+                    agregarTextoAlCanvas(input.value);
+                    input.value = '';
+                }
+            }
+        });
+    });
+
+    // 6. Botones de Placeholders (Escudo, Sponsor, Levalier)
+    document.querySelectorAll('.btn-item-placeholder').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tipo = btn.getAttribute('data-tipo');
+            agregarPlaceholderAlCanvas(tipo);
+        });
+    });
+
+    // 7. Sincronizar el color activo cuando el usuario selecciona un objeto existente
+    Object.values(canvasActivos).forEach(canvas => {
+        if (!canvas) return;
+        const sincronizarSeleccion = (e) => {
+            const obj = e.selected ? e.selected[0] : canvas.getActiveObject();
+            if (obj && obj.colorEstampado) {
+                actualizarVisualPaleta(obj.colorEstampado);
+            } else if (obj && obj.fill && typeof obj.fill === 'string' && obj.fill.startsWith('#')) {
+                actualizarVisualPaleta(obj.fill);
+            }
+            refrescarBotonEliminarActivo();
+        };
+        canvas.on('selection:created', sincronizarSeleccion);
+        canvas.on('selection:updated', sincronizarSeleccion);
+        canvas.on('selection:cleared', refrescarBotonEliminarActivo);
+        canvas.on('object:added', refrescarBotonEliminarActivo);
+        canvas.on('object:removed', refrescarBotonEliminarActivo);
+    });
+
+    // Inicializar visualización del botón desplegable con el estilo actual
+    if (typeof actualizarBotonDropdownEstilo === 'function') {
+        actualizarBotonDropdownEstilo(typeof modeloActualGlobal !== 'undefined' ? modeloActualGlobal : 'liso');
     }
 });
